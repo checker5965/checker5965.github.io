@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
 
-.progress {background: rgba(245, 245, 245, 1); border: 0px solid rgba(245, 245, 245, 1); border-radius: 0px; height: 5px;}
+.progress {background: rgba(245, 245, 245, 1); border: 1.5px solid rgba(0, 0, 0, 1); border-radius: 0px; height: 5px;}
 .progress-bar-custom {background: rgba(0, 0, 0, 1);}
 
 

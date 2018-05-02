@@ -1,10 +1,4 @@
-$(window).scroll(function() {
-   var hT = $('#scroll-to').offset().top,
-       hH = $('#scroll-to').outerHeight(),
-       wH = $(window).height(),
-       wS = $(this).scrollTop();
-   if (wS > (hT+hH-wH)){
-       $(function() {
+$(function() {
   var current_progress = 0;
   var interval = setInterval(function() {
       current_progress += 1;
@@ -102,6 +96,4 @@ $(function() {
       if (current_progress >= 60)
           clearInterval(interval);
   }, 2);
-});
-   }
 });
