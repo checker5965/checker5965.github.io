@@ -6,7 +6,7 @@
 
 .parallax { 
     /* The image used */
-    background-image: url("https://images.pexels.com/photos/911085/pexels-photo-911085.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+    background-image: url("imgs/stock1.jpeg");
 
     /* Set a specific height */
     height: 200px; 
