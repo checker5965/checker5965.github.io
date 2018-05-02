@@ -7,5 +7,5 @@ $(function() {
       .attr("aria-valuenow", current_progress)
       if (current_progress >= 80)
           clearInterval(interval);
-  }, 10);
+  }, 2);
 });
