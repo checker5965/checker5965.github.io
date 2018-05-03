@@ -3,9 +3,8 @@
 .progress {background: rgba(245, 245, 245, 1); border: 1.5px solid rgba(0, 0, 0, 1); border-radius: 0px; height: 5px;}
 .progress-bar-custom {background: rgba(0, 0, 0, 1);}
 
-.navbar {
-  padding: .8rem;
-}
+
+
 .navbar-nav {
   padding-right: 20px; 
 }
@@ -29,7 +28,7 @@
 
 .parallax { 
     /* The image used */
-    background-image: url("https://images.pexels.com/photos/376533/pexels-photo-376533.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"); 
+    background-image: url("https://images.pexels.com/photos/1046233/pexels-photo-1046233.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"); 
     /* Set a specific height */
     height: 200px; 
 
@@ -38,6 +37,54 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.sli {
+  list-style: nones;
+  background-image:none;
+  background-repeat:none;
+  background-position:0; 
+  padding: 20px;
+}
+
+.sul
+{
+    list-style-type:none;
+    padding:0px;
+    margin:0px;
+}
+
+.tri {
+  width: 0; 
+  height: 0; 
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent; 
+  border-right:9px solid #333;
+  margin-left: 0px;
+  margin-right: 0px;  
+}
+
+.eh{
+  padding: 10px; 
+  padding-left: 30px;  
+  background: #333; 
+  display: inline-block;
+  color: white;  
+  width: 680px;
+  border-radius: 5px;
+}
+
+.parallaxe { 
+  /* The image used */
+  background-image: url("https://images.pexels.com/photos/205325/pexels-photo-205325.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"); 
+  /* Set a specific height */
+  height: 200px; 
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .parallaxh { 
