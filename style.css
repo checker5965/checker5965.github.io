@@ -13,6 +13,9 @@
   font-size: 1.1em;
 }
 
+.btn {
+  border-radius: 0px;
+}
 .carousel-inner img{
   width: 100%;
   height: 800px;
@@ -26,8 +29,7 @@
 
 .parallax { 
     /* The image used */
-    background-image: url("imgs/stock1.jpeg");
-
+    background-image: url("https://images.pexels.com/photos/376533/pexels-photo-376533.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"); 
     /* Set a specific height */
     height: 200px; 
 
@@ -36,6 +38,19 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.parallaxh { 
+  /* The image used */
+  background-image: url("https://images.pexels.com/photos/8395/lights-night-unsharp-blured.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"); 
+  /* Set a specific height */
+  height: 720px; 
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 
