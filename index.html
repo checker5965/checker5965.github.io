@@ -12,6 +12,32 @@
 	<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 	<link href="style.css" rel="stylesheet">
 	<script src="scripts.js"></script>
+	<script>
+			$(document).ready(function(){
+			  // Add smooth scrolling to all links
+			  $("a").on('click', function(event) {
+			
+				// Make sure this.hash has a value before overriding default behavior
+				if (this.hash !== "") {
+				  // Prevent default anchor click behavior
+				  event.preventDefault();
+			
+				  // Store hash
+				  var hash = this.hash;
+			
+				  // Using jQuery's animate() method to add smooth page scroll
+				  // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+				  $('html, body').animate({
+					scrollTop: $(hash).offset().top
+				  }, 800, function(){
+			   
+					// Add hash (#) to URL when done scrolling (default click behavior)
+					window.location.hash = hash;
+				  });
+				} // End if
+			  });
+			});
+	</script>
 </head>
 <body>
 
@@ -25,16 +51,16 @@
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item active">
-					<a class="nav-link" href="#slides">Home</a>
+					<a class="nav-link" href="#home">Home</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#about">About</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="#skills">Skills</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="#">CV</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Contact</a>
 				</li>
 			</ul>
 		</div>
@@ -47,12 +73,12 @@
 		<div class="text-center" style="padding-top: 250px;">
 		<h1 class="display-2"></h1>
 		<h3 style="color: white">Hi! I'm Archit.</h3>
-		<button type="button" class="btn btn-dark btn-md">Contact</button>
+		<a href="#contact"><button type="button" class="btn btn-dark btn-md">Contact</button></a>
 		<button type="button" class="btn btn-light btn-md">About</button>
 		</div>
 	</div>
 </section>
-<section class="container text-center" style="padding-bottom: 50px">
+<section class="container text-center" style="padding-bottom: 50px" id="about">
 	<h1 style="padding-top: 50px">ABOUT</h1>
 	<p style="padding-left: 100px; padding-right: 100px">I'm a 2nd year CS Major at <a href="https://ashoka.edu.in" target="_blank" style="color: black; font-style: italic">Ashoka University</a>.</p><p>I am undecided on my minor, but am interested in Economics, Physics and International Relations.</p><p>I'm part of the consulting club on campus and problem solving is something that really interests me. I have been a video-game enthusiast all through my life and aspire to get into the video game development industry. I have had some experience with Unity3D, Python, C, and code mainly in Java. I prefer to spend my free time writing science fiction and taking MOOCs.</p>
 </section>
@@ -153,7 +179,7 @@
 	<hr class="my-4">
 </div>
 </div>
-<footer>
+<footer id="contact">
 	<div class="container-fluid padding" style="background: black">
 		<div class="container">
 			<div class="row text-center padding">
