@@ -61,7 +61,9 @@ html,body {
   color: #222;
 }
 
-
+.override{
+  opacity: 1;
+}
 
 
 /*---Media Queries --*/
