@@ -3,7 +3,19 @@
 .progress {background: rgba(245, 245, 245, 1); border: 1.2px solid rgba(0, 0, 0, 1); border-radius: 0px; height: 5px;}
 .progress-bar-custom {background: rgba(0, 0, 0, 1);}
 
+.btn-cst{
+  display: inline-block; border: 1.2px solid white; background: #333;  width: 110px; border-radius:0px;  margin: 3px; color: white;
+  transition: all 0.4s ease;
+  -webkit-transition: all 0.4s ease;
+}
 
+.btn-cst:hover{
+  transform: scale(1.1,1.1);
+  -webkit-transform: scale(1.1,1.1);
+  background: white;
+  border: 1px solid #333;
+  color: #333;
+}
 
 .navbar-nav {
   padding-right: 20px; 
