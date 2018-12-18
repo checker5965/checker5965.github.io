@@ -24,9 +24,6 @@
   -webkit-transition: all 0.4s ease;
 }
 
-.wow{visibility: hidden; 
-}
-
 .btn-cst-2:hover{
   transform: scale(1.1,1.1);
   -webkit-transform: scale(1.1,1.1);
@@ -175,6 +172,10 @@ html,body {
 }
 @media (max-width: 576px) {
   
+}
+
+p {
+    opacity:0;
 }
 
 /*---Firefox Bug Fix --*/
