@@ -104,7 +104,7 @@ $(function() {
       $("#myBarc")
       .css("width", current_progress + "%")
       .attr("aria-valuenow", current_progress)
-      if (current_progress >= 80)
+      if (current_progress >= 90)
           clearInterval(interval);
   }, 2);
 });

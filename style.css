@@ -12,9 +12,25 @@
 .btn-cst:hover{
   transform: scale(1.1,1.1);
   -webkit-transform: scale(1.1,1.1);
-  background: white;
+  background-color: rgba(255, 255, 255, 1);
   border: 1px solid #333;
   color: #333;
+  opacity: 50%;
+}
+
+.btn-cst-2{
+  display: inline-block; border: 1.2px solid white; background: #333;  width: 130px; border-radius:0px;  margin: 3px; color: white;
+  transition: all 0.4s ease;
+  -webkit-transition: all 0.4s ease;
+}
+
+.btn-cst-2:hover{
+  transform: scale(1.1,1.1);
+  -webkit-transform: scale(1.1,1.1);
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid #333;
+  color: #333;
+  opacity: 50%;
 }
 
 .navbar-nav {
@@ -40,10 +56,10 @@
 
 .parallax { 
     /* The image used */
-    background-image: url("https://images.pexels.com/photos/1046233/pexels-photo-1046233.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"); 
+    /*background-image: url("https://images.pexels.com/photos/1046233/pexels-photo-1046233.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");*/ 
     /* Set a specific height */
     height: 200px; 
-
+    background-image: url("imgs/t3.jpg");
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
     background-position: center;
@@ -96,8 +112,9 @@
 
 .parallaxe { 
   /* The image used */
-  background-image: url("https://images.pexels.com/photos/205325/pexels-photo-205325.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"); 
+  /*background-image: url("https://images.pexels.com/photos/205325/pexels-photo-205325.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");*/ 
   /* Set a specific height */
+  background-image: url("imgs/t2.jpg");
   height: 200px; 
 
   /* Create the parallax scrolling effect */
@@ -109,11 +126,11 @@
 
 .parallaxh { 
   /* The image used */
-  background-image: url("https://images.pexels.com/photos/8395/lights-night-unsharp-blured.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"); 
+  /*background-image: url("https://images.pexels.com/photos/8395/lights-night-unsharp-blured.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");*/ 
   /* Set a specific height */
   height: 720px; 
-
-  /* Create the parallax scrolling effect */
+  background-image: url("imgs/t2.jpg");
+    /* Create the parallax scrolling effect */
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -122,10 +139,10 @@
 
 .parallaxp { 
   /* The image used */
-  background-image: url("https://images.pexels.com/photos/897651/pexels-photo-897651.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"); 
+  /*background-image: url("https://images.pexels.com/photos/897651/pexels-photo-897651.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"); */
   /* Set a specific height */
   height: 200px; 
-
+  background-image: url("imgs/t3.jpg");
   /* Create the parallax scrolling effect */
   background-attachment: fixed;
   background-position: center;
