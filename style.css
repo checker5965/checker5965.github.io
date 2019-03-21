@@ -62,7 +62,7 @@
     /*background-image: url("https://images.pexels.com/photos/1046233/pexels-photo-1046233.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");*/ 
     /* Set a specific height */
     height: 200px; 
-    background-image: url("imgs/t3.jpg");
+    background-image: url("imgs/bg2.jpg");
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
     background-position: center;
@@ -132,7 +132,7 @@
   /*background-image: url("https://images.pexels.com/photos/8395/lights-night-unsharp-blured.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");*/ 
   /* Set a specific height */
   height: 720px; 
-  background-image: url("imgs/t2.jpg");
+  background-image: url("imgs/bg1.jpeg");
     /* Create the parallax scrolling effect */
   background-attachment: fixed;
   background-position: center;
