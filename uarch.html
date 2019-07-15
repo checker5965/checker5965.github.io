@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Archit Checker</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+	<script src="scripts.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css">
+	<link rel="stylesheet" href="https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css">
+	<link href="style.css" rel="stylesheet">
+	<script>
+        $(window).scroll(function() {
+        if($(this).scrollTop() > 50)  /*height in pixels when the navbar becomes non opaque*/ 
+        {
+            $('.navbar').attr("style", "opacity: 1; height: 45px");
+        } else {
+        $('.navbar').attr("style", "opacity: 0.7; height: 45px");
+        }
+    });
+    </script>
+    <style>
+        p{
+            color: #c2c2c2;
+        }
+        body{
+            background-color: #100e17;
+        }
+        a{
+            color:#008B8B; 
+            font-style: italic;
+        }
+    </style>
+	<link rel="shortcut icon" type="image/png" href="imgs/Checker_mono.png" style="border-radius: 100%;"/>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav id="mynav" class="navbar navbar-expand-md navbar-dark bg-inverse fixed-top" style="opacity: 0.7; height: 45px;">
+	<div class="container-fluid">
+		<a class="navbar-brand" href="index.html"><img src="imgs/img.jpg" style="height: 30px; border-radius: 100px; margin-right: 10px; border: 2px; border-style: solid; border-color: white"/><span id="brand" style="font-style: normal">Archit Checker</span></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+		<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarResponsive">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="index.html" style="font-style: normal">Home</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+<!--- Landing -->
+<!-- <section id="home">
+	<div class="parallaxh">
+		<div class="text-center" style="padding-top: 250px;">
+		<h1 class="display-2"></h1>
+		<img src="imgs/test.jpg" style="height: 180px; margin: 10px; border-radius: 100%">
+		<h3 style="color: white" class="wow fadeInUp">Hi! I'm Archit.</h3>
+		<div class="wow fadeInUp" data-wow-delay="0.25s">
+		<a href="Archit_Checker_CV.pdf"><button type="button" class="btn btn-cst">CV</button></a>
+		<a href="#about"><button type="button" class="btn btn-cst">About</button></a></div>
+		</div>
+	</div>
+</section> -->
+<section class="container" style="padding-bottom: 20px; padding-top: 40px;">
+	<h2 style="padding-top: 30px; color: #008B8B">My ISCA 2019 Experience</h2>
+	<div>
+	<p style="padding-left: 150px; padding-right: 150px; padding-top: 10px">This year’s <a href="https://iscaconf.org" target="_blank" style="color:#008B8B; font-style: italic">International Symposium on Computer Architecture (ISCA 19)</a> hosted the very first
+        iteration of the <a href="https://uarch2019.github.io/uarch2019/" target="_blank" style="color: #008B8B; font-style: italic">uArch Workshop</a>. As the name suggests, this workshop is meant to be a mentoring
+        workshop for late stage undergraduates and new master’s students, who are aiming to pursue graduate
+        studies in Computer Architecture.
+        <br>
+        <br>
+        The uArch workshop is a fantastic opportunity to interact with the biggest names in computer
+        architecture, network with academics and industry workers, and to understand what a career in
+        Computer Architecture research entails. The workshop provides funding to all selected
+        students. This funding includes all conference fees, meals, accommodation, and travel funding
+        up to 500 USD.
+        <br>
+        <br>
+        As part of the program, the students not only get to attend the one full day dedicated to the
+        workshop itself, but also take part in the main ISCA program.
+        <br>
+        <br>
+        My experience visiting ISCA this year was beyond fantastic.
+        <br>
+        <br>
+        The conference took place at the <a href="https://www.phoenixconventioncenter.com/" target="_blank">Phoenix Convention Center</a>, in Phoenix, Arizona, USA. The
+        workshop was partly sponsored by Microsoft, and one day before the event, Microsoft invited
+        all the students to an informal networking dinner where we were introduced to various people
+        in Architecture, including the ISCA general chair Dr. Srilatha Mane, and the workshop chairs Dr.
+        Lena Olson and Dr. Newsha Ardalani. Throughout my time at ISCA, the organizers were
+        extremely helpful and they were the most important resource when it came to interacting with
+        new people. If I was too hesitant to approach someone, Lena or Newsha always helped in
+        introducing me to them.
+        <br>
+        <br>
+        The workshop had 6 sessions in total followed by a networking event.
+        <br>
+        <br>
+        The first session focused on networking and we got some great tips on interacting with people
+        at conferences. I really came to appreciate the value of this session by the end of the
+        conference because I realized that the conference was more about networking and discussions
+        about individual research rather than the presentations for the accepted papers in ISCA 19.
+        The second session was a talk titled “What I wish I knew my first few years of grad school,” by
+        Prof. Jason Mars from the University of Michigan. This talk was by far one of the most engaging
+        talks I have encountered in my life. Jason communicated his ideas very effectively. Although he
+        did present some controversial opinions such as – Working on a different topic after submitting
+        a paper, or submitting to top tier conferences only, he also gave some solid advice about what
+        it takes to publish a paper at a top conference.
+        <br>
+        <br>
+        Prof. Mary Hall from the University of Utah was the third speaker and she spoke on the topic
+        “How to be a great researcher.” She talked about the importance of team work and
+        collaborations, and identified curiosity and persistence as the key traits in order to be a
+        successful researcher.
+        <br>
+        <br>
+        This was followed by a panel discussion on the topic “How you made decisions about your
+        career?” I believe this was probably the most helpful session out of all the others when it comes
+        to understanding what one must expect out of graduate school or a job in the industry. There
+        were some very good tips given to us about applying to PhD programs and there was in-depth
+        discussion about the admission process, the PhD Journey, and the life after. One great thing
+        about this panel was that it had an equal representation from both academia and industry.
+        Moreover, the panelists were also at different points in their career paths which helped us gain
+        both – insights that come with experience, and about contemporary practices.
+        <br>
+        <br>
+        The next session was a talk on the history of Computer Architecture research by Turing Award
+        Winner, Prof. David Patterson. Prof. Patterson is the co-author of the most widely used
+        <a href="https://dl.acm.org/citation.cfm?id=1999263" target="_blank">Computer Systems textbooks</a> and it was very inspiring to see him there in person.
+        <br>
+        <br>
+        The last session of the uArch workshop was by Dr. Karin Strauss from Microsoft Research, and
+        her presentation was about interdisciplinary research in Computer Architecture. She talked
+        about a research project that Microsoft is currently working on with the University of
+        Washington which involves working with <a href="https://www.washington.edu/news/2019/03/21/first-fully-automated-dna-data-storage/" target="_blank">DNA sequences to use them as storage.</a>
+        <br>
+        <br>
+        The workshop ended there, and we got to interact with various faculty after it as part of the
+        informal networking session.
+        <br>
+        <br>
+        One important part of the ISCA experience was the “Meet a Senior Architect” Program where
+        we got to meet a mentor in a one on one session. I was really fortunate to have been assigned
+        Prof. Daniel Jimenez, who came up with the original <a href="https://www.cs.utexas.edu/~lin/papers/hpca01.pdf" target="_blank">perceptron-based branch predictor</a> and is
+        an eminent personality in Computer Architecture. I greatly appreciate the time he gave me and
+        I got some very good tips regarding research in general, and grad school admissions from him.
+        <br>
+        <br>
+        I consider myself really fortunate for attending ISCA this year, especially due to 
+        the fact that it was organized as part of the <a href="https://fcrc.acm.org/" target="_blank">ACM FCRC</a>. The FCRC is an event that occurs
+        once in every 4 years (I found out only after attending!) and since multiple workshops happen
+        parallelly as part of FCRC, the scale of the event was even bigger than it usually is. This unique
+        opportunity allowed us to attend the FCRC Plenary sessions – which are talks by eminent
+        personalities in Computer Science on various diverse set of topics.
+        <br>
+        <br>
+        I attended a total of four Plenary Talks.</p>
+        <br>
+        <div style="font-size: 70%; text-align:center; color: #008B8B">
+            <img src="imgs/yann.jpg" style="height: 250px; margin: auto; display: block; padding-bottom: 5px;">
+            Dr. Yann LeCunn
+        </div>
+        <br>
+        <p style="padding-left: 150px; padding-right: 150px">
+        The first one was the <a style="https://www.youtube.com/watch?v=VsnQf7exv5I" target="_blank">Turing Lecture</a> by Dr. Yann LeCun and Dr. Geoffrey Hinton. This plenary
+        talk was very humorous and Dr. Hinton gave us a piece of advice – Friends may come and go,
+        but enemies accumulate. This was immediately followed by a slide on how (and why) his papers
+        were rejected by conference reviewers as late as 2009 and some of the reasons were quite
+        hilarious.
+        <br>
+        <br>
+        Another great plenary talk was the one by Prof. Shriram Krishnamurthy from Brown University.
+        </p>
+        <br>
+        <div style="font-size: 70%; text-align:center; color: #008B8B">
+            <img src="imgs/sriplenary.jpg" style="height: 250px; margin: auto; display: block; padding-bottom: 5px;">
+            Prof. Shriram Krishnamurthy
+        </div>
+        <br>
+        <p style="padding-left: 150px; padding-right: 150px">
+        The talk revolved around how Computer Scientists can make computer science education more
+        accessible to students. What was really amazing about the talk, was how effectively he communicated
+        his ideas. It also made me realize the importance of good slides. The presentation was so well done that
+        it felt like a performance – every step carefully choreographed.
+        <br>
+        <br>
+        Amidst the various main sessions of ISCA and lots of networking, there were some other events
+        of interest – such as the business meeting by SIGARCH and the ISCA Awards Luncheon. The
+        business meeting was to discuss logistical matters – such as the amount of money
+        spent/earned, the criteria for paper selection, etc. The Awards Luncheon was an event where
+        key contributions to Computer Architecture were recognized.
+        <br>
+        <br>
+        This year’s <a href="https://awards.acm.org/eckert-mauchly" target="_blank">Eckert-Mauchly Award</a> was presented to Prof. Mark Hill from University of
+        Wisconsin-Madison. Prof. Mark Hill is famously known for coming up with the 3Cs model of
+        cache misses. His <a href="https://www.youtube.com/watch?v=kqrhBTK6SHE&feature=youtu.be" target="_blank">acceptance speech</a> was one of the most inspiring talks for ISCA. Not only did
+        he give great advice regarding research, but the way he talked about his career reflected his
+        greatness and I am sure that it motivated a lot of young researchers.
+        </p>
+        <br>
+        <div style="font-size: 70%; text-align:center; color: #008B8B">
+            <img src="imgs/mim.jpg" style="height: 250px; margin: auto; display: block; padding-bottom: 5px;">
+            The MiM
+        </div>
+        <br>
+        <p style="padding-left: 150px; padding-right: 150px">
+        It has been rightly said that “All work and no play makes Jack a dull boy.” The last event for ISCA
+        was an excursion to the <a href="https://en.wikipedia.org/wiki/Musical_Instrument_Museum_(Phoenix)" target="_blank">Musical Instrument Museum</a> in Phoenix and with that, the 4-day event
+        came to an end.
+        <br>
+        <br>
+        Attending ISCA 2019 turned out to be a life changing experience for me. I had a lot of fun, got
+        to network with lots of really great people, met some of the biggest personalities in Computer
+        Architecture, and got a lot of tips regarding grad school and a career in this field. The workshop
+        accomplished the goals it set out to achieve, and I have much more clarity about my future
+        plans.
+        <br>
+        <br>
+        I am very thankful to the organizers for starting this great initiative and executing it in a spot-on
+        manner. I would also like to acknowledge the contributions of my Professor, <a href="https://www.cs.utah.edu/~manua/" target="_blank">Dr. Manu Awasthi</a>
+        who was instrumental in getting me interested in computer architecture.</p>
+	</div>
+</section>
+
+<!--- Skills Section -->
+<!-- <section id="skills">
+	<div class="container-fluid padding parallax">
+		<div class="row text-center">
+			<div class="col-12" style="padding-top: 70px">
+				<h1 class="display-4" style="color: white">S<span style="font-size: 70%">KILLS</span></h1>
+			</div>
+		</div>
+	</div>
+</section> -->
+<!--- Progress Bars -->
+<!-- <div class="container-fluid" style="padding-bottom: 60px; padding-top: 30px">
+	<div class="container">
+		<div class="row text-center padding">
+			<div style="padding: 10px; margin-right: 30px; margin-left: 30px" class="col-sm">
+				<div style="padding: 10px">
+					<i class="devicon-java-plain-wordmark" style="font-size: 5em"></i>
+				</div>
+				<div class="progress">
+					<div id="myBarjava" class="progress-bar progress-bar-custom" role="progressbar" style="width: 0%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+				</div>
+			</div>
+			<div style="padding: 10px; margin-right: 30px; margin-left: 30px" class="col-sm">
+				<div style="padding: 10px">
+					<i class="devicon-python-plain-wordmark" style="font-size: 5em"></i>
+				</div>
+				<div class="progress">
+					<div id="myBarpython" class="progress-bar progress-bar-custom" role="progressbar" style="width: 0%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+				</div>
+			</div>
+			<div style="padding: 10px; margin-right: 30px; margin-left: 30px" class="col-sm">
+				<div style="padding: 10px">
+					<i class="devicon-c-plain-wordmark" style="font-size: 5em"></i>
+				</div>
+				<div class="progress">
+					<div id="myBarc" class="progress-bar progress-bar-custom" role="progressbar" style="width: 0%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+				</div>
+			</div>
+			<div style="padding: 10px; margin-right: 30px; margin-left: 30px" class="col-sm">
+				<div style="padding: 10px">
+					<i class="devicon-git-plain-wordmark" style="font-size: 5em"></i>
+				</div>
+				<div class="progress">
+					<div id="myBargit" class="progress-bar progress-bar-custom" role="progressbar" style="width: 0%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+				</div>
+			</div>
+		</div>
+		<div class="row text-center padding">
+			<div style="padding: 10px; margin-right: 30px; margin-left: 30px" class="col-sm">
+				<div style="padding: 10px">
+					<i class="devicon-javascript-plain" style="font-size: 5em"></i>
+				</div>
+				<div class="progress">
+					<div id="myBarjs" class="progress-bar progress-bar-custom" role="progressbar" style="width: 0%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+				</div>
+			</div>
+			<div style="padding: 10px; margin-right: 30px; margin-left: 30px" class="col-sm">
+				<div style="padding: 10px;">
+					<i class="devicon-html5-plain-wordmark" style="font-size: 5em"></i>
+				</div>
+				<div class="progress">
+					<div id="myBarhtml" class="progress-bar progress-bar-custom" role="progressbar" style="width: 0%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+				</div>
+			</div>
+			<div style="padding: 10px ; margin-right: 30px; margin-left: 30px" class="col-sm">
+				<div style="padding: 10px">
+					<i class="devicon-css3-plain-wordmark" style="font-size: 5em"></i>
+				</div>
+				<div class="progress">
+					<div id="myBarcss" class="progress-bar progress-bar-custom" role="progressbar" style="width: 0%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+				</div>
+			</div>
+			<div style="padding: 10px; margin-right: 30px; margin-left: 30px" class="col-sm">
+				<div style="padding: 10px">
+					<i class="devicon-jquery-plain-wordmark" style="font-size: 5em"></i>
+				</div>
+				<div class="progress">
+					<div id="myBarjq" class="progress-bar progress-bar-custom" role="progressbar" style="width: 0%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> -->
+
+<!-- Education Section -->
+<!-- <section class="container-fluid text-center" style="padding-bottom: 5px; background-color: #333;" id="education">
+	<h1 style="padding-top: 52px; color: white">P<span style="font-size: 70%">ROJECTS</span></h1>
+</section>
+<div class="container-fluid" style="background-color: #333">
+<div class="container" style="padding-bottom: 30px">
+	<div class="row wow fadeInUp" style="padding-bottom: 30px" data-wow-delay="0.4">
+		<i class="far fa-dot-circle pr" style="font-size: 20px; margin-top: 37px; margin-right: 0px; color: white"></i><span class="tri2" style="margin-top: 38px; margin-left: 10px;"></span><span class="eh2" style="margin-top: 30px;"><span style="font-size: 25px">ClassifierC | Machine Learning in C</span><span style="font-size: 10"> / Dec 2018</span></span>
+		<div style="border-left: solid white; padding-left: 20px; margin-left: 8px"><p style="padding-top: 10px; padding-left: 10px; color: white">I Wrote a Naive Bayes Classifier from scratch in C. This was a group project, and I also assisted teammates with a KNN Classifier and a Simple Regressor in C. We later used these classifiers on various popular datasets and attained typical accuracies. Along with this, I wrote python scripts using standard libraries such as SciKit Learn and Pandas to clean data and run ML Algorithms on it.</p></div>
+	</div>
+	<div class="wow slideInLeft" data-wow-delay="1s"><a href="https://github.com/checker5965/ClassifierC" target="_blank"><button type="button" class="btn btn-cst-2">View Project</button></a></div>
+	<div class="row wow fadeInUp" style="padding-bottom: 30px" data-wow-delay="0.6s">
+		<i class="far fa-dot-circle pr" style="font-size: 20px; margin-top: 37px; margin-right: 0px; color: white"></i><span class="tri2" style="margin-top: 38px; margin-left: 10px;"></span><span class="eh2" style="margin-top: 30px;"><span style="font-size: 25px">2-Bit Branch Predictor | CS-103 Project</span><span style="font-size: 10"> / Dec 18</span></span>
+		<div style="border-left: solid white; padding-left: 20px; margin-left: 8px"><p style="padding-top: 10px; padding-left: 10px; color: white">I Wrote a 2-bit saturating counter Branch Prediction Simulator in Python. A branch predictor helps avoid wasted cycles while branching in a pipelined processor. The simulator that I created allows the user to enter the starting bit, and the number of bits to be used for prediction. It was observed that accuracies vary greatly based on the choice of bits.</p></div>
+	</div>
+	<div class="wow slideInLeft" data-wow-delay="1s"><a href="https://github.com/checker5965/BimodalPredictor" target="_blank"><button type="button" class="btn btn-cst-2">View Project</button></a></div>
+	<div class="row wow fadeInUp" style="padding-bottom: 30px" data-wow-delay="0.8s">
+			<i class="far fa-dot-circle pr" style="font-size: 20px; margin-top: 37px; margin-right: 0px; color: white"></i><span class="tri2" style="margin-top: 38px; margin-left: 10px;"></span><span class="eh2" style="margin-top: 30px;"><span style="font-size: 25px">Library Data Analysis | Consulting</span><span style="font-size: 10"> / Oct 2018 - Nov 2018</span></span>
+			<div style="border-left: solid white; padding-left: 20px; margin-left: 8px"><p style="padding-top: 10px; padding-left: 10px; color: white">As part of the consulting club on campus, I analyzed the Ashoka University library data using R. I was responsible for cleaning the data, figuring out the utilization rates across departments and coming up with a method to understand the net effect on library. I came up with a metric that automatically rated the departments based on their usage history.</p></div>
+	</div>
+</div>
+</div> -->
+<!-- Positions of Responsibility Section -->
+<!-- <section class="container text-center" style="padding-bottom: 20px" id="por">
+	<h1 style="padding-top: 52px">POSITIONS OF RESPONSIBILITY</h1>
+</section>
+<div class="container-fluid">
+<div class="container" style="padding-bottom: 30px">
+	<div class="row wow fadeInUp" data-wow-delay="0.4s" style="padding-bottom: 30px">
+		<i class="far fa-dot-circle pr" style="font-size: 20px; margin-top: 37px; margin-right: 0px; "></i><span class="tri" style="margin-top: 38px; margin-left: 10px;"></span><span class="eh" style="margin-top: 30px;"><span style="font-size: 25px">President - R3SPAWN</span><span style="font-size: 10"> / October 2017 - Present</span></span>
+		<div style="border-left: solid #333; padding-left: 20px; margin-left: 8px"><p style="padding-top: 10px; padding-left: 10px;">Founded R3SPAWN – The gaming society and served as its president to foster an interest in video games on campus. R3SPAWN hosted the "Gaming Arcade" during Banjaara 2018 - The Cultural Festival of Ashoka University. It was one of the most successful events during the Festival.</p></div>
+	</div>
+	<div class="row wow fadeInUp" data-wow-delay="0.6s" style="padding-bottom: 30px">
+			<i class="far fa-dot-circle pr" style="font-size: 20px; margin-top: 37px; margin-right: 0px;"></i><span class="tri" style="margin-top: 38px; margin-left: 10px;"></span><span class="eh" style="margin-top: 30px;"><span style="font-size: 25px">Consulting Core Team</span><span style="font-size: 10"> / January 2018 - Present</span></span>
+			<div style="border-left: solid #333; padding-left: 20px; margin-left: 8px"><p style="padding-top: 10px; padding-left: 10px;">Core team member in the highly selective 6 member consulting team of the Ashoka Business, Consulting and Investments society. Handled the strategic and technical consulting aspects. The Ashoka Business, Consulting and Investments Society was awarded the best society in the "Enriching Campus Life" category by the Office of Student Life in the year 2018.</p></div>
+	</div>
+	<div class="row wow fadeInUp" data-wow-delay="0.8s" style="padding-bottom: 30px">
+			<i class="far fa-dot-circle pr" style="font-size: 20px; margin-top: 37px; margin-right: 0px;"></i><span class="tri" style="margin-top: 38px; margin-left: 10px;"></span><span class="eh" style="margin-top: 30px;"><span style="font-size: 25px">Technical Team Head at Ruhi</span><span style="font-size: 10"> / September 2017 - January 2018</span></span>
+			<div style="border-left: solid #333; padding-left: 20px; margin-left: 8px"><p style="padding-top: 10px; padding-left: 10px;">Ruhi is a social society which aims towards teaching english to the non academic staff on campus. I Created a Web Portal based on Flask and Python that allots a tutee to a tutor automatically and allows feedback and report submission thus eliminating all manual work for the team.</p></div>
+	</div>
+</div>
+</div> -->
+<!-- Contact -->
+<footer id="contact">
+	<div class="container-fluid padding" style="background: black; margin: 0px">
+		<div class="container-fluid">
+			<div class="row text-center padding">
+				<div style="padding: 10px;" class="col-sm">
+					<div style="padding: 10px;">
+						<a href="mailto:archit.checker_ug20@ashoka.edu.in"><i class="far fa-envelope" style="font-size: 3em; color: white"></i></a>
+					</div>
+				</div>
+				<div style="padding: 10px;" class="col-sm">
+					<div style="padding: 10px">
+						<a href="https://github.com/checker5965" target="_blank"><i class="fab fa-github" style="font-size: 3em; color: white"></i></a>
+					</div>
+				</div>
+				<div style="padding: 10px" class="col-sm">
+					<div style="padding: 10px">
+						<a href="https://www.linkedin.com/in/architc" target="_blank"><i class="fab fa-linkedin" style="font-size: 3em; color: white"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="row text-center padding">
+				<a href="#home" style="color: white;" class="col-sm">© Archit Checker 2019.</a>
+			</div>
+		</div>
+	</div>
+</footer>
+</div>
+</body>
+</html>
