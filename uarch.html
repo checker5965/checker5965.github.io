@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Archit Checker</title>
+    <title>Archit Checker</title>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -18,9 +18,9 @@
         $(window).scroll(function() {
         if($(this).scrollTop() > 50)  /*height in pixels when the navbar becomes non opaque*/ 
         {
-            $('.navbar').attr("style", "opacity: 1; height: 45px");
+            $('.navbar').attr("style", "opacity: 1;");
         } else {
-        $('.navbar').attr("style", "opacity: 0.7; height: 45px");
+        $('.navbar').attr("style", "opacity: 0.6;");
         }
     });
     </script>
@@ -41,11 +41,11 @@
 <body>
 
 <!-- Navigation -->
-<nav id="mynav" class="navbar navbar-expand-md navbar-dark bg-inverse fixed-top" style="opacity: 0.7; height: 45px;">
+<nav id="mynav" class="navbar navbar-expand-md navbar-dark bg-inverse fixed-top" style="opacity: 0.6;">
 	<div class="container-fluid">
-		<a class="navbar-brand" href="index.html"><img src="imgs/img.jpg" style="height: 30px; border-radius: 100px; margin-right: 10px; border: 2px; border-style: solid; border-color: white"/><span id="brand" style="font-style: normal">Archit Checker</span></a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-		<span class="navbar-toggler-icon"></span>
+		<a class="navbar-brand" href="index.html" style="padding-top: 0px;"><img src="imgs/img.jpg" style="height: 30px; border-radius: 100px; margin-right: 10px; border: 2px; border-style: solid; border-color: white;"/><span id="brand" style="font-style: normal">Archit Checker</span></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" style="display: none">
+		<span class="navbar-toggler-icon hidden" style="display: none"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto">
@@ -72,8 +72,8 @@
 </section> -->
 <section class="container" style="padding-bottom: 20px; padding-top: 40px;">
 	<h2 style="padding-top: 30px; color: #008B8B">My ISCA 2019 Experience</h2>
-	<div>
-	<p style="padding-left: 12%; padding-right: 12%; padding-top: 10px">This year’s <a href="https://iscaconf.org" target="_blank" style="color:#008B8B; font-style: italic">International Symposium on Computer Architecture (ISCA 19)</a> hosted the very first
+	<div class="container" style="width: 85%">
+	<p style="padding-top: 10px">This year’s <a href="https://iscaconf.org" target="_blank" style="color:#008B8B; font-style: italic">International Symposium on Computer Architecture (ISCA 19)</a> hosted the very first
         iteration of the <a href="https://uarch2019.github.io/uarch2019/" target="_blank" style="color: #008B8B; font-style: italic">uArch Workshop</a>. As the name suggests, this workshop is meant to be a mentoring
         workshop for late stage undergraduates and new master’s students, who are aiming to pursue graduate
         studies in Computer Architecture.
@@ -171,7 +171,7 @@
             Dr. Yann LeCunn
         </div>
         <br>
-        <p style="padding-left: 12%; padding-right: 12%">
+        <p>
         The first one was the <a style="https://www.youtube.com/watch?v=VsnQf7exv5I" target="_blank">Turing Lecture</a> by Dr. Yann LeCun and Dr. Geoffrey Hinton. This plenary
         talk was very humorous and Dr. Hinton gave us a piece of advice – Friends may come and go,
         but enemies accumulate. This was immediately followed by a slide on how (and why) his papers
@@ -187,7 +187,7 @@
             Prof. Shriram Krishnamurthy
         </div>
         <br>
-        <p style="padding-left: 12%; padding-right: 12%">
+        <p>
         The talk revolved around how Computer Scientists can make computer science education more
         accessible to students. What was really amazing about the talk, was how effectively he communicated
         his ideas. It also made me realize the importance of good slides. The presentation was so well done that
@@ -213,7 +213,7 @@
             The MiM
         </div>
         <br>
-        <p style="padding-left: 12%; padding-right: 12%">
+        <p>
         It has been rightly said that “All work and no play makes Jack a dull boy.” The last event for ISCA
         was an excursion to the <a href="https://en.wikipedia.org/wiki/Musical_Instrument_Museum_(Phoenix)" target="_blank">Musical Instrument Museum</a> in Phoenix and with that, the 4-day event
         came to an end.
