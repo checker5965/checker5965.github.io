@@ -1,0 +1,88 @@
+Original Email body: 
+Message-ID: <13113222.1075855932552.JavaMail.evans@thyme>
+Date: Mon, 23 Apr 2001 06:53:00 -0700 (PDT)
+From: sally.beck@enron.com
+To: greg.piper@enron.com
+Subject: RE: Update on Confirm Logic
+Mime-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+X-From: Sally Beck
+X-To: Greg Piper
+X-cc: 
+X-bcc: 
+X-Folder: \Sally_Beck_Jun2001\Notes Folders\All documents
+X-Origin: Beck-S
+X-FileName: sbeck.nsf
+
+I will have that to you by the end of the afternoon.  I have set aside my 
+afternoon to complete the timeline and resource needs, rewrite the 
+presentation to originators, recap our Monday morning meeting on 
+commercialization efforts for this week, work on my game plan for EES and get 
+with Bob Hall to do an update for Brian Redmond on the HPL sale before his 
+Tueday meeting with Louise.  I will share these items with you as I get them 
+checked off my list this afternoon.  --Sally 
+
+
+
+
+From: Greg Piper/ENRON@enronXgate on 04/23/2001 01:28 PM
+To: Sally Beck/HOU/ECT@ECT
+cc:  
+Subject: RE: Update on Confirm Logic
+
+How are we coming on your operations workload and goals for Q2?
+
+GP
+
+ -----Original Message-----
+From:  Beck, Sally  
+Sent: Monday, April 23, 2001 10:47 AM
+To: Piper, Greg
+Subject: Update on Confirm Logic
+
+Latest update - FYI 
+---------------------- Forwarded by Sally Beck/HOU/ECT on 04/23/2001 10:45 AM 
+---------------------------
+   Kim S Theriot                04/23/2001 10:02 AM
+
+To: Sally Beck/HOU/ECT@ECT, Leslie Reeves/HOU/ECT@ECT
+cc:  
+Subject: Update on Confirm Logic
+
+So far, we have not done any further testing on ConfirmLogic since early last 
+week when we encountered the problems with the volume and price displays.  
+Kathryn called me late on Friday and said that they would let us know when we 
+can resume testing.  We have not heard from them this morning.
+
+Their demo last Thursday for the Beta Clients went well.  The customers that 
+participated in the demo were Reliant, Dynegy, Calpine, and Sempra (Sempra 
+participated via Video Conference from Enron's New York Office.)  Dynegy 
+immediately said that they were very interested and I heard that Reliant 
+called back and expressed their interest as well.
+
+I will keep you posted on any further developments.
+
+Kim Theriot 
+
+
+
+
+
+Cleaned Email body: 
+['end', 'afternoon', 'aside', 'afternoon', 'complete', 'timeline', 'resource', 'need', 'rewrite', 'presentation', 'recap', 'meeting', 'commercialization', 'effort', 'week', 'game', 'plan', 'get', 'hpl', 'tueday', 'meeting', 'share', 'item', 'get', 'check', 'afternoon', 'subject', 'logic', 'come', 'workload', 'goal', 'original', 'send', 'subject', 'logic', 'late', 'fyi', 'forward', 'subject', 'logic', 'far', 'do', 'test', 'confirmlogic', 'since', 'early', 'last', 'week', 'encounter', 'problem', 'display', 'call', 'late', 'say', 'would', 'let', 'know', 'test', 'demo', 'last', 'thursday', 'beta', 'go', 'well', 'participate', 'demo', 'reliant', 'dynegy', 'calpine', 'participate', 'via', 'dynegy', 'immediately', 'say', 'interested', 'reliant', 'call', 'back', 'express', 'interest', 'well', 'post', 'development']
+
+Topic distribution: 
+[(2, 0.5098231), (3, 0.22269367), (1, 0.22163825), (4, 0.043344375)]
+
+Assigned topic: [('get', 0.0038298054), ('image', 0.003415238), ('would', 0.0032377911), ('go', 0.0030991707), ('think', 0.003043731), ('recipient', 0.0030200724), ('know', 0.0030032073), ('intend', 0.0029943422), ('ferc', 0.0027351303), ('subject', 0.0025358112), ('send', 0.0024983585), ('want', 0.0024940863), ('use', 0.002483071), ('see', 0.0024460107), ('need', 0.0023712446), ('let', 0.0023681954), ('like', 0.0023659398), ('original', 0.0023257162), ('one', 0.0021825419), ('take', 0.0021422245), ('issue', 0.001970343), ('week', 0.0019636517), ('look', 0.001929701), ('back', 0.0019208532), ('say', 0.001899074), ('give', 0.0018670255), ('thru', 0.0018606116), ('well', 0.0018460026), ('could', 0.0018348603), ('deal', 0.0017996313), ('come', 0.001737568), ('also', 0.0017205016), ('try', 0.0016743), ('still', 0.0016370817), ('receive', 0.0016055098), ('schedule', 0.0016002913), ('last', 0.0015866698), ('thing', 0.0015847725), ('regard', 0.0015527301), ('much', 0.0015331547)]
+
+
+
+Other topics in decreasing order of similarity:
+[('meeting', 0.008261635), ('phone', 0.0064673256), ('subject', 0.0052056876), ('original', 0.0051963767), ('description', 0.004885155), ('meet', 0.004586978), ('send', 0.0045441384), ('attend', 0.0043358547), ('calendar', 0.0043083006), ('thursday', 0.004266601), ('tuesday', 0.00409123), ('sent', 0.0040669055), ('street', 0.0040072366), ('lunch', 0.003920028), ('wednesday', 0.0039008365), ('know', 0.003850956), ('let', 0.0037870603), ('get', 0.0036059935), ('room', 0.0034796926), ('november', 0.003383494), ('date', 0.0033314659), ('number', 0.0032646742), ('tomorrow', 0.0032388465), ('see', 0.0032306912), ('cell', 0.0031007293), ('forward', 0.0029732233), ('chairperson', 0.0029484783), ('would', 0.0028619487), ('vacation', 0.0028339424), ('look', 0.002799483), ('week', 0.002728817), ('assistant', 0.002715237), ('dinner', 0.0026436753), ('october', 0.0026278), ('leave', 0.002474978), ('attached', 0.0024628807), ('location', 0.0024427276), ('detailed', 0.0024375494), ('entry', 0.0024243947), ('regard', 0.0024232897)]
+
+[('schedule', 0.0042754766), ('variance', 0.003877806), ('final', 0.0037400688), ('company', 0.0036147607), ('detect', 0.003316158), ('iso', 0.003102232), ('say', 0.0030879476), ('hour', 0.0030182765), ('award', 0.0029992354), ('hourahead', 0.0029054591), ('westdesk', 0.002902551), ('log', 0.002896836), ('ancillary', 0.002888875), ('parse', 0.0028700007), ('date', 0.002605762), ('file', 0.0021679974), ('million', 0.0019844447), ('trans', 0.0019735624), ('type', 0.0019066514), ('utility', 0.0016800148), ('one', 0.0016129521), ('would', 0.0016071075), ('plant', 0.001526073), ('continue', 0.0015144416), ('get', 0.0014618698), ('data', 0.0013452994), ('industry', 0.0013348147), ('take', 0.0013213772), ('also', 0.0012946249), ('make', 0.0012875202), ('well', 0.0012560688), ('plan', 0.001228533), ('last', 0.0012199078), ('find', 0.001214944), ('include', 0.0012119211), ('unit', 0.0012035043), ('high', 0.0011968606), ('year', 0.001195431), ('join', 0.0011844785), ('billion', 0.001171666)]
+
+[('attach', 0.0059477617), ('deal', 0.0053315945), ('subject', 0.0052635577), ('let', 0.004331067), ('forward', 0.004172212), ('know', 0.004145635), ('original', 0.004102448), ('xl', 0.004039693), ('agreement', 0.0035735318), ('send', 0.0034214458), ('sent', 0.0033943506), ('would', 0.003272866), ('file', 0.0032109322), ('pdx', 0.0030940643), ('presentation', 0.0030030962), ('broker', 0.0029865832), ('need', 0.0029575275), ('regard', 0.0029137675), ('draft', 0.0028882665), ('see', 0.002851899), ('review', 0.0026068534), ('curve', 0.0024935007), ('october', 0.002475819), ('get', 0.0024553947), ('prebon', 0.0024525241), ('give', 0.0023374956), ('change', 0.002284415), ('use', 0.002228309), ('meeting', 0.0022120555), ('like', 0.0021980603), ('look', 0.0021310828), ('request', 0.0021106196), ('discuss', 0.0020957468), ('week', 0.0020866399), ('model', 0.002037712), ('version', 0.0020022558), ('attached', 0.0019888652), ('follow', 0.0019716069), ('show', 0.0019486919), ('want', 0.0019380667)]
+
