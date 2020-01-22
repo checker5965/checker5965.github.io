@@ -1,0 +1,388 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>A Tutorial on git</title>
+    <link rel="icon" href="Scribbler/git.png">
+    <script src="https://kit.fontawesome.com/829bfa1590.js" crossorigin="anonymous"></script>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="Scribbler/scribbler-doc.css">
+    <link rel="stylesheet" href="Scribbler/scribbler-global.css">
+    <link rel="author" href="humans.txt">
+  </head>
+  <body>
+    <div class="doc__bg"></div>
+    <nav class="header">
+      <h1 class="logo">CS1217<span class="logo__thin"> git Tutorial</span></h1>
+      <ul class="menu">
+        <div class="menu__item toggle"><span></span></div>
+        <li class="menu__item"><a href="https://git-scm.com/docs/giteveryday" class="link link--dark"><i class="fab fa-git-alt"></i></a></li>
+        <li class="menu__item"><a href="https://eagain.net/articles/git-for-computer-scientists/" class="link link--dark"><i class="fas fa-laptop-code"></i></a></li>
+        <li class="menu__item"><a href="https://backlog.com/git-tutorial/" class="link link--dark"><i class="fas fa-chalkboard-teacher"></i></a></li>
+      </ul>
+    </nav>
+    <div class="wrapper">
+      <aside class="doc__nav">
+        <ul>
+          <li class="js-btn selected">Getting Started</li>
+          <li class="js-btn">Configuration</li>
+          <li class="js-btn">Creating a git Repository</li>
+          <li class="js-btn">New Project</li>
+          <li class="js-btn">Existing Project</li>
+          <li class="js-btn">Branches</li>
+          <li class="js-btn">Undoing Changes</li>
+        </ul>
+      </aside>
+      <article class="doc__content">
+        <section class="js-section">
+          <h3 class="section__title">Getting Started</h3>
+          <p>If you have never used git before, you need to download git first. 
+            Installation instructions for some common Operating Systems are given below.</p>
+          <h4 class="section__title">Linux</h4>
+          <p>To Install git on Linux, open a new terminal and run the following command.</p>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                $ sudo apt-get install git
+              </code>
+            </pre>
+          </div>
+          <h4 class="section__title">MacOS</h4>
+          <p>It is highly recommended that you download homebrew package manager for a mac.
+            Detailed instructions can be found <a class="mya" href="https://brew.sh/">here</a>.
+          With Homebrew installed, simply run the following command.</p>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                $ brew install git
+              </code>
+            </pre>
+          </div>
+          <h4 class="section__title">Windows</h4>
+          <p>There are several ways to install git on windows. 
+            I will mention 2 popular ways here. 
+            Note that it is highly recommended that you use a *nix OS for this course.</p>
+            <h5 class="section__title">Downloading git Directly</h5>
+            <p>You can download git for windows directly from <a class="mya" href="https://git-scm.com/download/win">here</a>. 
+              Follow on-screen instructions to install.</p>
+            <h5 class="section__title">Installing Using Chocolatey Package Manner</h5>
+            <p>Detailed instructions to install chocolatey (a package manager for windows) are <a class="mya" href="https://chocolatey.org/install">here</a>.
+            With chocolatey installed, simply run the following command on the command line.</p>
+            <div class="code__block code__block--notabs">
+              <pre class="code code--block">
+                <code>
+                  choco install git
+                </code>
+              </pre>
+            </div> 
+        </section>
+        <section class="js-section">
+          <h3 class="section__title">Configuration</h3>
+          <p>If you have never used git before, we need to do some basic one time config.</p>
+          <h4 class="section__title">For *nix Users</h4>
+          <p>Run the following commands from a terminal.</p>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                $ git config --global user.name "Your Name"
+                $ git config --global user.email "your_email@whatever.com"
+                $ git config --global core.autocrlf input
+                $ git config --global core.safecrlf true
+              </code>
+            </pre>
+          </div>
+          <h4 class="section__title">For Windows Users</h4>
+          <p>Run the following commands from the command line.</p>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                $ git config --global user.name "Your Name"
+                $ git config --global user.email "your_email@whatever.com"
+                $ git config --global core.autocrlf true
+                $ git config --global core.safecrlf true
+              </code>
+            </pre>
+          </div>  
+        </section>
+        <section class="js-section">
+          <h3 class="section__title">Creating a git Repository</h3>
+          <p>Let us start off by creating a new git repository.</p>
+          <p>First, let us create a new directory called <code class="code">&nbsp;cs1217 </code>.</p>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                $ mkdir cs1217
+              </code>
+            </pre>
+          </div> 
+          <p>Let us now <code class="code">&nbsp;cd </code>&nbsp;into this directory.</p>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                $ cd cs1217
+              </code>
+            </pre>
+          </div>
+        </section>
+        <p>To initialize an empty git repository, run the following command.</p>
+        <div class="code__block code__block--notabs">
+          <pre class="code code--block">
+            <code>
+              cs1217$ git init
+            </code>
+          </pre>
+        </div>
+        <p>We now have an empty git repository in this folder.</p> 
+        <p>Note that you do not need to initialize a repository if you clone a repository from GitHub. 
+          More on this later.</p> 
+        <section class="js-section">
+          <h3 class="section__title">Starting a Project</h3>
+          <p>Let us create a new file, <code class="code">&nbsp;hello.c </code>. To do this, run the following command.</p>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                cs1217$ touch hello.c
+              </code>
+            </pre>
+          </div>
+          <p>The contents of <code class="code">&nbsp;hello.c </code>&nbsp;should be the following.</p>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                #include &lt;stdio.h&gt;
+                
+                int main(void)
+                {
+                &emsp;&emsp;&emsp;printf("Hello, World!\n");
+                }
+              </code>
+            </pre>
+          </div>
+          <p>Now save this file, and type this in your terminal.</p>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                cs1217$ git status
+              </code>
+            </pre>
+          </div>
+          <p>You will see <code class="code">&nbsp;hello.c </code>&nbsp;in the untracked files.</p>
+          <p>Let us now go ahead and add <code class="code">&nbsp;hello.c </code>&nbsp;to the staging area, so that it is ready to be committed.</p>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                cs1217$ git add hello.c
+              </code>
+            </pre>
+          </div>
+          <p>Let us check the status now.</p>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                cs1217$ git status
+              </code>
+            </pre>
+          </div>
+          <p>You should now see <code class="code">&nbsp;hello.c </code>&nbsp;in the staging area, ready to be committed.</p>
+          <p>Let us go ahead and commit it.</p>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                cs1217$ git commit -m "create hello.c"
+              </code>
+            </pre>
+          </div>
+          <p>The -m flag is used here to specify your commit message.</p>
+          <p>Commit messages should always be crisp, to the point, and easy to understand for your collaborators. 
+            They should ideally start with a verb.</p>
+          <p>If your commit message is longer than a 5-10 word sentence, chances are that you have not been committing properly and need to commit more frequently.</p>
+          <p>Now that we have done our first commit, it is time to push it to the repository. But before that, let us check the status yet again.</p>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                cs1217$ git status
+                On branch master
+                nothing to commit, working tree clean
+              </code>
+            </pre>
+          </div>
+          <p>Notice that our working tree is clean now.</p>
+          <p>In order to push our changes to the repository, we must create a new repository on <a href="https://github.com" class="mya">github</a>.</p>
+          <p>Let us go to github and create a new private repository. To do so, click on the New button next to the repositories section on your homepage.</p>
+          <p>Set repository name to <code class="code">cs1217</code> and select the private option. Ignore everything else for now, and click create repository.</p>
+          <p>We now need to link our local repository to this remote one. In order to do this, let us first copy the link of our newly created repository. It should look something like this</p>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                https://github.com/checker5965/cs1217.git
+              </code>
+            </pre>
+          </div>
+          <p>Let us go back to our terminal and execute the following commands.</p>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                cs1217$ git remote add origin https://github.com/checker5965/cs1217.git
+                cs1217$ git push -u origin master 
+              </code>
+            </pre>
+          </div>
+          <p>And with that, we have just pushed our changes to our remote repository. 
+            You can go to github and check the repository out to see that your changes are there.</p>
+        </section>
+        <section class="js-section">
+          <h3 class="section__title">Working on an Existing Project</h3>
+          <p>Let us first clean our workspace. Run the following commands.</p>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                cs1217$ cd ..
+                $ rm -rf cs1217 
+              </code>
+            </pre>
+          </div>
+          <p>To download an existing repository from Github, we use the command <code class="code">&nbsp;git clone [link to repo]</code>. For this tutorial, we will redownload the repository we created earlier. To do this, run the following command.</p>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                $ git clone https://github.com/checker5965/cs1217.git
+              </code>
+            </pre>
+          </div>
+          <p>Let us <code class="code">&nbsp;cd </code>&nbsp;into the directory and <code class="code">&nbsp;ls </code>&nbsp;to make sure <code class="code">&nbsp;hello.c </code>&nbsp;is in the directory.</p> 
+          <p>In order to make changes to the repository now, we can use the previous workflow without the need to add origin again.</p>
+        </section>
+        <section class="js-section">
+          <h3 class="section__title">Branching and Merging</h3>
+          <p>In a collaborative environment, developers often want to work on different features and files simultaneously. You may choose to divide your work in the labs for this course, and thus, knowing how branches work could be an important thing.</p>
+          <p>Let us now create a new branch called <code class="code">&nbsp;myhello </code>. To do this, run the following command.</p>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                cs1217$ git checkout -b myhello
+              </code>
+            </pre>
+          </div>
+          <p>On checking the status, the output should be</p>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                cs1217$ git status
+                On branch myhello
+                nothing to commit, working tree clean
+              </code>
+            </pre>
+          </div>
+          <p>Let us now change <code class="code">&nbsp;hello.c </code>&nbsp;such that it accepts the user's name and prints <code class="code">&nbsp;Hello, [username]! </code>&nbsp;The contents should be the following.</p>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                #include &lt;stdio.h&gt;
+                #include &lt;assert.h&gt;
+                  
+                int main(int argc, char** argv)
+                {
+                  &nbsp;&nbsp;&nbsp;assert(argc==2 && "Only one argument allowed!");
+                  &nbsp;&nbsp;&nbsp;printf("Hello, %s!\n", argv[1]);
+                }
+              </code>
+            </pre>
+          </div>
+          <p>On checking the status, we will see that <code class="code">&nbsp;hello.c </code>&nbsp;is listed as modified. Let us push this change.</p>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                cs1217$ git add hello.c
+                cs1217$ git commit -m "add ability to print username in hello.c"
+                cs1217$ git push origin myhello
+              </code>
+            </pre>
+          </div>
+          <p>You can now go to github and see that your <code class="code">&nbsp;master </code>&nbsp;branch will not have the changes, while your <code class="code">&nbsp;myhello </code>&nbsp;branch will.</p>
+          <p>Let us switch to master, and merge our changes.</p>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                cs1217$ git checkout master
+                cs1217$ git merge myhello
+              </code>
+            </pre>
+          </div>
+          <p>Remember that our master branch is now one commit ahead of the remote repository, and these changes need to be pushed.</p>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                cs1217$ git push
+              </code>
+            </pre>
+          </div>
+          <p>Important note - you do not need to know advanced git in order to work with the code for this course, however, be very careful while working with git. As a rule of thumb, it might be best for the two partners to work on two separate branches (neither of which is master) and on different files.</p>
+        </section>
+        <section class="js-section">
+          <h3 class="section__title">Undoing Changes</h3>
+          <p>Suppose you made a mistake while adding a new feature to <code class="code">&nbsp;hello.c </code>&nbsp;</p>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                #include &lt;stdio.h&gt;
+                #include &lt;assert.h&gt;
+                  
+                int main(int argc, char** argv)
+                {
+                  // Assert command is checking the wrong condition.
+                  &nbsp;&nbsp;&nbsp;assert(argc==1 && "Only one argument allowed!");
+                  &nbsp;&nbsp;&nbsp;printf("Hello, %s!\n", argv[1]);
+                }
+              </code>
+            </pre>
+          </div>
+          <p>If you have not staged your change yet (i.e. you have not added the change via <code class="code">&nbsp;git add </code>&nbsp;) you can simply use the command below to revert to the latest commit.</p>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                cs1217$ git checkout hello.c
+              </code>
+            </pre>
+          </div>
+          <p>Suppose you did not realize that you made an error and already added it to the staging area via <code class="code">&nbsp;git add </code>&nbsp;, use the command below to unstage the commit.</p>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                cs1217$ git reset HEAD hello.c
+              </code>
+            </pre>
+          </div>
+          <p>And now, you can simply use the checkout command to revert the changes locally.</p>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                cs1217$ git checkout hello.c
+              </code>
+            </pre>
+          </div>
+          <p>Now, suppose you have already commited the change (but not pushed it), you can use the command below to undo the commit.</p>
+          <div class="code__block code__block--notabs">
+            <pre class="code code--block">
+              <code>
+                cs1217$ git revert HEAD
+              </code>
+            </pre>
+          </div>
+          <p>Note that this has put your current branch two commits ahead of the remote branch. Using revert does NOT delete the prior commit. Instead, it creates a new commit with the code in a previous commit.</p>
+          <p>Another important thing to note here is that we could revert using HEAD only because we wanted to go one commit back. Another way to revert would be to specify the hash of a commit instead of HEAD. You can find the hash of commits using the <code class="code">&nbsp;git log </code>&nbsp;command.</p>
+        </section>
+        <section class="js-section">
+          <h3 class="section__title">Conclusion</h3>
+          <p>And with that, we have come to the end of our tutorial. This is by no means a comprehensive introduction to git, however, it will be sufficient information for you to work with for the purposes of this course. I have also attached some helpful links in the top right corner of this webpage which might be helpful if you're curious.</p>
+          </section>
+      </article>
+    </div>
+    <footer class="footer">This tutorial was created by <a class="mya" href="index.html" target="_blank">Archit Checker</a> for CS-1217, Spring 2020 at <a class="mya" href="http://ashoka.university" target="_blank">Ashoka University</a>.<br><br>Scribbler is a free HTML template created exclusively for <a href="https://tympanus.net/codrops/" target="_blank" class="link link--light">Codrops</a>.</footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="Scribbler/scribbler.js"></script>
+  </body>
+</html>
