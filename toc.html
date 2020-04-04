@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Archit Checker</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+	<script src="scripts.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css">
+	<link rel="stylesheet" href="https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css">
+	<link href="style.css" rel="stylesheet">
+	<script>
+        $(window).scroll(function() {
+        if($(this).scrollTop() > 50)  /*height in pixels when the navbar becomes non opaque*/ 
+        {
+            $('.navbar').attr("style", "opacity: 1;");
+        } else {
+        $('.navbar').attr("style", "opacity: 0.6;");
+        }
+    });
+    </script>
+    <style>
+        p{
+            color: #c2c2c2;
+        }
+        body{
+            background-color: #100e17;
+        }
+        a{
+            color:#008B8B; 
+            /* font-style: italic; */
+        }
+    </style>
+	<link rel="shortcut icon" type="image/png" href="imgs/Checker_mono.png" style="border-radius: 100%;"/>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav id="mynav" class="navbar navbar-expand-md navbar-dark bg-inverse fixed-top" style="opacity: 0.6;">
+	<div class="container-fluid">
+		<a class="navbar-brand" href="index.html" style="padding-top: 0px;"><img src="imgs/img.jpg" style="height: 30px; border-radius: 100px; margin-right: 10px; border: 2px; border-style: solid; border-color: white;"/><span id="brand" style="font-style: normal">Archit Checker</span></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" style="display: none">
+		<span class="navbar-toggler-icon hidden" style="display: none"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarResponsive">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="index.html" style="font-style: normal">Home</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+
+<section class="container" style="padding-bottom: 20px; padding-top: 40px;">
+	<h2 style="padding-top: 30px; color: #008B8B">Theory Of Computation: CFG Developer</h2>
+	
+</section>
+
+
+
+
+<!-- FOOTER -->
+
+<footer id="contact">
+	<div class="container-fluid padding" style="background: black; margin: 0px">
+		<div class="container-fluid">
+			<div class="row text-center padding">
+				<div style="padding: 10px;" class="col-sm">
+					<div style="padding: 10px;">
+						<a href="mailto:archit.checker_ug20@ashoka.edu.in"><i class="far fa-envelope" style="font-size: 3em; color: white"></i></a>
+					</div>
+				</div>
+				<div style="padding: 10px;" class="col-sm">
+					<div style="padding: 10px">
+						<a href="https://github.com/checker5965" target="_blank"><i class="fab fa-github" style="font-size: 3em; color: white"></i></a>
+					</div>
+				</div>
+				<div style="padding: 10px" class="col-sm">
+					<div style="padding: 10px">
+						<a href="https://www.linkedin.com/in/architc" target="_blank"><i class="fab fa-linkedin" style="font-size: 3em; color: white"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="row text-center padding">
+				<a href="index.html" style="color: white; font-style: normal" class="col-sm">© Archit Checker 2019.</a>
+			</div>
+		</div>
+	</div>
+</footer>
+</div>
+</body>
+</html>
