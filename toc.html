@@ -1,99 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Archit Checker</title>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-	<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-	<script src="scripts.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css">
-	<link rel="stylesheet" href="https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css">
-	<link href="style.css" rel="stylesheet">
-	<script>
-        $(window).scroll(function() {
-        if($(this).scrollTop() > 50)  /*height in pixels when the navbar becomes non opaque*/ 
-        {
-            $('.navbar').attr("style", "opacity: 1;");
-        } else {
-        $('.navbar').attr("style", "opacity: 0.6;");
-        }
-    });
-    </script>
-    <style>
-        p{
-            color: #c2c2c2;
-        }
-        body{
-            background-color: #100e17;
-        }
-        a{
-            color:#008B8B; 
-            /* font-style: italic; */
-        }
-    </style>
-	<link rel="shortcut icon" type="image/png" href="imgs/Checker_mono.png" style="border-radius: 100%;"/>
-</head>
-<body>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-<!-- Navigation -->
-<nav id="mynav" class="navbar navbar-expand-md navbar-dark bg-inverse fixed-top" style="opacity: 0.6;">
-	<div class="container-fluid">
-		<a class="navbar-brand" href="index.html" style="padding-top: 0px;"><img src="imgs/img.jpg" style="height: 30px; border-radius: 100px; margin-right: 10px; border: 2px; border-style: solid; border-color: white;"/><span id="brand" style="font-style: normal">Archit Checker</span></a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" style="display: none">
-		<span class="navbar-toggler-icon hidden" style="display: none"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarResponsive">
-			<ul class="navbar-nav ml-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="index.html" style="font-style: normal">Home</a>
-				</li>
-			</ul>
-		</div>
-	</div>
-</nav>
+        <!-- documentation at http://getbootstrap.com/docs/4.0/, alternative themes at https://bootswatch.com/4-alpha/ -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet"/>
 
+        <link href="style-toc.css" rel="stylesheet"/>
 
-<section class="container" style="padding-bottom: 20px; padding-top: 40px;">
-	<h2 style="padding-top: 30px; color: #008B8B">Theory Of Computation: CFG Developer</h2>
-	
-</section>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+        <script src="app.js"></script>
 
+        <title>CFG Developer</title>
+    </head>
 
-
-
-<!-- FOOTER -->
-
-<footer id="contact">
-	<div class="container-fluid padding" style="background: black; margin: 0px">
-		<div class="container-fluid">
-			<div class="row text-center padding">
-				<div style="padding: 10px;" class="col-sm">
-					<div style="padding: 10px;">
-						<a href="mailto:archit.checker_ug20@ashoka.edu.in"><i class="far fa-envelope" style="font-size: 3em; color: white"></i></a>
-					</div>
-				</div>
-				<div style="padding: 10px;" class="col-sm">
-					<div style="padding: 10px">
-						<a href="https://github.com/checker5965" target="_blank"><i class="fab fa-github" style="font-size: 3em; color: white"></i></a>
-					</div>
-				</div>
-				<div style="padding: 10px" class="col-sm">
-					<div style="padding: 10px">
-						<a href="https://www.linkedin.com/in/architc" target="_blank"><i class="fab fa-linkedin" style="font-size: 3em; color: white"></i></a>
-					</div>
-				</div>
-			</div>
-			<div class="row text-center padding">
-				<a href="index.html" style="color: white; font-style: normal" class="col-sm">© Archit Checker 2019.</a>
-			</div>
-		</div>
-	</div>
-</footer>
-</div>
-</body>
+    <body class="grad-bg">
+        <header class="site-header">
+            <nav class="navbar navbar-expand-md navbar-dark bg-navy fixed-top">
+                <div class="container">
+                <a class="navbar-brand mr-4" href="index.html"><img src="imgs/test.jpg" style="height: 30px; border-radius: 50px"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarToggle">
+                    <div class="navbar-nav mr-auto">
+                    <a class="nav-item nav-link" href="index.html">Home</a>
+                    </div>
+                    <!-- Navbar Right Side -->
+                    <div class="navbar-nav">
+                        <a class="nav-item nav-link" href="#">Credits</a>
+                    </div>
+                </div>
+                </div>
+            </nav>
+        </header>
+        <main role="main" class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="content-section">
+                        <h3>How to Use</h3>
+                        <p>To use the CFG Developer, enter your CFG in the Input box, and hit generate.</p>
+                        <p>The Example box will have some strings belonging to the given language.</p>
+                        <p>The Test box can be used to enter your own string, and check for membership in the given CFG.</p>
+                        <p>To report any bugs, please fill the google form below.</p>
+                        <div class="text-center">
+                            <a href="https://forms.gle/CrsaMC1zeNt5Mr3H6"><button type="button" class="btn btn-cst">Report a Bug</button></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8" id="main-blocks">
+                    <div class="content-section">
+                        <h2>CFG Developer</h2>
+                    </div>
+                    <div class="content-section" id="input">
+                        <h3>Input</h3>
+                        <p>Enter your CFG in this box.</p>
+                        <ol>
+                            <li>
+                                An empty box is epsilon by default.
+                            </li>
+                            <li>
+                                Input is case sensitive, and whitespaces are not ignored.
+                            </li>
+                            <li>
+                                Use the "|" character to indicate an "or".
+                            </li>
+                        </ol>
+                        <form id="grammar">
+                            <div class="form-group" id="productions">
+                                <div class="d-flex flex-row" id="startrow">
+                                    <div class="p-2" style="width: 12%;">
+                                        <input type="text" style="cursor: not-allowed;" class="form-control first" id="startsymbol" placeholder="S" readonly="readonly">
+                                    </div>
+                                    <div class="p-2" style="margin-top: 1%">
+                                        <p>→</p>
+                                    </div>
+                                    <div class="p-2" style="width: 12%;">
+                                        <input type="text" onkeydown="keyAction(event)" class="form-control first" placeholder="Ɛ">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col text-center">
+                                    <button onclick="addProduction()" type="button" class="btn btn-cst">Add a Production</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col text-center">
+                                    <button onclick="generateCFG()" type="button" class="btn btn-cst">Generate!</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </body>
 </html>
