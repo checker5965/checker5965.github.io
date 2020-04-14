@@ -5,12 +5,14 @@ function addProduction () {
     var newProduction = document.createElement("div");
     newProduction.classList.add("d-flex");
     newProduction.classList.add("flex-row");
+    newProduction.classList.add("flex-wrap");
 
     var my_div = document.createElement("div");
     my_div.classList.add("p-2");
     my_div.setAttribute("style", "width: 12%");
     var my_input = document.createElement("input");
     my_input.setAttribute("type", "text");
+    my_input.setAttribute("maxlength", "1");
     my_input.classList.add("form-control");
     my_input.classList.add("first");
     my_div.appendChild(my_input);
