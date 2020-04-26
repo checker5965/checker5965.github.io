@@ -6,7 +6,7 @@ body {
     font-family: 'Cairo', sans-serif;
   }
   
-  h2, h3, h4, h5, h6 {
+  h2, h3, h4 {
     color: rgb(67, 197, 180);
     font-weight: 700
   }
@@ -146,4 +146,10 @@ body {
     transition: all 0.4s ease;
     -webkit-transition: all 0.4s ease;
     opacity: 100%;
+  }
+
+  .alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #721c24;
   }

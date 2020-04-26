@@ -14,7 +14,7 @@ function addProduction () {
     my_input.setAttribute("type", "text");
     my_input.setAttribute("maxlength", "1");
     my_input.classList.add("form-control");
-    my_input.classList.add("first");
+    my_input.classList.add("NT");
     my_div.appendChild(my_input);
     newProduction.appendChild(my_div);
 
@@ -89,7 +89,6 @@ function keyAction(event) {
             my_input.classList.add("form-control");
             my_div.appendChild(my_input);
             target_element.appendChild(my_div);
-
         }
         else {
             if (target_element.lastChild.nodeName === "#text") {
@@ -137,23 +136,114 @@ function keyAction(event) {
     }
 }
 
-function generateCFG() {
-    
-    var example_box = document.getElementById("example");
-    if (example_box) {
-        example_box.remove();
+function fadeOut(my_element) {
+    if (my_element.style.opacity > 0) {
+        my_element.style.opacity = my_element.style.opacity - 0.01;
+        console.log(my_element.style.opacity);
+        setTimeout(fadeOut, 50, my_element);
+    }
+    else {
+        my_element.parentNode.removeChild(my_element);
+    }
+}
+
+function myAlert(message) {
+    var alert_box = document.getElementById("wrong");
+    if (alert_box) {
+        return;
     }
 
-    var example_box = document.createElement("div");
-    example_box.classList.add("content-section");
-    example_box.setAttribute("id", "example");
+    alert_box = document.createElement("div");
+    alert_box.classList.add("alert-danger");
+    alert_box.classList.add("content-section");
+    alert_box.setAttribute("style", "opacity: 1")
+    alert_box.setAttribute("id", "wrong");
+    
+    var text = document.createElement("h5");
+    var node = document.createTextNode(message);
+    text.appendChild(node);
 
-    var heading = document.createElement("h3");
-    var node = document.createTextNode("Examples");
-    heading.appendChild(node);
-
-    example_box.appendChild(heading);
+    alert_box.appendChild(text);
 
     var main = document.getElementById("main-blocks");
-    main.appendChild(example_box);
+    main.prepend(alert_box);
+
+    setTimeout(fadeOut, 5000, alert_box);
+
+}
+
+function generateCFG() {
+    
+    // Remove existing boxes
+    {
+        // Remove existing example box
+        var example_box = document.getElementById("example");
+        if (example_box) {
+            example_box.remove();
+        }
+
+        // Remove existing test box
+        var test_box = document.getElementById("test");
+        if (test_box) {
+            test_box.remove();
+        }
+    }
+    
+    // Get input from the input box
+    {
+        var current_nt;
+        var non_terminals = [];
+        var rules = [];
+        var form = document.getElementById("grammar").elements;
+        // console.log(form);
+        for(var i = 0; i < form.length - 2; i++) {
+            var item = form.item(i);
+            if (item.classList[1] == "NT") {
+                current_nt = item.value;
+                if (current_nt === "") {
+                    myAlert("Invalid Grammar Entered!");
+                    return;
+                }
+                non_terminals.push(item.value);
+            }
+            else {
+                rules.push(current_nt + "->" + item .value);
+            }
+        }
+        // console.log(non_terminals);
+        // console.log(rules);
+    }
+
+    // Create new Example Box
+    {
+        example_box = document.createElement("div");
+        example_box.classList.add("content-section");
+        example_box.setAttribute("id", "example");
+
+        var heading = document.createElement("h3");
+        var node = document.createTextNode("Examples");
+        heading.appendChild(node);
+
+        example_box.appendChild(heading);
+
+        var main = document.getElementById("main-blocks");
+        main.appendChild(example_box);
+    }
+    
+    // Create new Test Box
+    {
+        test_box = document.createElement("div");
+        test_box.classList.add("content-section");
+        test_box.setAttribute("id", "test");
+
+        heading = document.createElement("h3");
+        node = document.createTextNode("Test");
+        heading.appendChild(node);
+
+        test_box.appendChild(heading);
+
+        main = document.getElementById("main-blocks");
+        main.appendChild(test_box);
+    }
+
 }
