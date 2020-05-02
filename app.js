@@ -308,8 +308,6 @@ function prepare() {
         main.appendChild(membership_box);
     }
 
-    testMembership();
-
 }
 
 
@@ -338,47 +336,54 @@ function getInput() {
                     my_val = "Ɛ";
                 }
                 symbol_map.set(my_val, 0);
-                rules.push([current_nt], [my_val]);
+                rules.push([current_nt, my_val]);
             }
         }
-        // console.log(non_terminals);
-        // console.log(rules);
-        console.log(symbol_map);
+
         return 0;
     }
 }
 
 function init(S, len) {
-    S = [...Array(len + 1)].map(elem => []);
+    S = [...Array(len + 1)].map(elem => new Set());
     return S;
 }
 
-function predictor(state, j, rules) {
-
+function predictor(S, state, j) {
+    for (var rule = 0; rule < rules.length; rule++) {
+        if (rules[rule][0] === state[1][state[1].indexOf('.') + 1]) {
+            S[j].add(JSON.stringify([rules[rule][0], "." + rules[rule][1], j])); 
+        }
+    }
+    return S;
 }
+
+var S;
 
 function testMembership() {
     var input_strings = document.getElementById("input_strings").value;
     input_strings = input_strings.split("\n");
     
     for (var i = 0; i < input_strings.length; i++) {
-        var S;
         S = init(S, input_strings[i].length);
 
-        S[0].push(["γ", ".S", "0"]);
-
+        S[0].add(JSON.stringify(["γ", ".S", 0]));
+        
         for (var j = 0; j <= input_strings[i].length; j++) {
-            for (var k = 0; k < S[j].length; k++) {
-                var current_rule = S[j][k];
+            for (var k = 0; k < S[j].size; k++) {
+                var current_rule = JSON.parse(Array.from(S[j])[k]);
+
                 if (current_rule[1][current_rule[1].length - 1] === ".") {
                     completer();
                 }
                 else {
-                    if (symbol_map[current_rule[1][current_rule[1].indexOf('.') + 1]] === 1) {
-                        predictor(current_rule, j, rules);
+                    if (symbol_map.get(current_rule[1][current_rule[1].indexOf('.') + 1]) === 1) {
+                        S = predictor(S, current_rule, j);
+                        console.log(S);
                     }
                     else {
-                        scanner();
+                        // scanner();
+                        console.log("Scanner");
                     }
                 }
             }
