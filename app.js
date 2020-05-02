@@ -350,7 +350,6 @@ function init(S, len) {
 }
 
 function predictor(S, state, j) {
-    // console.log("Predictor");
     for (var rule = 0; rule < rules.length; rule++) {
         if (rules[rule][0] === state[1][state[1].indexOf('.') + 1]) {
             S[j].add(JSON.stringify([rules[rule][0], "." + rules[rule][1], j])); 
@@ -360,7 +359,6 @@ function predictor(S, state, j) {
 }
 
 function scanner(S, state, j, character) {
-    // console.log("Scanner");
     if (state[1][state[1].indexOf('.') + 1] === character) {
         var split_rule = state[1].split('.');
         S[j + 1].add(JSON.stringify([state[0], split_rule[0] + split_rule[1][0] + "." + split_rule[1].substring(1), state[2]]));
@@ -369,7 +367,6 @@ function scanner(S, state, j, character) {
 }
 
 function completer(S, state, j) {
-    // console.log("completer");
     for (var rule = 0; rule < S[state[2]].size; rule++) {
         var temp_rule = JSON.parse(Array.from(S[state[2]])[rule]);
         if (temp_rule[1][temp_rule[1].indexOf('.') + 1] === state[0]) {
@@ -397,24 +394,18 @@ function testMembership() {
 
                 if (current_rule[1][current_rule[1].length - 1] === ".") {
                     S = completer(S, current_rule, j);
-                    // console.log(S);
                 }
                 else {
                     if (symbol_map.get(current_rule[1][current_rule[1].indexOf('.') + 1]) === 1) {
                         S = predictor(S, current_rule, j);
-                        // console.log(S);
                     }
                     else {
                         S = scanner(S, current_rule, j, input_strings[i][j]);
-                        // console.log(S);
                     }
                 }
             }
-            // console.log(S);
         }
         // Add to table here
-        for (var iterate = 0; iterate < S.length; iterate++) {
-            console.log(S[iterate]);
-        }
+        
     }
 }
