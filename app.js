@@ -171,7 +171,8 @@ function myAlert(message) {
 
 }
 
-var non_terminals;
+var symbol_map;
+var non_terminals_arr;
 var rules;
 
 function prepare() {
@@ -189,34 +190,18 @@ function prepare() {
         if (test_box) {
             test_box.remove();
         }
-    }
-    
-    // Get input from the input box
-    {
-        var current_nt;
-        var form = document.getElementById("grammar").elements;
-        non_terminals = [];
-        rules = [];
-        for(var i = 0; i < form.length - 2; i++) {
-            var item = form.item(i);
-            if (item.classList[1] == "NT") {
-                current_nt = item.value;
-                if (current_nt === "") {
-                    myAlert("Invalid Grammar Entered!");
-                    return;
-                }
-                non_terminals.push(item.value);
-            }
-            else {
-                var my_val = item.value;
-                if (my_val === "") {
-                    my_val = "Ɛ";
-                }
-                rules.push(current_nt + "->" + my_val);
-            }
+
+        var membership_box = document.getElementById("membership");
+        if (membership_box) {
+            membership_box.remove();
         }
-        console.log(non_terminals);
-        console.log(rules);
+
+    }
+
+    var ret = getInput();
+
+    if (ret === 1) {
+        return;
     }
 
     // Create new Example Box
@@ -264,6 +249,7 @@ function prepare() {
         var input_box = document.createElement("textarea");
         input_box.classList.add("form-control");
         input_box.setAttribute("rows", "3");
+        input_box.setAttribute("oninput", "testMembership()");
         input_box.setAttribute("id", "input_strings");
 
         input_div.appendChild(input_label);
@@ -313,6 +299,7 @@ function prepare() {
         my_table.appendChild(table_heading);
 
         var table_body = document.createElement("tbody");
+        table_body.setAttribute("id", "table-body");
         my_table.appendChild(table_body);
 
         membership_box.appendChild(my_table);
@@ -321,5 +308,81 @@ function prepare() {
         main.appendChild(membership_box);
     }
 
+    testMembership();
+
 }
 
+
+function getInput() {
+    // Get input from the input box
+    {
+        var current_nt;
+        var form = document.getElementById("grammar").elements;
+        symbol_map = new Map();
+        non_terminals_arr = [];
+        rules = [];
+        for(var i = 0; i < form.length - 2; i++) {
+            var item = form.item(i);
+            if (item.classList[1] == "NT") {
+                current_nt = item.value;
+                if (current_nt === "") {
+                    myAlert("Invalid Grammar Entered!");
+                    return 1;
+                }
+                symbol_map.set(item.value, 1);
+                non_terminals_arr.push(item.value);
+            }
+            else {
+                var my_val = item.value;
+                if (my_val === "") {
+                    my_val = "Ɛ";
+                }
+                symbol_map.set(my_val, 0);
+                rules.push([current_nt], [my_val]);
+            }
+        }
+        // console.log(non_terminals);
+        // console.log(rules);
+        console.log(symbol_map);
+        return 0;
+    }
+}
+
+function init(S, len) {
+    S = [...Array(len + 1)].map(elem => []);
+    return S;
+}
+
+function predictor(state, j, rules) {
+
+}
+
+function testMembership() {
+    var input_strings = document.getElementById("input_strings").value;
+    input_strings = input_strings.split("\n");
+    
+    for (var i = 0; i < input_strings.length; i++) {
+        var S;
+        S = init(S, input_strings[i].length);
+
+        S[0].push(["γ", ".S", "0"]);
+
+        for (var j = 0; j <= input_strings[i].length; j++) {
+            for (var k = 0; k < S[j].length; k++) {
+                var current_rule = S[j][k];
+                if (current_rule[1][current_rule[1].length - 1] === ".") {
+                    completer();
+                }
+                else {
+                    if (symbol_map[current_rule[1][current_rule[1].indexOf('.') + 1]] === 1) {
+                        predictor(current_rule, j, rules);
+                    }
+                    else {
+                        scanner();
+                    }
+                }
+            }
+        }
+        // Add to table here
+    }
+}
