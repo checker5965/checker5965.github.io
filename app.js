@@ -358,6 +358,19 @@ function predictor(S, state, j) {
     return S;
 }
 
+function scanner(S, state, j, character) {
+    console.log("Scanner");
+    if (state[1][state[1].indexOf('.') + 1] === character) {
+        var split_rule = state[1].split('.');
+        S[j + 1].add(JSON.stringify([state[0], split_rule[0] + split_rule[1][0] + "." + split_rule[1].substring(1), state[2]]));
+    }
+    return S;
+}
+
+function completer() {
+    console.log("completer");
+}
+
 var S;
 
 function testMembership() {
@@ -379,11 +392,11 @@ function testMembership() {
                 else {
                     if (symbol_map.get(current_rule[1][current_rule[1].indexOf('.') + 1]) === 1) {
                         S = predictor(S, current_rule, j);
-                        console.log(S);
+                        // console.log(S);
                     }
                     else {
-                        // scanner();
-                        console.log("Scanner");
+                        S = scanner(S, current_rule, j, input_strings[i][j]);
+                        console.log(S);
                     }
                 }
             }
