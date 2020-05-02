@@ -15,7 +15,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
         <script src="app.js"></script>
 
-        <title>CFG Developer</title>
+        <title>Credits</title>
     </head>
 
     <body class="grad-bg">
@@ -32,7 +32,7 @@
                     </div>
                     <!-- Navbar Right Side -->
                     <div class="navbar-nav">
-                        <a class="nav-item nav-link" href="credits.html">Credits</a>
+                        <a class="nav-item nav-link" href="toc.html">CFG Developer</a>
                     </div>
                 </div>
                 </div>
@@ -43,7 +43,8 @@
                 <div class="col-md-4" id="side-blocks">
                     <div class="content-section">
                         <h3>How to Use</h3>
-                        <p>To use the CFG Developer, enter your CFG in the Input box, and hit generate.</p>
+                        <p>To use the CFG Developer, first go to the application page by clicking on the button in the top right.</p>
+                        <p>Enter your CFG in the Input box, and hit generate.</p>
                         <p>The Example box will have a string belonging to the given language.</p>
                         <p>The Test box can be used to enter your own string, and check for membership in the given CFG.</p>
                         <p>To report any bugs, please fill the google form below.</p>
@@ -56,45 +57,25 @@
                     <div class="content-section">
                         <h2>CFG Developer</h2>
                     </div>
-                    <div class="content-section" id="input">
-                        <h3>Input</h3>
-                        <p>Enter your CFG in this box.</p>
+                    <div class="content-section">
+                        <h2>Credits</h2>
+                        <p>This work was done as part of CS-2349 Theory of Computation [Spring 2020] at 
+                        <a href="ashoka.university">Ashoka University.</a> The work was inspired
+                        from various sources, and relied on help from others. They are listed below.</p>
                         <ol>
                             <li>
-                                An empty box is epsilon by default.
+                                <a href="https://web.stanford.edu/class/archive/cs/cs103/cs103.1156/tools/cfg/">Stanford CFG Developer</a>.
                             </li>
                             <li>
-                                Input is case sensitive, and whitespaces are not ignored.
+                                Parser implementation is based on the <a href="https://en.wikipedia.org/wiki/Earley_parser">Earley Parser</a>.
                             </li>
                             <li>
-                                Use the "|" character to indicate an "or".
+                                <a href="https://www.youtube.com/watch?v=WNKw1tiskSM">Earley Parsing by Toby Ho</a>.
+                            </li>
+                            <li>
+                                <a href="http://loup-vaillant.fr/tutorials/earley-parsing/">This excellent tutorial</a>.
                             </li>
                         </ol>
-                        <form id="grammar">
-                            <div class="form-group" id="productions">
-                                <div class="d-flex flex-row flex-wrap" id="startrow">
-                                    <div class="p-2" style="width: 15%;">
-                                        <input type="text" style="cursor: not-allowed;" class="form-control NT" id="startsymbol" placeholder="S" readonly="readonly" value="S">
-                                    </div>
-                                    <div class="p-2" style="margin-top: 1%">
-                                        <p>→</p>
-                                    </div>
-                                    <div class="p-2" style="width: 15%;">
-                                        <input type="text" onkeydown="keyAction(event)" class="form-control first" placeholder="Ɛ">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col text-center">
-                                    <button onclick="addProduction()" type="button" class="btn btn-cst">Add a Production</button>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col text-center">
-                                    <button onclick="prepare()" type="button" class="btn btn-cst">Generate!</button>
-                                </div>
-                            </div>
-                        </form>
                     </div>
                 </div>
             </div>
