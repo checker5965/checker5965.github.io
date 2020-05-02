@@ -271,8 +271,54 @@ function prepare() {
 
         test_box.appendChild(input_div);
 
-        main = document.getElementById("main-blocks");
+        main = document.getElementById("side-blocks");
         main.appendChild(test_box);
+    }
+
+    // Create new Membership Box
+    {
+        membership_box = document.createElement("div");
+        membership_box.classList.add("content-section");
+        membership_box.setAttribute("id", "membership");
+
+        var heading = document.createElement("h3");
+        var node = document.createTextNode("Membership");
+        heading.appendChild(node);
+
+        membership_box.appendChild(heading);
+
+        var my_table = document.createElement("table");
+        my_table.classList.add("table");
+        my_table.classList.add("table-borders");
+        my_table.classList.add("text-center");
+
+        
+        var table_heading = document.createElement("thead");
+        table_heading.classList.add("thead-my");
+
+        var row = document.createElement("tr");
+        var col = document.createElement("td");
+        var node = document.createTextNode("String");
+        col.classList.add("w-75");
+        col.appendChild(node);
+        row.appendChild(col);
+
+        col = document.createElement("td");
+        node = document.createTextNode("Member");
+        col.appendChild(node);
+        row.appendChild(col);
+
+        table_heading.appendChild(row);
+
+        my_table.appendChild(table_heading);
+
+        var table_body = document.createElement("tbody");
+        my_table.appendChild(table_body);
+
+        membership_box.appendChild(my_table);
+
+        var main = document.getElementById("main-blocks");
+        main.appendChild(membership_box);
     }
 
 }

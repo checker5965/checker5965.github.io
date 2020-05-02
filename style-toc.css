@@ -153,3 +153,13 @@ body {
     background-color: #f8d7da;
     border-color: #721c24;
   }
+
+  .thead-my {
+    background-color: #001f3fa4;
+    font-weight: bold;
+  }
+
+  .table-borders th, .table-borders td {
+    border: 1px solid #43cea2;
+    border-bottom-width: 2px;
+  }
