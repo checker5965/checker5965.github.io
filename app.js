@@ -9,7 +9,7 @@ function addProduction () {
 
     var my_div = document.createElement("div");
     my_div.classList.add("p-2");
-    my_div.setAttribute("style", "width: 12%");
+    my_div.setAttribute("style", "width: 15%");
     var my_input = document.createElement("input");
     my_input.setAttribute("type", "text");
     my_input.setAttribute("maxlength", "1");
@@ -29,7 +29,7 @@ function addProduction () {
     
     var my_div = document.createElement("div");
     my_div.classList.add("p-2");
-    my_div.setAttribute("style", "width: 12%");
+    my_div.setAttribute("style", "width: 15%");
     my_div.setAttribute("onkeydown", "keyAction(event)");
     var my_input = document.createElement("input");
     my_input.setAttribute("type", "text");
@@ -81,7 +81,7 @@ function keyAction(event) {
             
             var my_div = document.createElement("div");
             my_div.classList.add("p-2");
-            my_div.setAttribute("style", "width: 12%");
+            my_div.setAttribute("style", "width: 15%");
             my_div.setAttribute("onkeydown", "keyAction(event)");
             var my_input = document.createElement("input");
             my_input.setAttribute("type", "text");
@@ -109,7 +109,7 @@ function keyAction(event) {
             
             var my_div = document.createElement("div");
             my_div.classList.add("p-2");
-            my_div.setAttribute("style", "width: 12%");
+            my_div.setAttribute("style", "width: 15%");
             my_div.setAttribute("onkeydown", "keyAction(event)");
             var my_input = document.createElement("input");
             my_input.setAttribute("type", "text");
@@ -174,6 +174,7 @@ function myAlert(message) {
 var symbol_map;
 var non_terminals_arr;
 var rules;
+var null_set;
 
 function prepare() {
     
@@ -308,8 +309,73 @@ function prepare() {
         main.appendChild(membership_box);
     }
 
+    testMembership();
+    addExample(createExample());
+
 }
 
+function addExample(my_string) {
+    var example_box = document.getElementById("example");
+
+    var new_example = document.createElement("input");
+    new_example.classList.add("form-control");
+    new_example.setAttribute("readonly", "readonly");
+    new_example.setAttribute("style", "cursor: not-allowed; width: 75%; margin-bottom: 10px;");
+    new_example.setAttribute("value", my_string);
+
+    example_box.appendChild(new_example);
+}
+
+function isNotResolved(my_string) {
+    for (var i = 0; i < my_string.length; i++) {
+        if (symbol_map.get(my_string[i]) == 1) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function createExample() {
+    var curr_str = rules[0][1];
+    var tries = 0;
+    var curr_index = 0;
+
+    while(isNotResolved(curr_str) && tries <= 20) {
+        console.log(curr_str);
+        if (symbol_map.get(curr_str[curr_index]) != 1) {
+            curr_index++;
+        }
+        else {
+            var flag = 0;
+            var prev_rule;
+            for (var rule = 0; rule < rules.length; rule++) {
+                if (rules[rule][0] == curr_str[curr_index]) {
+                    if (isNotResolved(rules[rule][1])) {
+                        flag = 1;
+                        prev_rule = rule;
+                    }
+                    else {
+                        flag = 0;
+                        curr_str = curr_str.split(curr_str[curr_index]);
+                        curr_str = curr_str[0] + rules[rule][1] + curr_str[1];
+                        break;
+                    }
+                }
+            }
+            if (flag === 1) {
+                curr_str = curr_str.split(curr_str[curr_index]);
+                curr_str = curr_str[0] + rules[prev_rule][1] + curr_str[1];
+            }
+            tries++;
+        }
+    }
+    if (isNotResolved(curr_str)) {
+        return "Sorry, example unavailable.";
+    }
+    else {
+        return curr_str;
+    }
+}
 
 function getInput() {
     // Get input from the input box
@@ -319,6 +385,7 @@ function getInput() {
         symbol_map = new Map();
         non_terminals_arr = [];
         rules = [];
+        null_set = new Set();
         for(var i = 0; i < form.length - 2; i++) {
             var item = form.item(i);
             if (item.classList[1] == "NT") {
@@ -334,6 +401,7 @@ function getInput() {
                 var my_val = item.value;
                 if (my_val === "") {
                     my_val = "Ɛ";
+                    null_set.add(JSON.stringify(current_nt));
                 }
                 symbol_map.set(my_val, 0);
                 rules.push([current_nt, my_val]);
@@ -353,6 +421,9 @@ function predictor(S, state, j) {
     for (var rule = 0; rule < rules.length; rule++) {
         if (rules[rule][0] === state[1][state[1].indexOf('.') + 1]) {
             S[j].add(JSON.stringify([rules[rule][0], "." + rules[rule][1], j])); 
+            if (null_set.has(JSON.stringify(rules[rule][0]))) {
+                S[j].add(JSON.stringify([state[0][0], rules[rule][0] + ".", j]))
+            }
         }
     }
     return S;
@@ -387,7 +458,6 @@ function testMembership() {
         S = init(S, input_strings[i].length);
 
         S[0].add(JSON.stringify(["γ", ".S", 0]));
-        
         for (var j = 0; j <= input_strings[i].length; j++) {
             for (var k = 0; k < S[j].size; k++) {
                 var current_rule = JSON.parse(Array.from(S[j])[k]);
@@ -406,6 +476,53 @@ function testMembership() {
             }
         }
         // Add to table here
-        
+        createTable(i, input_strings[i]);
     }
+}
+
+function createTable (i, input_string) {
+    var match = false;
+    for(var final_chart_iterator = 0; final_chart_iterator < S[S.length - 1].size; final_chart_iterator++) {
+        var curr_rule = JSON.parse(Array.from(S[S.length - 1])[final_chart_iterator]);
+        if (curr_rule[2] === 0 && curr_rule[1][curr_rule[1].length - 1] === ".") {
+            match = true;
+        }
+    }
+    
+    var current_row = document.getElementById("member" + i);
+    if (current_row) {
+        current_row.remove();
+    }
+    
+    var my_table = document.getElementById("table-body");
+    
+    var row = document.createElement("tr");
+    row.setAttribute("id", "member" + i);
+    var col = document.createElement("td");
+    var my_text = input_string;
+    if (input_string === "") {
+        my_text = "Ɛ";
+        if (i !== 0) {
+            return;
+        }
+    }
+    var node = document.createTextNode(my_text);
+    col.classList.add("w-75");
+    col.appendChild(node);
+    row.appendChild(col);
+
+    col = document.createElement("td");
+    if (match === true) {
+        node = document.createTextNode("Yes");
+        row.classList.add("table-s");
+    }
+    else {
+        node = document.createTextNode("No");
+        row.classList.add("table-d");
+    }
+
+    col.appendChild(node);
+    row.appendChild(col);
+
+    my_table.appendChild(row);
 }

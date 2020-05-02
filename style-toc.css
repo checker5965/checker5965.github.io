@@ -160,6 +160,16 @@ body {
   }
 
   .table-borders th, .table-borders td {
-    border: 1px solid #43cea2;
+    border: 2px solid #001f3fa4;
     border-bottom-width: 2px;
+  }
+
+  .table-d {
+    color: #721c24;
+    background-color: #f8d7da;
+  }
+
+  .table-s {
+    color: #001f3f;
+    background-color: #43cea2;
   }
