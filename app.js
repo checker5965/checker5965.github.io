@@ -139,7 +139,6 @@ function keyAction(event) {
 function fadeOut(my_element) {
     if (my_element.style.opacity > 0) {
         my_element.style.opacity = my_element.style.opacity - 0.01;
-        console.log(my_element.style.opacity);
         setTimeout(fadeOut, 50, my_element);
     }
     else {
@@ -172,7 +171,10 @@ function myAlert(message) {
 
 }
 
-function generateCFG() {
+var non_terminals;
+var rules;
+
+function prepare() {
     
     // Remove existing boxes
     {
@@ -192,10 +194,9 @@ function generateCFG() {
     // Get input from the input box
     {
         var current_nt;
-        var non_terminals = [];
-        var rules = [];
         var form = document.getElementById("grammar").elements;
-        // console.log(form);
+        non_terminals = [];
+        rules = [];
         for(var i = 0; i < form.length - 2; i++) {
             var item = form.item(i);
             if (item.classList[1] == "NT") {
@@ -207,11 +208,15 @@ function generateCFG() {
                 non_terminals.push(item.value);
             }
             else {
-                rules.push(current_nt + "->" + item .value);
+                var my_val = item.value;
+                if (my_val === "") {
+                    my_val = "Ɛ";
+                }
+                rules.push(current_nt + "->" + my_val);
             }
         }
-        // console.log(non_terminals);
-        // console.log(rules);
+        console.log(non_terminals);
+        console.log(rules);
     }
 
     // Create new Example Box
@@ -226,7 +231,13 @@ function generateCFG() {
 
         example_box.appendChild(heading);
 
-        var main = document.getElementById("main-blocks");
+        var my_text = document.createElement("p");
+        node = document.createTextNode("An example string from this language is: ");
+        my_text.appendChild(node);
+
+        example_box.appendChild(my_text);
+
+        var main = document.getElementById("side-blocks");
         main.appendChild(example_box);
     }
     
@@ -242,8 +253,27 @@ function generateCFG() {
 
         test_box.appendChild(heading);
 
+        var input_div = document.createElement("div");
+        input_div.classList.add("form-group");
+        
+        var input_label = document.createElement("label");
+        input_label.setAttribute("for", "input_strings");
+        node = document.createTextNode("Input String: ");
+        input_label.appendChild(node);
+
+        var input_box = document.createElement("textarea");
+        input_box.classList.add("form-control");
+        input_box.setAttribute("rows", "3");
+        input_box.setAttribute("id", "input_strings");
+
+        input_div.appendChild(input_label);
+        input_div.appendChild(input_box);
+
+        test_box.appendChild(input_div);
+
         main = document.getElementById("main-blocks");
         main.appendChild(test_box);
     }
 
 }
+
