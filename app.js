@@ -356,14 +356,14 @@ function createExample() {
                     }
                     else {
                         flag = 0;
-                        curr_str = curr_str.split(curr_str[curr_index]);
+                        curr_str = [curr_str.slice(0, curr_index), curr_str.slice(curr_index + 1)];
                         curr_str = curr_str[0] + rules[rule][1] + curr_str[1];
                         break;
                     }
                 }
             }
             if (flag === 1) {
-                curr_str = curr_str.split(curr_str[curr_index]);
+                curr_str = [curr_str.slice(0, curr_index), curr_str.slice(curr_index + 1)];
                 curr_str = curr_str[0] + rules[prev_rule][1] + curr_str[1];
             }
             tries++;
