@@ -341,7 +341,6 @@ function createExample() {
     var curr_index = 0;
 
     while(isNotResolved(curr_str) && tries <= 20) {
-        console.log(curr_str);
         if (symbol_map.get(curr_str[curr_index]) != 1) {
             curr_index++;
         }
@@ -400,7 +399,6 @@ function getInput() {
             else {
                 var my_val = item.value;
                 if (my_val === "") {
-                    my_val = "Ɛ";
                     null_set.add(JSON.stringify(current_nt));
                 }
                 symbol_map.set(my_val, 0);
@@ -419,10 +417,10 @@ function init(S, len) {
 
 function predictor(S, state, j) {
     for (var rule = 0; rule < rules.length; rule++) {
-        if (rules[rule][0] === state[1][state[1].indexOf('.') + 1]) {
-            S[j].add(JSON.stringify([rules[rule][0], "." + rules[rule][1], j])); 
+        if (rules[rule][0] === state[1][state[1].indexOf("φ") + 1]) {
+            S[j].add(JSON.stringify([rules[rule][0], "φ" + rules[rule][1], j])); 
             if (null_set.has(JSON.stringify(rules[rule][0]))) {
-                S[j].add(JSON.stringify([state[0][0], rules[rule][0] + ".", j]))
+                S[j].add(JSON.stringify([state[0][0], rules[rule][0] + "φ", j]))
             }
         }
     }
@@ -430,9 +428,9 @@ function predictor(S, state, j) {
 }
 
 function scanner(S, state, j, character) {
-    if (state[1][state[1].indexOf('.') + 1] === character) {
-        var split_rule = state[1].split('.');
-        S[j + 1].add(JSON.stringify([state[0], split_rule[0] + split_rule[1][0] + "." + split_rule[1].substring(1), state[2]]));
+    if (state[1][state[1].indexOf("φ") + 1] === character) {
+        var split_rule = state[1].split("φ");
+        S[j + 1].add(JSON.stringify([state[0], split_rule[0] + split_rule[1][0] + "φ" + split_rule[1].substring(1), state[2]]));
     }
     return S;
 }
@@ -440,9 +438,9 @@ function scanner(S, state, j, character) {
 function completer(S, state, j) {
     for (var rule = 0; rule < S[state[2]].size; rule++) {
         var temp_rule = JSON.parse(Array.from(S[state[2]])[rule]);
-        if (temp_rule[1][temp_rule[1].indexOf('.') + 1] === state[0]) {
-            var split_rule = temp_rule[1].split('.');
-            S[j].add(JSON.stringify([temp_rule[0], split_rule[0] + split_rule[1][0] + "." + split_rule[1].substring(1), temp_rule[2]]));
+        if (temp_rule[1][temp_rule[1].indexOf("φ") + 1] === state[0]) {
+            var split_rule = temp_rule[1].split("φ");
+            S[j].add(JSON.stringify([temp_rule[0], split_rule[0] + split_rule[1][0] + "φ" + split_rule[1].substring(1), temp_rule[2]]));
         }
     }
     return S;
@@ -457,16 +455,16 @@ function testMembership() {
     for (var i = 0; i < input_strings.length; i++) {
         S = init(S, input_strings[i].length);
 
-        S[0].add(JSON.stringify(["γ", ".S", 0]));
+        S[0].add(JSON.stringify(["γ", "φS", 0]));
         for (var j = 0; j <= input_strings[i].length; j++) {
             for (var k = 0; k < S[j].size; k++) {
                 var current_rule = JSON.parse(Array.from(S[j])[k]);
 
-                if (current_rule[1][current_rule[1].length - 1] === ".") {
+                if (current_rule[1][current_rule[1].length - 1] === "φ") {
                     S = completer(S, current_rule, j);
                 }
                 else {
-                    if (symbol_map.get(current_rule[1][current_rule[1].indexOf('.') + 1]) === 1) {
+                    if (symbol_map.get(current_rule[1][current_rule[1].indexOf("φ") + 1]) === 1) {
                         S = predictor(S, current_rule, j);
                     }
                     else {
@@ -484,7 +482,7 @@ function createTable (i, input_string) {
     var match = false;
     for(var final_chart_iterator = 0; final_chart_iterator < S[S.length - 1].size; final_chart_iterator++) {
         var curr_rule = JSON.parse(Array.from(S[S.length - 1])[final_chart_iterator]);
-        if (curr_rule[2] === 0 && curr_rule[1][curr_rule[1].length - 1] === ".") {
+        if (curr_rule[2] === 0 && curr_rule[1][curr_rule[1].length - 1] === "φ" && curr_rule[0] === "γ") {
             match = true;
         }
     }
