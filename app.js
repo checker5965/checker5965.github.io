@@ -175,6 +175,7 @@ var symbol_map;
 var non_terminals_arr;
 var rules;
 var null_set;
+var ptr_map;
 
 function prepare() {
     
@@ -410,6 +411,45 @@ function getInput() {
     }
 }
 
+function addPtr(rule, j, k, temp_rule, prev) {
+    if (ptr_map.get(rule)) {
+        temp_arr = ptr_map.get(rule);
+        var curr_arr = new Array();
+        curr_arr.push([j, k]);
+        // if (rule[0] === "2" && rule[1] === "1") {
+        //     console.log(String(prev) + temp_rule);
+        // }
+        if (ptr_map.get(String(prev) + temp_rule)) {
+            var iter_arr = ptr_map.get(String(prev) + temp_rule);
+            for (var i = 0; i < iter_arr.length; i++) {
+                for (var i2 = 0; i2 < iter_arr[i].length; i2++) {
+                    curr_arr.push(iter_arr[i][i2]);
+                }
+            }
+        }
+        temp_arr.push(curr_arr);
+        ptr_map.set(rule, temp_arr);
+    }
+    else {
+        temp_arr = [];
+        var curr_arr = new Array();
+        curr_arr.push([j, k]);
+        // if (rule[0] === "2" && rule[1] === "1") {
+        //     console.log(String(prev) + temp_rule);
+        // }
+        if (ptr_map.get(String(prev) + temp_rule)) {
+            var iter_arr = ptr_map.get(String(prev) + temp_rule);
+            for (var i = 0; i < iter_arr.length; i++) {
+                for (var i2 = 0; i2 < iter_arr[i].length; i2++) {
+                    curr_arr.push(iter_arr[i][i2]);
+                }
+            }
+        }
+        temp_arr.push(curr_arr);
+        ptr_map.set(rule, temp_arr);
+    }
+}
+
 function init(S, len) {
     S = [...Array(len + 1)].map(elem => new Set());
     return S;
@@ -418,29 +458,39 @@ function init(S, len) {
 function predictor(S, state, j) {
     for (var rule = 0; rule < rules.length; rule++) {
         if (rules[rule][0] === state[1][state[1].indexOf("φ") + 1]) {
-            S[j].add(JSON.stringify([rules[rule][0], "φ" + rules[rule][1], j])); 
+            var new_rule = JSON.stringify([rules[rule][0], "φ" + rules[rule][1], j]);
+            S[j].add(new_rule);
+            // addPtr(String(j) + new_rule, j, k); 
             if (null_set.has(JSON.stringify(rules[rule][0]))) {
-                S[j].add(JSON.stringify([state[0][0], rules[rule][0] + "φ", j]))
+                new_rule = JSON.stringify([state[0][0], rules[rule][0] + "φ", j]);
+                S[j].add(new_rule);
+                // addPtr(String(j) + new_rule, j, k);
             }
         }
     }
     return S;
 }
 
-function scanner(S, state, j, character) {
+function scanner(S, state, j, character, k) {
     if (state[1][state[1].indexOf("φ") + 1] === character) {
         var split_rule = state[1].split("φ");
-        S[j + 1].add(JSON.stringify([state[0], split_rule[0] + split_rule[1][0] + "φ" + split_rule[1].substring(1), state[2]]));
+        var new_rule = JSON.stringify([state[0], split_rule[0] + split_rule[1][0] + "φ" + split_rule[1].substring(1), state[2]]);
+        S[j + 1].add(new_rule);
+        // addPtr(String(j + 1) + new_rule, j, k);
+        
     }
     return S;
 }
 
-function completer(S, state, j) {
+function completer(S, state, j, k) {
     for (var rule = 0; rule < S[state[2]].size; rule++) {
         var temp_rule = JSON.parse(Array.from(S[state[2]])[rule]);
         if (temp_rule[1][temp_rule[1].indexOf("φ") + 1] === state[0]) {
             var split_rule = temp_rule[1].split("φ");
-            S[j].add(JSON.stringify([temp_rule[0], split_rule[0] + split_rule[1][0] + "φ" + split_rule[1].substring(1), temp_rule[2]]));
+            var new_rule = JSON.stringify([temp_rule[0], split_rule[0] + split_rule[1][0] + "φ" + split_rule[1].substring(1), temp_rule[2]]);
+            S[j].add(new_rule);
+            temp_rule = Array.from(S[state[2]])[rule];
+            addPtr(String(j) + new_rule, j, k, temp_rule, state[2]); 
         }
     }
     return S;
@@ -449,9 +499,9 @@ function completer(S, state, j) {
 var S;
 
 function testMembership() {
+    ptr_map = new Map();
     var input_strings = document.getElementById("input_strings").value;
     input_strings = input_strings.split("\n");
-    
     for (var i = 0; i < input_strings.length; i++) {
         S = init(S, input_strings[i].length);
 
@@ -461,14 +511,14 @@ function testMembership() {
                 var current_rule = JSON.parse(Array.from(S[j])[k]);
 
                 if (current_rule[1][current_rule[1].length - 1] === "φ") {
-                    S = completer(S, current_rule, j);
+                    S = completer(S, current_rule, j, k);
                 }
                 else {
                     if (symbol_map.get(current_rule[1][current_rule[1].indexOf("φ") + 1]) === 1) {
-                        S = predictor(S, current_rule, j);
+                        S = predictor(S, current_rule, j, k);
                     }
                     else {
-                        S = scanner(S, current_rule, j, input_strings[i][j]);
+                        S = scanner(S, current_rule, j, input_strings[i][j], k);
                     }
                 }
             }
@@ -484,6 +534,19 @@ function createTable (i, input_string) {
         var curr_rule = JSON.parse(Array.from(S[S.length - 1])[final_chart_iterator]);
         if (curr_rule[2] === 0 && curr_rule[1][curr_rule[1].length - 1] === "φ" && curr_rule[0] === "γ") {
             match = true;
+
+            // var D = []
+            // var iter_rule = curr_rule;
+
+            // while (true) {
+            //     if (!iter_rule || !ptr_map.get(JSON.stringify(iter_rule))) {
+            //         break;
+            //     }
+            //     if (iter_rule[1][iter_rule[1].length - 1] === "φ") {
+            //         D.push(iter_rule);
+            //     }
+
+            // }
         }
     }
     
@@ -513,6 +576,8 @@ function createTable (i, input_string) {
     if (match === true) {
         node = document.createTextNode("Yes");
         row.classList.add("table-s");
+        console.log(S);
+        console.log(ptr_map);
     }
     else {
         node = document.createTextNode("No");
