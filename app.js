@@ -1,5 +1,6 @@
 function addProduction () {
     
+    // Get current productions
     var current_productions = document.getElementById('productions');
     
     var newProduction = document.createElement("div");
@@ -477,7 +478,7 @@ function scanner(S, state, j, character, k) {
         var new_rule = JSON.stringify([state[0], split_rule[0] + split_rule[1][0] + "φ" + split_rule[1].substring(1), state[2]]);
         S[j + 1].add(new_rule);
         // addPtr(String(j + 1) + new_rule, j, k);
-        
+
     }
     return S;
 }
@@ -530,23 +531,21 @@ function testMembership() {
 
 function createTable (i, input_string) {
     var match = false;
+    var ambiguous = false;
     for(var final_chart_iterator = 0; final_chart_iterator < S[S.length - 1].size; final_chart_iterator++) {
         var curr_rule = JSON.parse(Array.from(S[S.length - 1])[final_chart_iterator]);
         if (curr_rule[2] === 0 && curr_rule[1][curr_rule[1].length - 1] === "φ" && curr_rule[0] === "γ") {
             match = true;
-
-            // var D = []
-            // var iter_rule = curr_rule;
-
-            // while (true) {
-            //     if (!iter_rule || !ptr_map.get(JSON.stringify(iter_rule))) {
-            //         break;
-            //     }
-            //     if (iter_rule[1][iter_rule[1].length - 1] === "φ") {
-            //         D.push(iter_rule);
-            //     }
-
-            // }
+            var back_ptrs = ptr_map.get(String(final_chart_iterator) + Array.from(S[S.length - 1])[final_chart_iterator]);
+            var back_rule = Array.from(S[back_ptrs[0][0][0]])[back_ptrs[0][0][1]];
+            try {
+                if(ptr_map.get(String(back_ptrs[0][0][0]) + String(back_rule)).length > 1) {
+                    ambiguous = true;
+                }
+            }
+            catch (err) {
+                console.log("Ambiguity Corner Case: Scanned");
+            }
         }
     }
     
@@ -573,11 +572,14 @@ function createTable (i, input_string) {
     row.appendChild(col);
 
     col = document.createElement("td");
-    if (match === true) {
+    if (match) {
         node = document.createTextNode("Yes");
-        row.classList.add("table-s");
-        console.log(S);
-        console.log(ptr_map);
+        if (ambiguous) {
+            row.classList.add("table-amb");
+        }
+        else {
+            row.classList.add("table-s");
+        }
     }
     else {
         node = document.createTextNode("No");
