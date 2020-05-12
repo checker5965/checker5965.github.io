@@ -584,6 +584,9 @@ function createExample() {
  */
 function addPtr(rule, j, k, temp_rule, prev) {
 
+    // New representation for map.
+    rule = String(j) + rule;
+
     // If there already exists a pointer for given rule.
     if (ptr_map.get(rule)) {
         
@@ -645,6 +648,73 @@ function addPtr(rule, j, k, temp_rule, prev) {
     }
 }
 
+/**
+ * Function that copies the backpointers
+ * of scanned or predicted rule from
+ * parent rule.
+ * @param {*} rule The rule for which back-ptr needs to be copied
+ * @param {*} j Chart column
+ * @param {*} k Chart row
+ * @param {*} temp_rule The rule that caused the match
+ * @param {*} prev Chart column of the matched rule
+ */
+function copyPtr(rule, j, k, temp_rule, prev) {
+
+    // New representation for map.
+    rule = String(j) + rule;
+
+    // If there already exists a pointer for given rule.
+    if (ptr_map.get(rule)) {
+        
+        // Add new backpointers to existing pointer array. 
+        temp_arr = ptr_map.get(rule);
+        
+        // If the matched string itself has backpointers, they need to be added.
+        if (ptr_map.get(String(prev) + temp_rule)) {
+            var iter_arr = ptr_map.get(String(prev) + temp_rule);
+            for (var i = 0; i < iter_arr.length; i++) {
+                var curr_arr = [];
+                for (var i2 = 0; i2 < iter_arr[i].length; i2++) {
+                    curr_arr.push(iter_arr[i][i2]);
+                }
+                if (curr_arr !== []) {
+                    temp_arr.push(curr_arr);
+                }
+            }
+        }
+
+        // Push all back pointers in our pointer map.
+        ptr_map.set(rule, temp_arr);
+    }
+
+    // If no backpointers existed for this rule.
+    else {
+
+        // Create new pointer array and add back-pointers.
+        temp_arr = [];
+
+        // If the matched string itself has backpointers, they need to be added.
+        if (ptr_map.get(String(prev) + temp_rule)) {
+            var iter_arr = ptr_map.get(String(prev) + temp_rule);
+            for (var i = 0; i < iter_arr.length; i++) {
+                var curr_arr = [];
+                for (var i2 = 0; i2 < iter_arr[i].length; i2++) {
+                    curr_arr.push(iter_arr[i][i2]);
+                }
+                if (curr_arr.length) {
+                    temp_arr.push(curr_arr);
+                }
+            }
+        }
+
+        // Push all back pointers in our pointer map.
+        if (temp_arr.length) {
+            ptr_map.set(rule, temp_arr);
+        }
+    }
+
+}
+
 
 /**
  * Initialize the chart.
@@ -669,7 +739,7 @@ function init(S, len) {
  * @param {*} state Current state
  * @param {*} j Chart column
  */
-function predictor(S, state, j) {
+function predictor(S, state, j, k) {
     
     // Iterate over all rules. 
     for (var rule = 0; rule < rules.length; rule++) {
@@ -689,6 +759,8 @@ function predictor(S, state, j) {
                 var split_rule = state[1].split("φ");
                 new_rule = JSON.stringify([state[0][0], split_rule[0] + split_rule[1][0] + "φ" + split_rule[1].substring(1), state[2]]);
                 S[j].add(new_rule);
+
+                // TODO: Nullable case backpointers.
             }
         }
     }
@@ -707,7 +779,7 @@ function predictor(S, state, j) {
  * @param {*} j Chart column
  * @param {*} character Next character in input string
  */
-function scanner(S, state, j, character) {
+function scanner(S, state, j, character, k) {
     
     // Check if the current rule contains the same 
     // character as the next character in input string. 
@@ -717,6 +789,10 @@ function scanner(S, state, j, character) {
         var split_rule = state[1].split("φ");
         var new_rule = JSON.stringify([state[0], split_rule[0] + split_rule[1][0] + "φ" + split_rule[1].substring(1), state[2]]);
         S[j + 1].add(new_rule);
+
+        // Copy pointers of parent.
+        copyPtr(new_rule, j + 1, k, JSON.stringify(state), j);
+        
     }
     return S;
 }
@@ -752,7 +828,7 @@ function completer(S, state, j, k) {
             temp_rule = Array.from(S[state[2]])[rule];
 
             // Add back-pointers.
-            addPtr(String(j) + new_rule, j, k, temp_rule, state[2]); 
+            addPtr(new_rule, j, k, temp_rule, state[2]); 
         }
     }
     return S;
@@ -801,12 +877,12 @@ function testMembership() {
 
                     // If the next character is a Non-Terminal, run predictor.
                     if (symbol_map.get(current_rule[1][current_rule[1].indexOf("φ") + 1]) === 1) {
-                        S = predictor(S, current_rule, j);
+                        S = predictor(S, current_rule, j, k);
                     }
 
                     // If the next character is a Terminal, run scanner.
                     else {
-                        S = scanner(S, current_rule, j, input_strings[i][j]);
+                        S = scanner(S, current_rule, j, input_strings[i][j], k);
                     }
                 }
             }
