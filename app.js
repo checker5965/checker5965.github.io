@@ -589,21 +589,28 @@ function addPtr(rule, j, k, temp_rule, prev) {
         
         // Add new backpointers to existing pointer array. 
         temp_arr = ptr_map.get(rule);
-        var curr_arr = new Array();
-        curr_arr.push([j, k]);
-
+        
         // If the matched string itself has backpointers, they need to be added.
         if (ptr_map.get(String(prev) + temp_rule)) {
             var iter_arr = ptr_map.get(String(prev) + temp_rule);
             for (var i = 0; i < iter_arr.length; i++) {
                 for (var i2 = 0; i2 < iter_arr[i].length; i2++) {
+                    var curr_arr = [];
+                    curr_arr.push([j, k]);
                     curr_arr.push(iter_arr[i][i2]);
+                    temp_arr.push(curr_arr);
                 }
             }
         }
 
+        // If pointers for prior rules don't exist.
+        else {
+            var curr_arr = [];
+            curr_arr.push([j, k]);
+            temp_arr.push(curr_arr);
+        }
+
         // Push all back pointers in our pointer map.
-        temp_arr.push(curr_arr);
         ptr_map.set(rule, temp_arr);
     }
 
@@ -612,21 +619,28 @@ function addPtr(rule, j, k, temp_rule, prev) {
 
         // Create new pointer array and add back-pointers.
         temp_arr = [];
-        var curr_arr = new Array();
-        curr_arr.push([j, k]);
 
         // If the matched string itself has backpointers, they need to be added.
         if (ptr_map.get(String(prev) + temp_rule)) {
             var iter_arr = ptr_map.get(String(prev) + temp_rule);
             for (var i = 0; i < iter_arr.length; i++) {
                 for (var i2 = 0; i2 < iter_arr[i].length; i2++) {
+                    var curr_arr = [];
+                    curr_arr.push([j, k]);
                     curr_arr.push(iter_arr[i][i2]);
+                    temp_arr.push(curr_arr);
                 }
             }
         }
 
+        // If pointers for prior rules don't exist.
+        else {
+            var curr_arr = [];
+            curr_arr.push([j, k]);
+            temp_arr.push(curr_arr);
+        }
+        
         // Push all back pointers in our pointer map.
-        temp_arr.push(curr_arr);
         ptr_map.set(rule, temp_arr);
     }
 }
@@ -672,7 +686,8 @@ function predictor(S, state, j) {
             if (null_set.has(JSON.stringify(rules[rule][0]))) {
                 
                 // Construct and add new rule.
-                new_rule = JSON.stringify([state[0][0], rules[rule][0] + "φ", j]);
+                var split_rule = state[1].split("φ");
+                new_rule = JSON.stringify([state[0][0], split_rule[0] + split_rule[1][0] + "φ" + split_rule[1].substring(1), state[2]]);
                 S[j].add(new_rule);
             }
         }
@@ -825,10 +840,11 @@ function createTable (i, input_string) {
             match = true;
 
             // Go one level down in parse tree.
-            var back_ptrs = ptr_map.get(String(final_chart_iterator) + Array.from(S[S.length - 1])[final_chart_iterator]);
-            var back_rule = Array.from(S[back_ptrs[0][0][0]])[back_ptrs[0][0][1]];
             try {
 
+                var back_ptrs = ptr_map.get(String(S.length - 1) + Array.from(S[S.length - 1])[final_chart_iterator]);
+                var back_rule = Array.from(S[back_ptrs[0][0][0]])[back_ptrs[0][0][1]];
+                
                 // If the first rule has multiple possible parses, this is an ambiguous grammar.
                 if(ptr_map.get(String(back_ptrs[0][0][0]) + String(back_rule)).length > 1) {
                     ambiguous = true;
