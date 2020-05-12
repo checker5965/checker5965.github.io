@@ -1,13 +1,19 @@
+/**
+ * Helper function to create new 
+ * productions in the input area.
+ */
 function addProduction () {
     
     // Get current productions
     var current_productions = document.getElementById('productions');
     
+    // Create new row for production
     var newProduction = document.createElement("div");
     newProduction.classList.add("d-flex");
     newProduction.classList.add("flex-row");
     newProduction.classList.add("flex-wrap");
 
+    // Create Non-Terminal
     var my_div = document.createElement("div");
     my_div.classList.add("p-2");
     my_div.setAttribute("style", "width: 15%");
@@ -19,6 +25,7 @@ function addProduction () {
     my_div.appendChild(my_input);
     newProduction.appendChild(my_div);
 
+    // Connector
     var my_div = document.createElement("div");
     my_div.classList.add("p-2");
     my_div.setAttribute("style", "margin-top: 1%");
@@ -28,6 +35,7 @@ function addProduction () {
     my_div.appendChild(my_p);
     newProduction.appendChild(my_div);
     
+    // Create space for Terminal
     var my_div = document.createElement("div");
     my_div.classList.add("p-2");
     my_div.setAttribute("style", "width: 15%");
@@ -40,6 +48,7 @@ function addProduction () {
     my_div.appendChild(my_input);
     newProduction.appendChild(my_div);
     
+    // Button to delete production
     var my_div = document.createElement("div");
     my_div.classList.add("p-2");
     my_div.setAttribute("style", "width: 10%");
@@ -50,27 +59,46 @@ function addProduction () {
     my_div.appendChild(my_img);
     newProduction.appendChild(my_div);
 
+    // Add new production to DOM
     current_productions.appendChild(newProduction);
 }
 
+/**
+ * Helper function to delete a 
+ * production from the input area.
+ * 
+ * @param {*} element The production to delete
+ */
 function delProduction(element) {
     element.parentNode.parentNode.parentNode.removeChild(element.parentNode.parentNode)
 }
 
+/**
+ * Helper function to control
+ * productions via keyboard.
+ * 
+ * @param {*} event Key press
+ */
 function keyAction(event) {
 
+    // Find target element.
     var target_element = event.target.parentNode.parentNode;
 
+    // If Enter, create new production.
     if (event.keyCode === 13) {
         addProduction();
     }
     
+    // If [|], add new rule to current production.
     if (event.key === "|") {
         
+        // Prevent treating [|] like a character.
         event.preventDefault();
 
+        // If this is the first row.
         if (target_element.id === "startrow") {
             
+            // Create the space for the new rule.
             var my_div = document.createElement("div");
             my_div.classList.add("p-2");
             my_div.setAttribute("style", "margin-top: 1%");
@@ -80,6 +108,7 @@ function keyAction(event) {
             my_div.appendChild(my_p);
             target_element.appendChild(my_div);
             
+            // Create the actual box for the rule.
             var my_div = document.createElement("div");
             my_div.classList.add("p-2");
             my_div.setAttribute("style", "width: 15%");
@@ -92,6 +121,7 @@ function keyAction(event) {
             target_element.appendChild(my_div);
         }
         else {
+            // Hacky fix to prevent weird behaviour on deletion.
             if (target_element.lastChild.nodeName === "#text") {
                 target_element.removeChild(target_element.childNodes[target_element.childNodes.length - 2]);
             }
@@ -99,6 +129,7 @@ function keyAction(event) {
                 target_element.removeChild(target_element.lastChild);                
             }
 
+            // Create the space for the new rule.
             var my_div = document.createElement("div");
             my_div.classList.add("p-2");
             my_div.setAttribute("style", "margin-top: 1%");
@@ -108,6 +139,7 @@ function keyAction(event) {
             my_div.appendChild(my_p);
             target_element.appendChild(my_div);
             
+            // Create the actual box for the rule.
             var my_div = document.createElement("div");
             my_div.classList.add("p-2");
             my_div.setAttribute("style", "width: 15%");
@@ -119,6 +151,7 @@ function keyAction(event) {
             my_div.appendChild(my_input);
             target_element.appendChild(my_div);
             
+            // Add delete button here.
             var my_div = document.createElement("div");
             my_div.classList.add("p-2");
             my_div.setAttribute("style", "width: 10%");
@@ -131,12 +164,19 @@ function keyAction(event) {
         }
     }
 
+    // Deleting rules on backspace, but be careful not to delet the first rule.
     if (event.target.value.length === 0 && event.keyCode === 8 && event.target.className != "form-control first") {
         target_element.removeChild(event.target.parentNode.previousElementSibling);      
         target_element.removeChild(event.target.parentNode);
     }
 }
 
+/**
+ * Helper function to fade out
+ * a pop up.
+ * 
+ * @param {*} my_element The element to fade out 
+ */
 function fadeOut(my_element) {
     if (my_element.style.opacity > 0) {
         my_element.style.opacity = my_element.style.opacity - 0.01;
@@ -147,67 +187,160 @@ function fadeOut(my_element) {
     }
 }
 
+
+/**
+ * Helper function to print a
+ * fading alert at the top of 
+ * the application.
+ * 
+ * @param {*} message The message to display in the alert
+ */
 function myAlert(message) {
+    // If an alert already exists, return.
     var alert_box = document.getElementById("wrong");
     if (alert_box) {
         return;
     }
 
+    // Create the alert box.
     alert_box = document.createElement("div");
     alert_box.classList.add("alert-danger");
     alert_box.classList.add("content-section");
     alert_box.setAttribute("style", "opacity: 1")
     alert_box.setAttribute("id", "wrong");
     
+    // Add the text to the alert box.
     var text = document.createElement("h5");
     var node = document.createTextNode(message);
     text.appendChild(node);
 
+    // Append the text to the box.
     alert_box.appendChild(text);
 
+    // Append the box to the top of the application.
     var main = document.getElementById("main-blocks");
     main.prepend(alert_box);
 
+    // Fade the box after 5000 ms.
     setTimeout(fadeOut, 5000, alert_box);
 
 }
 
-var symbol_map;
-var non_terminals_arr;
+// Set of all rules received from input.
 var rules;
+
+// A map of all symbols, 1 indicates NT, 0 indicates T.
+var symbol_map;
+
+// Nullable Non Terminals.
 var null_set;
+
+// Map of rules to backpointers.
 var ptr_map;
 
+// The array of all States.
+var S;
+
+/**
+ * Function that takes user
+ * input from the input box
+ * and populates various data
+ * structures.
+ */
+function getInput() {
+    // Get input from the input box.
+    {
+        // Initialize things.
+        var current_nt;
+        symbol_map = new Map();
+        rules = [];
+        null_set = new Set();
+
+        // Get user input.
+        var form = document.getElementById("grammar").elements;
+        
+        // Convert user input to some usable form.
+        {
+            // Iterate over all form items.
+            for(var i = 0; i < form.length - 2; i++) {
+                var item = form.item(i);
+
+                // If current item is a Non-Terminal, update current NT.
+                if (item.classList[1] == "NT") {
+                    current_nt = item.value;
+
+                    // If the NT is empty, grammar is invalid. Throw error.
+                    if (current_nt === "") {
+                        myAlert("Invalid Grammar Entered!");
+
+                        // Exit Code 1: Invalid Grammar.
+                        return 1;
+                    }
+
+                    // Populate our map of all Symbols, and set value to Non-Terminal.
+                    symbol_map.set(item.value, 1);
+                }
+
+                // Terminal 
+                else {
+                    var my_val = item.value;
+
+                    // If current terminal is empty character, add the current NT to nullable set.
+                    if (my_val === "") {
+                        null_set.add(JSON.stringify(current_nt));
+                    }
+                    
+                    // Populate our map of all Symbols, and set value to Terminal.
+                    symbol_map.set(my_val, 0);
+
+                    // Add new rule to set of all rules.
+                    rules.push([current_nt, my_val]);
+                }
+            }
+        }
+        // Exit Code 0: All good. Yay!
+        return 0;
+    }
+}
+
+
+/**
+ * Function that sets up the required
+ * frontend elements and initializes
+ * the state for the back-end for parsing.
+ */
 function prepare() {
     
-    // Remove existing boxes
+    // Remove existing boxes.
     {
-        // Remove existing example box
+        // Remove existing example box.
         var example_box = document.getElementById("example");
         if (example_box) {
             example_box.remove();
         }
 
-        // Remove existing test box
+        // Remove existing test box.
         var test_box = document.getElementById("test");
         if (test_box) {
             test_box.remove();
         }
 
+        // Remove existing membership box.
         var membership_box = document.getElementById("membership");
         if (membership_box) {
             membership_box.remove();
         }
-
     }
 
+    // Get the input CFG.
     var ret = getInput();
-
+    
+    // If input CFG is wrong, stop.
     if (ret === 1) {
         return;
     }
 
-    // Create new Example Box
+    // Create new Example Box.
     {
         example_box = document.createElement("div");
         example_box.classList.add("content-section");
@@ -229,7 +362,7 @@ function prepare() {
         main.appendChild(example_box);
     }
     
-    // Create new Test Box
+    // Create new Test Box.
     {
         test_box = document.createElement("div");
         test_box.classList.add("content-section");
@@ -264,7 +397,7 @@ function prepare() {
         main.appendChild(test_box);
     }
 
-    // Create new Membership Box
+    // Create new Membership Box.
     {
         membership_box = document.createElement("div");
         membership_box.classList.add("content-section");
@@ -311,11 +444,22 @@ function prepare() {
         main.appendChild(membership_box);
     }
 
+    // Start testing for membership.
     testMembership();
+
+    // Show an example for the input CFG.
     addExample(createExample());
 
 }
 
+
+/**
+ * Helper function to add an
+ * example for the given CFG
+ * to the application.
+ * 
+ * @param {*} my_string The example string
+ */
 function addExample(my_string) {
     var example_box = document.getElementById("example");
 
@@ -328,33 +472,73 @@ function addExample(my_string) {
     example_box.appendChild(new_example);
 }
 
+/**
+ * Helper function to check if given
+ * string has any Non-Terminals or not.
+ * Used in example generation.
+ * 
+ * @param {*} my_string The string to check
+ */
 function isNotResolved(my_string) {
+    
+    // Iterate over the string and return true if any NT is found.
     for (var i = 0; i < my_string.length; i++) {
         if (symbol_map.get(my_string[i]) == 1) {
             return true;
         }
     }
+    // No NT found, string is resolved.
     return false;
 }
 
+/**
+ * Low cost, naive, example generation
+ * algorithm. It's not the best, but it
+ * gets the job done for now.
+ * In the future, a more sophisticated
+ * algorithm can be implemented.
+ * Example - http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.32.8707
+ */
 function createExample() {
+
+    // Take the very first rule in the grammar, and set number of tries to 0.
     var curr_str = rules[0][1];
     var tries = 0;
     var curr_index = 0;
 
+    // While the given string does not fully consist of Terminals, 
+    // and number of tries are less than 20, keep trying.
+    // The 20 number has been chosen to keep this fast.
+    // Another reason for limiting the tries is to make sure that
+    // this naive algorithm actually terminates. Otherwise we can
+    // run into some pretty nasty cases when a NT can be resolved to itself.
     while(isNotResolved(curr_str) && tries <= 20) {
+        
+        // If the element at the current index is a Terminal, advance the index.
         if (symbol_map.get(curr_str[curr_index]) != 1) {
             curr_index++;
         }
+        // Non-Terminal 
         else {
             var flag = 0;
             var prev_rule;
+
+            // Iterate over the set of all rules.
             for (var rule = 0; rule < rules.length; rule++) {
+                
+                // If the rule is a match, check if the LHS is resolvable.
                 if (rules[rule][0] == curr_str[curr_index]) {
+
+                    // If LHS is not resolvable, try to find a resolvable LHS.
+                    // Set flag, which indicates a rule for the current 
+                    // Non-Terminal was seen. Store this rule in Previous. 
                     if (isNotResolved(rules[rule][1])) {
                         flag = 1;
                         prev_rule = rule;
                     }
+
+                    // If LHS is resolvable, we are done. Advance the index of the 
+                    // string and break out of the loop. Unset flag.
                     else {
                         flag = 0;
                         curr_str = [curr_str.slice(0, curr_index), curr_str.slice(curr_index + 1)];
@@ -363,63 +547,52 @@ function createExample() {
                     }
                 }
             }
+
+            // If flag is set, no resolvable rule was found. 
+            // Apply the last seen non-resolvable rule.
             if (flag === 1) {
                 curr_str = [curr_str.slice(0, curr_index), curr_str.slice(curr_index + 1)];
                 curr_str = curr_str[0] + rules[prev_rule][1] + curr_str[1];
             }
+
+            // Increment number of tries.
             tries++;
         }
     }
+
+    // If the final string remanining at loop exit was unresolved,
+    // we were unable to find an example using this algorithm.
     if (isNotResolved(curr_str)) {
         return "Sorry, example unavailable.";
     }
+    
+    // Example generated! 
     else {
         return curr_str;
     }
 }
 
-function getInput() {
-    // Get input from the input box
-    {
-        var current_nt;
-        var form = document.getElementById("grammar").elements;
-        symbol_map = new Map();
-        non_terminals_arr = [];
-        rules = [];
-        null_set = new Set();
-        for(var i = 0; i < form.length - 2; i++) {
-            var item = form.item(i);
-            if (item.classList[1] == "NT") {
-                current_nt = item.value;
-                if (current_nt === "") {
-                    myAlert("Invalid Grammar Entered!");
-                    return 1;
-                }
-                symbol_map.set(item.value, 1);
-                non_terminals_arr.push(item.value);
-            }
-            else {
-                var my_val = item.value;
-                if (my_val === "") {
-                    null_set.add(JSON.stringify(current_nt));
-                }
-                symbol_map.set(my_val, 0);
-                rules.push([current_nt, my_val]);
-            }
-        }
-
-        return 0;
-    }
-}
-
+/**
+ * Helper function that constructs back-pointers
+ * for given rule and populates our pointer map.
+ * 
+ * @param {*} rule The rule for which back_ptr needs to be constructed
+ * @param {*} j Chart column of back-pointer
+ * @param {*} k Chart row of back-pointer
+ * @param {*} temp_rule The rule that caused a match
+ * @param {*} prev Chart column of the matched rule
+ */
 function addPtr(rule, j, k, temp_rule, prev) {
+
+    // If there already exists a pointer for given rule.
     if (ptr_map.get(rule)) {
+        
+        // Add new backpointers to existing pointer array. 
         temp_arr = ptr_map.get(rule);
         var curr_arr = new Array();
         curr_arr.push([j, k]);
-        // if (rule[0] === "2" && rule[1] === "1") {
-        //     console.log(String(prev) + temp_rule);
-        // }
+
+        // If the matched string itself has backpointers, they need to be added.
         if (ptr_map.get(String(prev) + temp_rule)) {
             var iter_arr = ptr_map.get(String(prev) + temp_rule);
             for (var i = 0; i < iter_arr.length; i++) {
@@ -428,16 +601,21 @@ function addPtr(rule, j, k, temp_rule, prev) {
                 }
             }
         }
+
+        // Push all back pointers in our pointer map.
         temp_arr.push(curr_arr);
         ptr_map.set(rule, temp_arr);
     }
+
+    // If no backpointers existed for this rule.
     else {
+
+        // Create new pointer array and add back-pointers.
         temp_arr = [];
         var curr_arr = new Array();
         curr_arr.push([j, k]);
-        // if (rule[0] === "2" && rule[1] === "1") {
-        //     console.log(String(prev) + temp_rule);
-        // }
+
+        // If the matched string itself has backpointers, they need to be added.
         if (ptr_map.get(String(prev) + temp_rule)) {
             var iter_arr = ptr_map.get(String(prev) + temp_rule);
             for (var i = 0; i < iter_arr.length; i++) {
@@ -446,80 +624,174 @@ function addPtr(rule, j, k, temp_rule, prev) {
                 }
             }
         }
+
+        // Push all back pointers in our pointer map.
         temp_arr.push(curr_arr);
         ptr_map.set(rule, temp_arr);
     }
 }
 
+
+/**
+ * Initialize the chart.
+ * We start with an array with n + 1 columns
+ * where n is number of tokens. Each of these
+ * columns contains a set.
+ * @param {*} S Empty array of all states
+ * @param {*} len The number of tokens
+ */
 function init(S, len) {
     S = [...Array(len + 1)].map(elem => new Set());
     return S;
 }
 
+
+/**
+ * Predicts rules from non-terminals next 
+ * to the current position and adds to state
+ * array. For example, rules of the form
+ * φNT are replaced with φα where NT -> α.
+ * @param {*} S The state array
+ * @param {*} state Current state
+ * @param {*} j Chart column
+ */
 function predictor(S, state, j) {
+    
+    // Iterate over all rules. 
     for (var rule = 0; rule < rules.length; rule++) {
+
+        // Check if rules of the form NT -> α exist when current state is φNT.
         if (rules[rule][0] === state[1][state[1].indexOf("φ") + 1]) {
+            
+            // Construct and add new rule.
             var new_rule = JSON.stringify([rules[rule][0], "φ" + rules[rule][1], j]);
             S[j].add(new_rule);
-            // addPtr(String(j) + new_rule, j, k); 
+            
+            // Handle nullable rules.
+            // Essentially, doing a complete step here.
             if (null_set.has(JSON.stringify(rules[rule][0]))) {
+                
+                // Construct and add new rule.
                 new_rule = JSON.stringify([state[0][0], rules[rule][0] + "φ", j]);
                 S[j].add(new_rule);
-                // addPtr(String(j) + new_rule, j, k);
             }
         }
     }
     return S;
 }
 
-function scanner(S, state, j, character, k) {
+
+/**
+ * Scans a terminal and adds new
+ * rules after scanning. For example,
+ * rules of the form φT are replaced
+ * with Tφ, and the new state is added
+ * to the next column.
+ * @param {*} S The state array
+ * @param {*} state Current state
+ * @param {*} j Chart column
+ * @param {*} character Next character in input string
+ */
+function scanner(S, state, j, character) {
+    
+    // Check if the current rule contains the same 
+    // character as the next character in input string. 
     if (state[1][state[1].indexOf("φ") + 1] === character) {
+        
+        // Construct and add new rule in the next column.
         var split_rule = state[1].split("φ");
         var new_rule = JSON.stringify([state[0], split_rule[0] + split_rule[1][0] + "φ" + split_rule[1].substring(1), state[2]]);
         S[j + 1].add(new_rule);
-        // addPtr(String(j + 1) + new_rule, j, k);
-
     }
     return S;
 }
 
+/**
+ * When a given rule completes, add
+ * the previously seen rules of which
+ * the given rule was a sub-part while
+ * updating the φ position. For Example,
+ * rules of the form A -> Bφ 
+ * originating from index x go from 
+ * C -> DφB to C -> DBφ if such a rule
+ * exists in column x.
+ * @param {*} S The state array
+ * @param {*} state Current state
+ * @param {*} j Chart column
+ * @param {*} k Chart row
+ */
 function completer(S, state, j, k) {
+
+    // Iterate over the rules in the column 
+    // where the current rule originated
     for (var rule = 0; rule < S[state[2]].size; rule++) {
         var temp_rule = JSON.parse(Array.from(S[state[2]])[rule]);
+
+        // If a rule of the form C -> DφB exists, update and add.
         if (temp_rule[1][temp_rule[1].indexOf("φ") + 1] === state[0]) {
+
+            // Construct and add new rule.
             var split_rule = temp_rule[1].split("φ");
             var new_rule = JSON.stringify([temp_rule[0], split_rule[0] + split_rule[1][0] + "φ" + split_rule[1].substring(1), temp_rule[2]]);
             S[j].add(new_rule);
             temp_rule = Array.from(S[state[2]])[rule];
+
+            // Add back-pointers.
             addPtr(String(j) + new_rule, j, k, temp_rule, state[2]); 
         }
     }
     return S;
 }
 
-var S;
-
+/**
+ * This function runs the parser
+ * on the input strings and calls
+ * the create table method to show
+ * the matches.
+ */
 function testMembership() {
-    ptr_map = new Map();
+
+    // Get all the input strings.
     var input_strings = document.getElementById("input_strings").value;
     input_strings = input_strings.split("\n");
-    for (var i = 0; i < input_strings.length; i++) {
-        S = init(S, input_strings[i].length);
 
+    // Run the parser for each input string.
+    for (var i = 0; i < input_strings.length; i++) {
+
+        // Initialize the state array, and the 
+        // back-pointer map for each string.
+        S = init(S, input_strings[i].length);
+        ptr_map = new Map();
+
+        // Add the gamma rule, base case.
         S[0].add(JSON.stringify(["γ", "φS", 0]));
+
+        // Run for each character in input string.
         for (var j = 0; j <= input_strings[i].length; j++) {
+
+            // Run for all the rules in the current column.
+            // Note that this set size can increase on the fly.
             for (var k = 0; k < S[j].size; k++) {
+
+                // Get the current rule.
                 var current_rule = JSON.parse(Array.from(S[j])[k]);
 
+                // If the current rule has completed, run completer.
                 if (current_rule[1][current_rule[1].length - 1] === "φ") {
                     S = completer(S, current_rule, j, k);
                 }
+
+                // If the rule has not completed.
                 else {
+
+                    // If the next character is a Non-Terminal, run predictor.
                     if (symbol_map.get(current_rule[1][current_rule[1].indexOf("φ") + 1]) === 1) {
-                        S = predictor(S, current_rule, j, k);
+                        S = predictor(S, current_rule, j);
                     }
+
+                    // If the next character is a Terminal, run scanner.
                     else {
-                        S = scanner(S, current_rule, j, input_strings[i][j], k);
+                        S = scanner(S, current_rule, j, input_strings[i][j]);
                     }
                 }
             }
@@ -529,65 +801,93 @@ function testMembership() {
     }
 }
 
+/**
+ * This function adds a given input string
+ * to the table and detects if it is a match
+ * from the parse.
+ * @param {*} i String number
+ * @param {*} input_string Parsed string
+ */ 
 function createTable (i, input_string) {
+
+    // Starting assumptions - it is not a match, and not ambiguous.
     var match = false;
     var ambiguous = false;
+
+    // Iterate over the last column in the chart, to find a completed gamma rule originating from 0.
     for(var final_chart_iterator = 0; final_chart_iterator < S[S.length - 1].size; final_chart_iterator++) {
         var curr_rule = JSON.parse(Array.from(S[S.length - 1])[final_chart_iterator]);
+
+        // If completed gamma rule originating at index 0 is found, we have a match.
         if (curr_rule[2] === 0 && curr_rule[1][curr_rule[1].length - 1] === "φ" && curr_rule[0] === "γ") {
+            
+            // Set match.
             match = true;
+
+            // Go one level down in parse tree.
             var back_ptrs = ptr_map.get(String(final_chart_iterator) + Array.from(S[S.length - 1])[final_chart_iterator]);
             var back_rule = Array.from(S[back_ptrs[0][0][0]])[back_ptrs[0][0][1]];
             try {
+
+                // If the first rule has multiple possible parses, this is an ambiguous grammar.
                 if(ptr_map.get(String(back_ptrs[0][0][0]) + String(back_rule)).length > 1) {
                     ambiguous = true;
                 }
             }
+
+            // Just some error handling, ambiguity detection is not complete right now.
             catch (err) {
                 console.log("Ambiguity Corner Case: Scanned");
             }
         }
     }
     
-    var current_row = document.getElementById("member" + i);
-    if (current_row) {
-        current_row.remove();
-    }
-    
-    var my_table = document.getElementById("table-body");
-    
-    var row = document.createElement("tr");
-    row.setAttribute("id", "member" + i);
-    var col = document.createElement("td");
-    var my_text = input_string;
-    if (input_string === "") {
-        my_text = "Ɛ";
-        if (i !== 0) {
-            return;
-        }
-    }
-    var node = document.createTextNode(my_text);
-    col.classList.add("w-75");
-    col.appendChild(node);
-    row.appendChild(col);
+    // Create entry on table.
+    {
 
-    col = document.createElement("td");
-    if (match) {
-        node = document.createTextNode("Yes");
-        if (ambiguous) {
-            row.classList.add("table-amb");
+        // Special handling for first row.
+        var current_row = document.getElementById("member" + i);
+        if (current_row) {
+            current_row.remove();
+        }
+        
+        var my_table = document.getElementById("table-body");
+        
+        var row = document.createElement("tr");
+        row.setAttribute("id", "member" + i);
+        var col = document.createElement("td");
+        var my_text = input_string;
+
+        // Handling epsilon.
+        if (input_string === "") {
+            my_text = "Ɛ";
+            if (i !== 0) {
+                return;
+            }
+        }
+        var node = document.createTextNode(my_text);
+        col.classList.add("w-75");
+        col.appendChild(node);
+        row.appendChild(col);
+
+        col = document.createElement("td");
+        if (match) {
+            node = document.createTextNode("Yes");
+            if (ambiguous) {
+                row.classList.add("table-amb");
+            }
+            else {
+                row.classList.add("table-s");
+            }
         }
         else {
-            row.classList.add("table-s");
+            node = document.createTextNode("No");
+            row.classList.add("table-d");
         }
-    }
-    else {
-        node = document.createTextNode("No");
-        row.classList.add("table-d");
-    }
 
-    col.appendChild(node);
-    row.appendChild(col);
+        col.appendChild(node);
+        row.appendChild(col);
 
-    my_table.appendChild(row);
+        my_table.appendChild(row);
+    }
 }
