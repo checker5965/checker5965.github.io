@@ -594,12 +594,12 @@ function addPtr(rule, j, k, temp_rule, prev) {
         if (ptr_map.get(String(prev) + temp_rule)) {
             var iter_arr = ptr_map.get(String(prev) + temp_rule);
             for (var i = 0; i < iter_arr.length; i++) {
+                var curr_arr = [];
+                curr_arr.push([j, k]);
                 for (var i2 = 0; i2 < iter_arr[i].length; i2++) {
-                    var curr_arr = [];
-                    curr_arr.push([j, k]);
                     curr_arr.push(iter_arr[i][i2]);
-                    temp_arr.push(curr_arr);
                 }
+                temp_arr.push(curr_arr);
             }
         }
 
@@ -624,12 +624,12 @@ function addPtr(rule, j, k, temp_rule, prev) {
         if (ptr_map.get(String(prev) + temp_rule)) {
             var iter_arr = ptr_map.get(String(prev) + temp_rule);
             for (var i = 0; i < iter_arr.length; i++) {
+                var curr_arr = [];
+                curr_arr.push([j, k]);
                 for (var i2 = 0; i2 < iter_arr[i].length; i2++) {
-                    var curr_arr = [];
-                    curr_arr.push([j, k]);
                     curr_arr.push(iter_arr[i][i2]);
-                    temp_arr.push(curr_arr);
                 }
+                temp_arr.push(curr_arr);
             }
         }
 
