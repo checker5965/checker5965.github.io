@@ -287,16 +287,48 @@ function getInput() {
 
                     // If current terminal is empty character, add the current NT to nullable set.
                     if (my_val === "") {
-                        null_set.add(JSON.stringify(current_nt));
+                        null_set.add(current_nt);
                     }
                     
                     // Populate our map of all Symbols, and set value to Terminal.
-                    symbol_map.set(my_val, 0);
+                    if (!symbol_map.get(my_val)===1)
+                    {
+                        symbol_map.set(my_val, 0);
+                    }
 
                     // Add new rule to set of all rules.
                     rules.push([current_nt, my_val]);
                 }
             }
+
+            // Make sure our nullable set is correct.
+            // Loop over all rules and keep adding nullable
+            // symbols till null set size does not increase
+            // anymore.
+            var curr_null_set_size = null_set.size;
+            while (true) {
+                for (var rule = 0; rule < rules.length; rule++) {
+                    if (!null_set.has(rules[rule][0])) {
+                        var flag = 1;
+                        var curr_string = rules[rule][1];
+                        for (var str_iter = 0; str_iter < curr_string.length; str_iter++) {
+                            if (!null_set.has(curr_string[str_iter])) {
+                                flag = 0;
+                            }
+                        }
+                        if (flag) {
+                            null_set.add(rules[rule][0]);
+                        }
+                    }
+                }
+                if (null_set.size === curr_null_set_size) {
+                    break;
+                }
+                else {
+                    curr_null_set_size = null_set.size;
+                }
+            }
+
         }
         // Exit Code 0: All good. Yay!
         return 0;
@@ -753,7 +785,7 @@ function predictor(S, state, j, k) {
             
             // Handle nullable rules.
             // Essentially, doing a complete step here.
-            if (null_set.has(JSON.stringify(rules[rule][0]))) {
+            if (null_set.has(rules[rule][0])) {
                 
                 // Construct and add new rule.
                 var split_rule = state[1].split("φ");
