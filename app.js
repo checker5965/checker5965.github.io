@@ -611,8 +611,7 @@ function createExample() {
 
 /**
  * Helper function that constructs back-pointers
- * for given rule and populates our pointer map.
- * 
+ * for completed rules and populates our pointer map.
  * @param {*} rule The rule for which back_ptr needs to be constructed
  * @param {*} j Chart column of back-pointer
  * @param {*} k Chart row of back-pointer
