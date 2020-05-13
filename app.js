@@ -476,6 +476,8 @@ function prepare() {
         main.appendChild(membership_box);
     }
 
+    // MILESTONE 2 ENDS HERE. 
+
     // Start testing for membership.
     testMembership();
 
@@ -600,6 +602,9 @@ function createExample() {
     
     // Example generated! 
     else {
+        if (curr_str == "") {
+            curr_str = "Ɛ";
+        }
         return curr_str;
     }
 }
@@ -792,7 +797,7 @@ function predictor(S, state, j, k) {
                 new_rule = JSON.stringify([state[0][0], split_rule[0] + split_rule[1][0] + "φ" + split_rule[1].substring(1), state[2]]);
                 S[j].add(new_rule);
 
-                // TODO: Nullable case backpointers.
+                // TODO: Nullable case backpointers. So far works without it. Any counter example?
             }
         }
     }
@@ -937,6 +942,9 @@ function createTable (i, input_string) {
     var match = false;
     var ambiguous = false;
 
+    var start_rule;
+    var start_index;
+
     // Iterate over the last column in the chart, to find a completed gamma rule originating from 0.
     for(var final_chart_iterator = 0; final_chart_iterator < S[S.length - 1].size; final_chart_iterator++) {
         var curr_rule = JSON.parse(Array.from(S[S.length - 1])[final_chart_iterator]);
@@ -952,6 +960,9 @@ function createTable (i, input_string) {
 
                 var back_ptrs = ptr_map.get(String(S.length - 1) + Array.from(S[S.length - 1])[final_chart_iterator]);
                 var back_rule = Array.from(S[back_ptrs[0][0][0]])[back_ptrs[0][0][1]];
+                
+                start_rule = JSON.parse(Array.from(S[S.length - 1])[final_chart_iterator]);
+                start_index = S.length - 1;
                 
                 // If the first rule has multiple possible parses, this is an ambiguous grammar.
                 if(ptr_map.get(String(back_ptrs[0][0][0]) + String(back_rule)).length > 1) {
@@ -969,12 +980,38 @@ function createTable (i, input_string) {
     // Create entry on table.
     {
 
-        // Special handling for first row.
+        // Remove table entry if already exists for given row.
         var current_row = document.getElementById("member" + i);
         if (current_row) {
             current_row.remove();
         }
         
+
+        // Remove existing parse trees.
+        {
+            var current_der1 = document.getElementById("member" + i + "Der1");
+            var current_der2 = document.getElementById("member" + i + "Der2");
+            var current_tog1 = document.getElementById("member" + i + "Tog1");
+            var current_tog2 = document.getElementById("member" + i + "Tog2");
+
+            if (current_der1) {
+                current_der1.remove();
+            }
+            
+            if (current_der2) {
+                current_der2.remove();
+            }
+
+            if (current_tog1) {
+                current_tog1.remove();
+            }
+
+            if (current_tog2) {
+                current_tog2.remove();
+            }
+        }
+
+        // Populate the table.
         var my_table = document.getElementById("table-body");
         
         var row = document.createElement("tr");
@@ -994,10 +1031,38 @@ function createTable (i, input_string) {
         col.appendChild(node);
         row.appendChild(col);
 
+        var anchor;
+        var anchor2;
+        var dec_node;
+
         col = document.createElement("td");
         if (match) {
-            node = document.createTextNode("Yes");
+
+            // Create the button to display derivations.
+            anchor = document.createElement("a");
+            anchor.setAttribute("id", "member" + i + "Tog1");
+            anchor.setAttribute("data-toggle", "collapse");
+            anchor.setAttribute("href", "#member" + i + "Der1");
+            anchor.setAttribute("role", "button");
+            anchor.setAttribute("aria-expanded", "false");
+            anchor.setAttribute("aria-controls", "member" + i + "Der1");
+            anchor.classList.add("collapsed");
+            node = document.createTextNode("[1]");
+            anchor.appendChild(node);
+
+            dec_node = document.createTextNode("Yes ");
             if (ambiguous) {
+                anchor2 = document.createElement("a");
+                anchor2.setAttribute("id", "member" + i + "Tog2");
+                anchor2.setAttribute("data-toggle", "collapse");
+                anchor2.setAttribute("href", "#member" + i + "Der2");
+                anchor2.setAttribute("role", "button");
+                anchor2.setAttribute("aria-expanded", "false");
+                anchor2.setAttribute("aria-controls", "member" + i + "Der2");
+                anchor2.classList.add("collapsed");
+                node = document.createTextNode(" [2]");
+                anchor2.appendChild(node);
+
                 row.classList.add("table-amb");
             }
             else {
@@ -1005,13 +1070,175 @@ function createTable (i, input_string) {
             }
         }
         else {
-            node = document.createTextNode("No");
+            dec_node = document.createTextNode("No");
             row.classList.add("table-d");
         }
 
-        col.appendChild(node);
-        row.appendChild(col);
+        col.appendChild(dec_node);
+        
+        if (match) {
+            col.appendChild(anchor);
+            if (ambiguous) {
+                col.appendChild(anchor2);
+            }
+        }
 
-        my_table.appendChild(row);
+        row.appendChild(col);
+        my_table.appendChild(row);    
+
+        if (match) {
+            // Create derivation box.
+            var outer = document.createElement("div");
+            outer.classList.add("collapse");
+            outer.setAttribute("id", "member" + i + "Der1");
+            
+            var inner = document.createElement("div");
+            inner.classList.add("card");
+            inner.classList.add("card-body");
+
+            
+            // This is the code that generates the tree.
+            var start = new Node("γ");
+            var derivation = new Tree(start);
+            derivation.buildTree(start, start_rule, start_index);
+            console.log(derivation);
+
+
+            var derivation_flag = 1;
+            var curr_nodes = [derivation.root];
+
+            var para = document.createElement("p");
+            var data = document.createTextNode(curr_nodes[0].data);
+
+            para.appendChild(data);
+            inner.appendChild(para);
+
+            // TODO: Display Tree on Frontend. 
+            // Below is some broken code to do so.
+
+            // while(derivation_flag) {
+            //     derivation_flag = 0;
+            //     para = document.createElement("p");
+            //     data = ""
+            //     var temp_nodes = [];
+            //     for (var i = 0; i < curr_nodes.length; i++) {
+            //         if (curr_nodes[i].children) {
+            //             for (var j = 0; j < curr_nodes[i].children.length; j++) {
+            //                 temp_nodes.push(curr_nodes[i].children);
+            //                 derivation_flag = 1;
+            //                 data = data + curr_nodes[i].children[j].data;
+            //             }
+            //         }
+            //     }
+            //     curr_nodes = temp_nodes;
+            //     data = document.createTextNode(data);
+            //     para.appendChild(data);
+            //     inner.appendChild(para);
+            // }
+
+            if (ambiguous) {
+
+                var outer2 = document.createElement("div");
+                outer2.classList.add("collapse");
+                outer2.setAttribute("id", "member" + i + "Der2");
+                
+                var inner2 = document.createElement("div");
+                inner2.classList.add("card");
+                inner2.classList.add("card-body"); 
+
+                inner.classList.add("table-amb");
+                inner2.classList.add("table-amb");
+
+                row.classList.add("table-amb");
+
+                outer.appendChild(inner);
+                outer2.appendChild(inner2);
+
+                my_table.append(outer);
+                my_table.append(outer2);
+            }
+            else {
+                inner.classList.add("table-s");
+
+                outer.appendChild(inner);
+
+                my_table.append(outer);     
+                
+                console.log("inner appended");
+            }
+        }
     }
+}
+
+/**
+ * Tree type object.
+ * @param {*} node Root node
+ */
+function Tree(node) {
+    this.root = node;
+}
+
+/**
+ * This function recursively creates
+ * the parse tree using the ptr_map
+ * data structure. It is essentially
+ * a modified Depth first search.
+ * @param {*} parent The parent node
+ * @param {*} rule The current rule
+ * @param {*} index The current index
+ */
+Tree.prototype.buildTree = function (parent, rule, index) {
+    var tree = this;
+
+    // Base case. If the rule is resolved, 
+    // we can add it to parent and return.
+    if (!isNotResolved(rule[1])) {
+        for (var i = 0; i < rule[1].length; i++) {
+            if (rule[1][i] === "φ") {
+                continue;
+            }
+            var node = new Node(rule[1][i]);
+            parent.addChild(node);
+        }
+    }
+    else {
+        var back_ptrs = ptr_map.get(String(index) + JSON.stringify(rule))[0];
+        var ptr = back_ptrs.length - 1;
+
+        // Add each child to current parent node.
+        for (var i = 0; i < rule[1].length; i++) {
+            if (rule[1][i] === "φ") {
+                continue;
+            }
+            var child = new Node(rule[1][i]);
+            parent.addChild(child);
+
+            // For each non-terminal child, recursively add children.
+            if (symbol_map.get(rule[1][i])) {
+                tree.buildTree(child, JSON.parse(Array.from(S[back_ptrs[ptr][0]])[back_ptrs[ptr][1]]), back_ptrs[ptr][0]);
+                ptr = ptr - 1; 
+            }
+        }
+    }
+}
+
+/**
+ * Node type object.
+ * @param {*} data The data to store
+ */
+function Node(data) {
+    this.data = data;
+    this.parent = null;
+    this.children = [];
+}
+
+/**
+ * This function adds a child
+ * node to the given node.
+ * @param {*} child The node to be added as a child
+ */
+Node.prototype.addChild = function (child) {
+    var node = this;
+    node.children.push(child);
+    child.parent = node;
 }
