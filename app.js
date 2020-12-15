@@ -1038,29 +1038,29 @@ function createTable (i, input_string) {
         if (match) {
 
             // Create the button to display derivations.
-            anchor = document.createElement("a");
-            anchor.setAttribute("id", "member" + i + "Tog1");
-            anchor.setAttribute("data-toggle", "collapse");
-            anchor.setAttribute("href", "#member" + i + "Der1");
-            anchor.setAttribute("role", "button");
-            anchor.setAttribute("aria-expanded", "false");
-            anchor.setAttribute("aria-controls", "member" + i + "Der1");
-            anchor.classList.add("collapsed");
-            node = document.createTextNode("[1]");
-            anchor.appendChild(node);
+            // anchor = document.createElement("a");
+            // anchor.setAttribute("id", "member" + i + "Tog1");
+            // anchor.setAttribute("data-toggle", "collapse");
+            // anchor.setAttribute("href", "#member" + i + "Der1");
+            // anchor.setAttribute("role", "button");
+            // anchor.setAttribute("aria-expanded", "false");
+            // anchor.setAttribute("aria-controls", "member" + i + "Der1");
+            // anchor.classList.add("collapsed");
+            // node = document.createTextNode("[1]");
+            // anchor.appendChild(node);
 
             dec_node = document.createTextNode("Yes ");
             if (ambiguous) {
-                anchor2 = document.createElement("a");
-                anchor2.setAttribute("id", "member" + i + "Tog2");
-                anchor2.setAttribute("data-toggle", "collapse");
-                anchor2.setAttribute("href", "#member" + i + "Der2");
-                anchor2.setAttribute("role", "button");
-                anchor2.setAttribute("aria-expanded", "false");
-                anchor2.setAttribute("aria-controls", "member" + i + "Der2");
-                anchor2.classList.add("collapsed");
-                node = document.createTextNode(" [2]");
-                anchor2.appendChild(node);
+                // anchor2 = document.createElement("a");
+                // anchor2.setAttribute("id", "member" + i + "Tog2");
+                // anchor2.setAttribute("data-toggle", "collapse");
+                // anchor2.setAttribute("href", "#member" + i + "Der2");
+                // anchor2.setAttribute("role", "button");
+                // anchor2.setAttribute("aria-expanded", "false");
+                // anchor2.setAttribute("aria-controls", "member" + i + "Der2");
+                // anchor2.classList.add("collapsed");
+                // node = document.createTextNode(" [2]");
+                // anchor2.appendChild(node);
 
                 row.classList.add("table-amb");
             }
