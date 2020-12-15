@@ -1075,42 +1075,42 @@ function createTable (i, input_string) {
 
         col.appendChild(dec_node);
         
-        if (match) {
-            col.appendChild(anchor);
-            if (ambiguous) {
-                col.appendChild(anchor2);
-            }
-        }
+        // if (match) {
+        //     col.appendChild(anchor);
+        //     if (ambiguous) {
+        //         col.appendChild(anchor2);
+        //     }
+        // }
 
         row.appendChild(col);
         my_table.appendChild(row);    
 
-        if (match) {
+        // if (match) {
             // Create derivation box.
-            var outer = document.createElement("div");
-            outer.classList.add("collapse");
-            outer.setAttribute("id", "member" + i + "Der1");
+            // var outer = document.createElement("div");
+            // outer.classList.add("collapse");
+            // outer.setAttribute("id", "member" + i + "Der1");
             
-            var inner = document.createElement("div");
-            inner.classList.add("card");
-            inner.classList.add("card-body");
+            // var inner = document.createElement("div");
+            // inner.classList.add("card");
+            // inner.classList.add("card-body");
 
             
             // This is the code that generates the tree.
-            var start = new Node("γ");
-            var derivation = new Tree(start);
-            derivation.buildTree(start, start_rule, start_index);
-            console.log(derivation);
+            // var start = new Node("γ");
+            // var derivation = new Tree(start);
+            // derivation.buildTree(start, start_rule, start_index);
+            // console.log(derivation);
 
 
-            var derivation_flag = 1;
-            var curr_nodes = [derivation.root];
+            // var derivation_flag = 1;
+            // var curr_nodes = [derivation.root];
 
-            var para = document.createElement("p");
-            var data = document.createTextNode(curr_nodes[0].data);
+            // var para = document.createElement("p");
+            // var data = document.createTextNode(curr_nodes[0].data);
 
-            para.appendChild(data);
-            inner.appendChild(para);
+            // para.appendChild(data);
+            // inner.appendChild(para);
 
             // TODO: Display Tree on Frontend. 
             // Below is some broken code to do so.
@@ -1135,36 +1135,36 @@ function createTable (i, input_string) {
             //     inner.appendChild(para);
             // }
 
-            if (ambiguous) {
+            // if (ambiguous) {
 
-                var outer2 = document.createElement("div");
-                outer2.classList.add("collapse");
-                outer2.setAttribute("id", "member" + i + "Der2");
+            //     var outer2 = document.createElement("div");
+            //     outer2.classList.add("collapse");
+            //     outer2.setAttribute("id", "member" + i + "Der2");
                 
-                var inner2 = document.createElement("div");
-                inner2.classList.add("card");
-                inner2.classList.add("card-body"); 
+            //     var inner2 = document.createElement("div");
+            //     inner2.classList.add("card");
+            //     inner2.classList.add("card-body"); 
 
-                inner.classList.add("table-amb");
-                inner2.classList.add("table-amb");
+            //     inner.classList.add("table-amb");
+            //     inner2.classList.add("table-amb");
 
-                row.classList.add("table-amb");
+            //     row.classList.add("table-amb");
 
-                outer.appendChild(inner);
-                outer2.appendChild(inner2);
+            //     outer.appendChild(inner);
+            //     outer2.appendChild(inner2);
 
-                my_table.append(outer);
-                my_table.append(outer2);
-            }
-            else {
-                inner.classList.add("table-s");
+            //     my_table.append(outer);
+            //     my_table.append(outer2);
+            // }
+            // else {
+            //     inner.classList.add("table-s");
 
-                outer.appendChild(inner);
+            //     outer.appendChild(inner);
 
-                my_table.append(outer);     
+            //     my_table.append(outer);     
                 
-                console.log("inner appended");
-            }
+            //     console.log("inner appended");
+            // }
         }
     }
 }
