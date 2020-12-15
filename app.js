@@ -1165,7 +1165,7 @@ function createTable (i, input_string) {
                 
             //     console.log("inner appended");
             // }
-        }
+        // }
     }
 }
 
