@@ -312,6 +312,7 @@
                 <button 
                     onclick="addItem()" 
                     class="w-full p-4 bg-gray-800 text-gray-200 rounded-md hover:bg-gray-700 transition border border-gray-700 flex items-center justify-center gap-2"
+                    tabindex="0"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -487,9 +488,17 @@
         people.forEach(person => {
             defaultShares[person] = 0;
         });
+        const newItemIndex = items.length;
         items.push({ name: '', price: 0, shares: defaultShares });
         clearCalculation();
         renderItems();
+        // Focus on the name input of the newly added item
+        setTimeout(() => {
+            const newItemNameInput = document.getElementById(`item-name-${newItemIndex}`);
+            if (newItemNameInput) {
+                newItemNameInput.focus();
+            }
+        }, 0);
     }
 
     function splitEqually(itemIndex) {
@@ -517,6 +526,7 @@
                         value='${shareValue}' 
                         onfocus='handleNumberFocus(this)'
                         onchange='updateShare(${itemIndex}, "${person}", this.value)'
+                        onblur='handleShareBlur(this, ${itemIndex}, "${person}")'
                         class='w-20 p-1 bg-gray-800 rounded text-right border border-gray-700 focus:outline-none focus:border-gray-600'
                     >
                 </div>`;
@@ -556,7 +566,7 @@
                         >
                             <span class="tooltip-text">Split equally among all people</span>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3l-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3l-3 3" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.97zm-16.5.52a49.5 49.5 0 013-.52m0 0l-2.62 10.726c-.122.499.106 1.028.589 1.202a5.989 5.989 0 002.031.352 5.989 5.989 0 002.031-.352c.483-.174.711-.703.59-1.202L5.25 4.97z" />
                             </svg>
                         </button>
                         <button 
@@ -1105,7 +1115,7 @@
             <li><strong>Add Items:</strong> Click "Add Item" to add each expense
                 <ul class="list-disc list-inside ml-4 mt-1">
                     <li>Enter item name and price</li>
-                    <li>Use the split equally button (↔️) to quickly divide an item among all people</li>
+                    <li>Use the split equally button (<svg class="w-4 h-4 inline align-text-bottom" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.97zm-16.5.52a49.5 49.5 0 013-.52m0 0l-2.62 10.726c-.122.499.106 1.028.589 1.202a5.989 5.989 0 002.031.352 5.989 5.989 0 002.031-.352c.483-.174.711-.703.59-1.202L5.25 4.97z" /></svg>) to quickly divide an item among all people</li>
                     <li>Or manually assign shares to people (1 share = equal split, 0.5 = half share)</li>
                 </ul>
             </li>
@@ -1145,6 +1155,13 @@
             null,
             true
         );
+    }
+
+    function handleShareBlur(input, itemIndex, person) {
+        if (input.value.trim() === '') {
+            input.value = '0';
+            updateShare(itemIndex, person, 0);
+        }
     }
 </script>
 
