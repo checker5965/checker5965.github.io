@@ -1,0 +1,111 @@
+Original Email body: 
+Message-ID: <23835725.1075853756422.JavaMail.evans@thyme>
+Date: Wed, 26 Apr 2000 04:21:00 -0700 (PDT)
+From: chris.germany@enron.com
+To: colleen.sullivan@enron.com, mark.breese@enron.com, steve.jackson@enron.com
+Subject: Re: Titanium Metals capacity
+Cc: joan.veselack@enron.com, scott.goodell@enron.com
+Mime-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+Bcc: joan.veselack@enron.com, scott.goodell@enron.com
+X-From: Chris Germany
+X-To: Colleen Sullivan, Mark Breese, Steve Jackson
+X-cc: Joan Veselack, Scott Goodell
+X-bcc: 
+X-Folder: \Chris_Germany_Dec2000\Notes Folders\Discussion threads
+X-Origin: Germany-C
+X-FileName: cgerman.nsf
+
+This capacity is in ENA's name and we have been billing CES the demand charge 
+since January.  The MDQ is 2300.
+
+Thanks Joanie!
+---------------------- Forwarded by Chris Germany/HOU/ECT on 04/26/2000 11:07 
+AM ---------------------------
+
+
+Joan Veselack@ENRON
+04/26/2000 10:21 AM
+To: Chris Germany/HOU/ECT@ECT
+cc: Scott Goodell/Corp/Enron@ENRON@ECT 
+Subject: Re: Titanium Metals capacity  
+
+It's contract 64939, term = 10/1/1999 to 9/30/2000.
+
+
+
+
+Chris Germany@ECT
+04/26/2000 09:59 AM
+To: Joan Veselack/Corp/Enron@ENRON, Scott Goodell/Corp/Enron@ENRON
+cc:  
+
+Subject: Titanium Metals capacity
+
+Do you guys know which contract this is? 
+
+---------------------- Forwarded by Chris Germany/HOU/ECT on 04/26/2000 09:58 
+AM ---------------------------
+   
+	
+	
+	From:  Colleen Sullivan                           04/25/2000 08:24 AM
+	
+
+To: Chris Germany/HOU/ECT@ECT
+cc: Mark Breese/HOU/ECT@ECT, Steve Jackson/HOU/ECT@ECT, Dan Junek/HOU/ECT@ECT 
+Subject: Titanium Metals capacity
+
+Chris--see Melissa's note below.....per her note it would appear that part of 
+the capacity we valued in the Wholesale book (not Retail) was not really 
+capacity they owned.  Can you give me the details on this capacity--what term 
+they gave it to us for, rate, receipt and delivery points, volume, etc.  Then 
+we need to look at what impact it will have to take it out of the book.  
+Thanks for the help.
+
+
+---------------------- Forwarded by Colleen Sullivan/HOU/ECT on 04/25/2000 
+08:21 AM ---------------------------
+
+
+mflewellyn@columbiaenergygroup.com on 04/24/2000 03:46:16 PM
+To: " - *colleen.sullivan@enron.com" <colleen.sullivan@enron.com>
+cc:  
+Subject: Titanium Metals capacity
+
+
+Colleen,
+
+As I understand it, we were acting as Agent for TCO capacity owned by Titanium
+Metals, and that capacity was incorrectly incorporated into the sale of our
+Wholesale book.  Could you please look into this on your end and let me know
+how to best proceed with correcting this situation.
+
+Thanks,
+
+Melissa (703-561-6408)
+
+
+
+
+
+
+
+
+
+Cleaned Email body: 
+['capacity', 'name', 'billing', 'ce', 'demand', 'charge', 'since', 'mdq', 'forward', 'subject', 'titanium', 'metal', 'capacity', 'term', 'subject', 'titanium', 'metal', 'capacity', 'guy', 'know', 'forward', 'subject', 'titanium', 'metal', 'capacity', 'see', 'note', 'note', 'would', 'appear', 'part', 'capacity', 'really', 'capacity', 'own', 'give', 'detail', 'capacity', 'term', 'give', 'rate', 'receipt', 'point', 'need', 'look', 'impact', 'take', 'forward', 'columbiaenergygroup', 'subject', 'titanium', 'metal', 'capacity', 'understand', 'act', 'tco', 'capacity', 'own', 'titanium', 'metal', 'capacity', 'incorrectly', 'incorporate', 'could', 'look', 'end', 'let', 'know', 'proceed', 'correct', 'situation']
+
+Topic distribution: 
+[(1, 0.51607275), (2, 0.2644425), (0, 0.2137041)]
+
+Assigned topic: [('schedule', 0.0042754766), ('variance', 0.003877806), ('final', 0.0037400688), ('company', 0.0036147607), ('detect', 0.003316158), ('iso', 0.003102232), ('say', 0.0030879476), ('hour', 0.0030182765), ('award', 0.0029992354), ('hourahead', 0.0029054591), ('westdesk', 0.002902551), ('log', 0.002896836), ('ancillary', 0.002888875), ('parse', 0.0028700007), ('date', 0.002605762), ('file', 0.0021679974), ('million', 0.0019844447), ('trans', 0.0019735624), ('type', 0.0019066514), ('utility', 0.0016800148), ('one', 0.0016129521), ('would', 0.0016071075), ('plant', 0.001526073), ('continue', 0.0015144416), ('get', 0.0014618698), ('data', 0.0013452994), ('industry', 0.0013348147), ('take', 0.0013213772), ('also', 0.0012946249), ('make', 0.0012875202), ('well', 0.0012560688), ('plan', 0.001228533), ('last', 0.0012199078), ('find', 0.001214944), ('include', 0.0012119211), ('unit', 0.0012035043), ('high', 0.0011968606), ('year', 0.001195431), ('join', 0.0011844785), ('billion', 0.001171666)]
+
+
+
+Other topics in decreasing order of similarity:
+[('get', 0.0038298054), ('image', 0.003415238), ('would', 0.0032377911), ('go', 0.0030991707), ('think', 0.003043731), ('recipient', 0.0030200724), ('know', 0.0030032073), ('intend', 0.0029943422), ('ferc', 0.0027351303), ('subject', 0.0025358112), ('send', 0.0024983585), ('want', 0.0024940863), ('use', 0.002483071), ('see', 0.0024460107), ('need', 0.0023712446), ('let', 0.0023681954), ('like', 0.0023659398), ('original', 0.0023257162), ('one', 0.0021825419), ('take', 0.0021422245), ('issue', 0.001970343), ('week', 0.0019636517), ('look', 0.001929701), ('back', 0.0019208532), ('say', 0.001899074), ('give', 0.0018670255), ('thru', 0.0018606116), ('well', 0.0018460026), ('could', 0.0018348603), ('deal', 0.0017996313), ('come', 0.001737568), ('also', 0.0017205016), ('try', 0.0016743), ('still', 0.0016370817), ('receive', 0.0016055098), ('schedule', 0.0016002913), ('last', 0.0015866698), ('thing', 0.0015847725), ('regard', 0.0015527301), ('much', 0.0015331547)]
+
+[('agreement', 0.006039858), ('request', 0.005176747), ('attach', 0.0041758735), ('name', 0.00376007), ('need', 0.0037431947), ('deal', 0.003593487), ('review', 0.0035693476), ('know', 0.0034014226), ('subject', 0.00339583), ('isda', 0.0033730809), ('counterparty', 0.0033135214), ('let', 0.003233132), ('draft', 0.0030112683), ('would', 0.0029205754), ('change', 0.002795483), ('send', 0.0027101848), ('forward', 0.002677151), ('date', 0.0026722616), ('letter', 0.0026485377), ('follow', 0.002640721), ('form', 0.002625872), ('regard', 0.0025831638), ('revise', 0.0025444194), ('get', 0.0023869118), ('original', 0.002330483), ('company', 0.0023119897), ('receive', 0.0022957006), ('sent', 0.0022840824), ('approve', 0.002232179), ('trade', 0.002166954), ('issue', 0.002129474), ('phone', 0.0020883207), ('process', 0.0020498543), ('status', 0.0020386048), ('complete', 0.0019933884), ('access', 0.001968715), ('add', 0.0019533143), ('note', 0.0019018373), ('swap', 0.0018963641), ('also', 0.0018848178)]
+

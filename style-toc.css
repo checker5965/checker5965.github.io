@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css?family=Cairo:600,700&display=swap');
+
+body {
+    color: #dddddd;
+    margin-top: 5rem;
+    font-family: 'Cairo', sans-serif;
+  }
+  
+  h2, h3, h4 {
+    color: rgb(67, 197, 180);
+    font-weight: 700
+  }
+  
+  h1 {
+    color: #001f3fd7;
+    font-weight: 700
+  }
+
+  ul {
+    margin: 0;
+  }
+  
+  .bg-steel {
+    background-color: #5f788a;
+  }
+
+  .bg-navy {
+    background-color: #001f3f8f;
+  }
+  
+  .site-header .navbar-nav .nav-link {
+    color: #cbd5db;
+  }
+  
+  .site-header .navbar-nav .nav-link:hover {
+    color: #ffffff;
+  }
+  
+  .site-header .navbar-nav .nav-link.active {
+    font-weight: 500;
+  }
+  
+  .content-section {
+    padding: 10px 20px;
+    background-color: #001f3f8f;
+    border: 3px solid rgb(67, 197, 180);
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 3px 3px rgba(49, 49, 49, 0.349);
+    transition: all 0.4s ease;
+    -webkit-transition: all 0.4s ease;
+  }
+
+  .content-section:hover {
+    transform: scale(1.02,1.02);
+    -webkit-transform: scale(1.02,1.02);
+    box-shadow: 0px 0px rgba(49, 49, 49, 0.349);
+  }
+  
+  .rec-title {
+    color: rgb(67, 197, 180);
+  }
+  
+  a.rec-title:hover {
+    color: #dddddd;
+    text-decoration: none;
+  }
+  
+  .rec-content {
+    white-space: pre-line;
+  }
+  
+  .rec-img {
+    height: 65px;
+    width: 65px;
+    margin-right: 16px;
+  }
+  
+  .rec-metadata {
+    padding-bottom: 1px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid rgb(67, 197, 180)
+  }
+  
+  .rec-metadata a:hover {
+    color: #dddddd;
+    text-decoration: none;
+  }
+  
+  .btn-cst{
+    display: inline-block; 
+    border: 2px solid #43cea2; 
+    background: #001f3fa4;
+    width: 150px;   
+    border-radius: 10px;  
+    margin: 3px; 
+    color: #dddddd;
+    transition: all 0.4s ease;
+    -webkit-transition: all 0.4s ease;
+  }
+  
+  .btn-cst:hover{
+    cursor: pointer;
+    transform: scale(1.1,1.1);
+    -webkit-transform: scale(1.1,1.1);
+    background-color: #43cea2;
+    border: 2px solid #001f3f;
+    color: #333;
+    opacity: 100%;
+  }
+
+  .rec-svg {
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+  }
+  
+  .account-img {
+    height: 125px;
+    width: 125px;
+    margin-right: 20px;
+    margin-bottom: 16px;
+  }
+  
+  .account-heading {
+    font-size: 2.5rem;
+  }
+
+  .grad-bg {
+
+    background: #43cea2;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #185a9d, #43cea2);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #185a9d, #43cea2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
+  
+  .hov {
+    width: 30%; 
+    margin-top: 25%;
+    opacity: 60%;
+  }
+
+  .hov:hover {
+    cursor: pointer;
+    transform: scale(1.2,1.2);
+    -webkit-transform: scale(1.2,1.2);
+    transition: all 0.4s ease;
+    -webkit-transition: all 0.4s ease;
+    opacity: 100%;
+  }
+
+  .alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #721c24;
+  }
+
+  .thead-my {
+    background-color: #001f3fa4;
+    font-weight: bold;
+  }
+
+  .table-borders th, .table-borders td {
+    border: 2px solid #001f3fa4;
+    border-bottom-width: 2px;
+  }
+
+  .table-d {
+    color: #001f3f;
+    background-color: #edacb2;
+  }
+
+  .table-s {
+    color: #001f3f;
+    background-color: #43cea2;
+  }
+
+  .table-amb {
+    color: #001f3f;
+    background-color: #eee4b0;
+  }

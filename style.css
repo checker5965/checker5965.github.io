@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
+
+.progress {background: rgba(245, 245, 245, 1); border: 1.2px solid rgba(0, 0, 0, 1); border-radius: 0px; height: 5px;}
+.progress-bar-custom {background: rgba(0, 0, 0, 1);}
+
+
+.btn-cst{
+  display: inline-block; border: 1.2px solid white; background: #333;  width: 110px; border-radius:0px;  margin: 3px; color: white;
+  transition: all 0.4s ease;
+  -webkit-transition: all 0.4s ease;
+}
+
+.btn-cst:hover{
+  transform: scale(1.1,1.1);
+  -webkit-transform: scale(1.1,1.1);
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid #333;
+  color: #333;
+  opacity: 100%;
+}
+
+.btn-cst-2{
+  display: inline-block; border: 1.2px solid white; background: #333;  width: 130px; border-radius:0px;  margin: 3px; color: white;
+  transition: all 0.4s ease;
+  -webkit-transition: all 0.4s ease;
+}
+
+.wow{visibility: hidden; 
+}
+
+#mynav{
+  background-color: black;
+  height: 45px;
+}
+
+.btn-cst-2:hover{
+  transform: scale(1.1,1.1);
+  -webkit-transform: scale(1.1,1.1);
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid #333;
+  color: #333;
+  opacity: 50%;
+}
+
+.navbar-nav {
+  padding-right: 20px; 
+}
+.nav-link {
+  font-size: 1.1em;
+}
+
+.btn {
+  border-radius: 0px;
+}
+.carousel-inner img{
+  width: 100%;
+  height: 800px;
+}
+
+.carousel-caption{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.parallax { 
+    /* The image used */
+    /*background-image: url("https://images.pexels.com/photos/1046233/pexels-photo-1046233.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");*/ 
+    /* Set a specific height */
+    height: 200px; 
+    background-image: url("imgs/bg2.jpg");
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+/* triangles */
+.tri {
+  width: 0; 
+  height: 0; 
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent; 
+  border-right:9px solid #333;
+  margin-left: 0px;
+  margin-right: 0px;  
+}
+
+.tri2 {
+  width: 0; 
+  height: 0; 
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent; 
+  border-right:9px solid white;
+  margin-left: 0px;
+  margin-right: 0px;  
+}
+
+/* Bullet points style */
+.eh {
+  padding: 10px; 
+  padding-left: 30px;  
+  background: #333; 
+  display: inline-block;
+  color: white;  
+  width: 680px;
+  border-radius: 5px;
+}
+
+.eh2 {
+  padding: 10px; 
+  padding-left: 30px;  
+  background: white; 
+  display: inline-block;
+  color: #333;  
+  width: 680px;
+  border-radius: 5px;
+}
+
+/* Parallax */ 
+
+.parallaxe { 
+  /* The image used */
+  /*background-image: url("https://images.pexels.com/photos/205325/pexels-photo-205325.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");*/ 
+  /* Set a specific height */
+  background-image: url("imgs/t2.jpg");
+  height: 200px; 
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.parallaxh { 
+  /* The image used */
+  /*background-image: url("https://images.pexels.com/photos/8395/lights-night-unsharp-blured.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");*/ 
+  /* Set a specific height */
+  height: 720px; 
+  background-image: url("imgs/bg1.jpeg");
+    /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.parallaxp { 
+  /* The image used */
+  /*background-image: url("https://images.pexels.com/photos/897651/pexels-photo-897651.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"); */
+  /* Set a specific height */
+  height: 200px; 
+  background-image: url("imgs/t3.jpg");
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+html,body {
+  height: 100%;
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
+  color: #222;
+}
+
+.override{
+  opacity: 1;
+}
+
+
+/*---Media Queries --*/
+@media (max-width: 992px) {
+
+  }
+@media (max-width: 768px) {
+  
+}
+@media (max-width: 576px) {
+  
+}
+
+/*---Firefox Bug Fix --*/
+.carousel-item {
+  transition: -webkit-transform 0.5s ease;
+  transition: transform 0.5s ease;
+  transition: transform 0.5s ease, -webkit-transform 0.5s ease;
+  -webkit-backface-visibility: visible;
+  backface-visibility: visible;
+}
+/*--- Fixed Background Image --*/
+figure {
+  position: relative;
+  width: 100%;
+  height: 60%;
+  margin: 0!important;
+}
+.fixed-wrap {
+  clip: rect(0, auto, auto, 0);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+#fixed {
+  background-image: url('img/mac.png');
+  position: fixed;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+  will-change: transform;
+}
+/*--- Bootstrap Padding Fix --*/
+[class*="col-"] {
+    padding: 1rem;
+}

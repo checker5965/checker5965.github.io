@@ -1,0 +1,175 @@
+
+1
+   features     score
+0    subject  0.392638
+1   original  0.316912
+2       send  0.227411
+3      would  0.181259
+4        say  0.173321
+5    company  0.165071
+6       sent  0.162036
+7        get  0.157366
+8       know  0.143902
+9       need  0.133084
+10       one  0.119465
+11   october  0.106312
+12       use  0.103588
+13    mailto  0.097362
+14       let  0.095416
+15       see  0.091992
+16     image  0.090357
+17      also  0.090202
+18   tuesday  0.088100
+19      like  0.087556
+
+2
+
+    features     score
+0        type  0.377535
+1       final  0.364884
+2       trans  0.277991
+3        date  0.256018
+4    schedule  0.228552
+5        hour  0.220562
+6    variance  0.217566
+7        data  0.216733
+8      dbcaps  0.216070
+9         iso  0.161967
+10      error  0.159803
+11     detect  0.147485
+12        mkt  0.138663
+13      alias  0.136541
+14  hourahead  0.132004
+15       epmi  0.121684
+16       file  0.121517
+17   westdesk  0.120185
+18       engy  0.108685
+19     detail  0.107534
+
+
+
+
+
+3
+         features     score
+0             deal  0.398140
+1          subject  0.380101
+2             know  0.199714
+3             need  0.186507
+4              get  0.181675
+5           change  0.141410
+6              let  0.136901
+7            would  0.131103
+8              pdx  0.123050
+9              see  0.122405
+10         forward  0.119828
+11            send  0.114030
+12             one  0.108554
+13          follow  0.100823
+14            like  0.097280
+15            look  0.090516
+16           meter  0.089457
+17             say  0.089227
+18  powermarketers  0.087105
+19            back  0.084395
+
+
+4
+
+                                             features     score
+0                                             subject  0.284106
+1                                               would  0.206798
+2                                                 say  0.199099
+3                                             company  0.180187
+4                                                 get  0.163812
+5                                                need  0.145484
+6                                                know  0.138508
+7                                                 one  0.136162
+8                                                send  0.133282
+9   aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa...  0.129391
+10                                              image  0.127016
+11                                                use  0.116806
+12                                               also  0.114675
+13                                               font  0.108041
+14                                                see  0.104629
+15                                            forward  0.097603
+16                                               week  0.097539
+17                                           original  0.097184
+18                                               take  0.097133
+19                                              issue  0.093163
+
+
+
+5
+
+     features     score
+0     subject  0.401590
+1   agreement  0.346094
+2       would  0.190465
+3        send  0.175535
+4        need  0.175385
+5        know  0.167392
+6     forward  0.148240
+7         get  0.144319
+8      attach  0.134668
+9    original  0.130143
+10        let  0.123056
+11        use  0.107071
+12     letter  0.105128
+13     review  0.103904
+14        see  0.098776
+15    receive  0.098173
+16     regard  0.096062
+17       also  0.095760
+18      draft  0.095157
+19        one  0.093800
+
+
+6
+
+                                             features     score
+0                                             subject  0.314489
+1                                               would  0.233104
+2                                                 say  0.227563
+3                                                 get  0.186150
+4                                             company  0.176285
+5                                                know  0.158958
+6                                                need  0.150727
+7                                                 one  0.139356
+8                                                send  0.134168
+9                                                also  0.122221
+10                                            forward  0.113445
+11                                                use  0.110339
+12  aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa...  0.109272
+13                                                let  0.108577
+14                                                see  0.106367
+15                                               like  0.104189
+16                                               take  0.098616
+17                                              could  0.094837
+18                                               week  0.094613
+19                                              think  0.093972
+
+
+7
+
+   features     score
+0       say  0.363448
+1   company  0.278827
+2     would  0.214107
+3   subject  0.161025
+4   utility  0.137383
+5       get  0.128163
+6       one  0.118259
+7   million  0.117665
+8      also  0.114972
+9      need  0.110089
+10     plan  0.104429
+11      use  0.102466
+12    issue  0.099135
+13  include  0.096213
+14     take  0.094936
+15     know  0.091421
+16    could  0.090919
+17     cost  0.089413
+18     last  0.089048
+19     send  0.086537

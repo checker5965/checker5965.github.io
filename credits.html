@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+        <!-- documentation at http://getbootstrap.com/docs/4.0/, alternative themes at https://bootswatch.com/4-alpha/ -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet"/>
+
+        <link href="style-toc.css" rel="stylesheet"/>
+
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+        <script src="app.js"></script>
+
+        <title>Credits</title>
+    </head>
+
+    <body class="grad-bg">
+        <header class="site-header">
+            <nav class="navbar navbar-expand-md navbar-dark bg-navy fixed-top">
+                <div class="container">
+                <a class="navbar-brand mr-4" href="index.html"><img src="imgs/test.jpg" style="height: 30px; border-radius: 50px"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarToggle">
+                    <div class="navbar-nav mr-auto">
+                    <a class="nav-item nav-link" href="index.html">Home</a>
+                    </div>
+                    <!-- Navbar Right Side -->
+                    <div class="navbar-nav">
+                        <a class="nav-item nav-link" href="toc.html">CFG Developer</a>
+                    </div>
+                </div>
+                </div>
+            </nav>
+        </header>
+        <main role="main" class="container">
+            <div class="row">
+                <div class="col-md-4" id="side-blocks">
+                    <div class="content-section">
+                        <h3>How to Use</h3>
+                        <p>To use the CFG Developer, first go to the application page by clicking on the button in the top right.</p>
+                        <p>Enter your CFG in the Input box, and hit generate.</p>
+                        <p>The Example box will have a string belonging to the given language.</p>
+                        <p>The Test box can be used to enter your own string, and check for membership in the given CFG.</p>
+                        <p>To report any bugs, please fill the google form below.</p>
+                        <div class="text-center">
+                            <a href="https://forms.gle/yzgRY28f1hrhDGxYA"><button type="button" class="btn btn-cst">Report a Bug</button></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8" id="main-blocks">
+                    <div class="content-section">
+                        <h2>CFG Developer</h2>
+                    </div>
+                    <div class="content-section">
+                        <h2>Credits</h2>
+                        <p>This work was done as part of CS-2349 Theory of Computation [Spring 2020] at 
+                        <a href="ashoka.university">Ashoka University.</a> The work was inspired
+                        from various sources, and relied on help from others. They are listed below.</p>
+                        <ol>
+                            <li>
+                                <a href="https://web.stanford.edu/class/archive/cs/cs103/cs103.1156/tools/cfg/">Stanford CFG Developer</a>.
+                            </li>
+                            <li>
+                                Parser implementation is based on the <a href="https://en.wikipedia.org/wiki/Earley_parser">Earley Parser</a>.
+                            </li>
+                            <li>
+                                <a href="https://www.youtube.com/watch?v=WNKw1tiskSM">Earley Parsing by Toby Ho</a>.
+                            </li>
+                            <li>
+                                <a href="http://loup-vaillant.fr/tutorials/earley-parsing/">This excellent tutorial</a>.
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </body>
+</html>

@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hisaab</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <style>
+        .fade-enter {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        .fade-enter-active {
+            opacity: 1;
+            transform: scale(1);
+            transition: all 0.3s ease;
+        }
+        body {
+            font-family: 'Space Grotesk', system-ui, sans-serif;
+        }
+        /* Remove spinner arrows from number inputs */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+        .tooltip {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            text-align: center;
+            padding: 8px 12px;
+            border-radius: 6px;
+            position: absolute;
+            z-index: 1;
+            width: 280px;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.2s;
+            font-size: 0.875rem;
+            pointer-events: none;
+        }
+
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.9);
+            color: #fff;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            z-index: 50;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            max-width: calc(100vw - 2rem);
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+
+        /* Modal */
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 40;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .modal-backdrop.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background-color: #1f2937;
+            border: 1px solid #374151;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            width: 90%;
+            max-width: 800px;
+            transform: scale(0.95);
+            transition: transform 0.2s ease;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-content h3.modal-title {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #e5e7eb;
+            margin-bottom: 1rem;
+            padding-right: 2rem;
+        }
+
+        .modal-content .help-content h3 {
+            font-size: 1.125rem;
+            font-weight: 500;
+            color: #e5e7eb;
+            margin-top: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-content .help-content p,
+        .modal-content .help-content li {
+            color: #9ca3af;
+            line-height: 1.5;
+        }
+
+        .modal-content .help-content ul,
+        .modal-content .help-content ol {
+            margin-top: 0.5rem;
+        }
+
+        .modal-content .help-content > div + div {
+            margin-top: 1.25rem;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            color: #9ca3af;
+            padding: 0.5rem;
+            line-height: 1;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .modal-close:hover {
+            color: #e5e7eb;
+        }
+
+        /* Custom scrollbar for the modal */
+        .modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: #1f2937;
+            border-radius: 4px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: #4b5563;
+            border-radius: 4px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb:hover {
+            background: #6b7280;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200 min-h-screen flex flex-col items-center p-4 md:p-8">
+
+<div class="w-full max-w-[90rem] flex flex-col items-center">
+    <div class="w-full flex justify-center items-center relative mb-12">
+        <h1 class="text-4xl md:text-5xl font-light tracking-tight">Hisaab</h1>
+        <button 
+            onclick="showHelpModal()" 
+            class="absolute right-0 text-gray-400 hover:text-gray-300 transition"
+            aria-label="Help"
+        >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+            </svg>
+        </button>
+    </div>
+
+    <div class="w-full max-w-full grid grid-cols-1 xl:grid-cols-[1fr_2fr] gap-8">
+        <!-- Left Column -->
+        <div class="space-y-8">
+            <!-- Title Section -->
+            <div class="w-full flex items-center justify-between gap-4 bg-gray-800/50 backdrop-blur rounded-2xl p-6 shadow-sm">
+                <input 
+                    id="sheet-title" 
+                    value="My Outing" 
+                    class="bg-gray-800 text-white p-2 rounded-md flex-1"
+                    tabindex="0"
+                >
+                <button 
+                    onclick="resetAll()" 
+                    class="p-2 bg-gray-800 text-red-400 rounded-md hover:bg-gray-700 transition"
+                    tabindex="0"
+                >Reset</button>
+            </div>
+
+            <!-- People Section -->
+            <div class="w-full bg-gray-800/50 backdrop-blur rounded-2xl p-6 shadow-sm">
+                <h2 class="text-xl font-medium mb-4 text-gray-300">People</h2>
+                <div id="people-list" class="space-y-2 mb-4"></div>
+                <form onsubmit="handleAddPerson(event)" class="flex">
+                    <input 
+                        id="person-name" 
+                        type="text" 
+                        placeholder="Enter person's name" 
+                        class="flex-1 p-2 rounded-l-md bg-gray-800 border border-gray-700 focus:outline-none focus:border-gray-600"
+                        tabindex="0"
+                    >
+                    <button 
+                        type="submit"
+                        class="px-4 py-2 bg-gray-800 text-gray-200 rounded-r-md hover:bg-gray-700 transition border border-l-0 border-gray-700"
+                        tabindex="0"
+                    >Add</button>
+                </form>
+            </div>
+
+            <!-- Final Paid Amount -->
+            <div class="w-full bg-gray-800/50 backdrop-blur rounded-2xl p-6 shadow-sm">
+                <div class="flex items-center gap-2 mb-4">
+                    <h2 class="text-xl font-medium text-gray-300">Total Paid Amount</h2>
+                    <div class="tooltip">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-400">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                        </svg>
+                        <span class="tooltip-text">This is the actual amount you ended up paying, post taxes, service charge, and discounts.</span>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <span class="text-gray-400">₹</span>
+                    </div>
+                    <input 
+                        id="final-paid" 
+                        type="number" 
+                        step="0.01" 
+                        placeholder="Enter final paid amount" 
+                        class="w-full p-2 pl-7 bg-gray-800 rounded-md border border-gray-700 focus:outline-none focus:border-gray-600"
+                        onchange="clearCalculation()"
+                        tabindex="0"
+                    >
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="results-section" class="w-full bg-gray-800/50 backdrop-blur rounded-2xl p-6 shadow-sm hidden">
+                <h2 class="text-xl font-medium mb-4 text-gray-300">Results</h2>
+                <div id="results" class="space-y-2"></div>
+                <div id="stats" class="mt-4"></div>
+            </div>
+
+            <!-- Actions -->
+            <div class="w-full flex flex-col sm:flex-row gap-4">
+                <button 
+                    onclick="calculateShares()" 
+                    class="flex-1 p-3 bg-gray-800 text-gray-200 rounded-md hover:bg-gray-700 transition border border-gray-700"
+                    tabindex="0"
+                >Calculate</button>
+                <button 
+                    id="copy-btn" 
+                    onclick="copyResults()" 
+                    disabled 
+                    class="flex-1 p-3 bg-gray-800 text-gray-200 rounded-md hover:bg-gray-700 transition border border-gray-700 disabled:opacity-50 disabled:hover:bg-gray-800 disabled:cursor-not-allowed"
+                    tabindex="0"
+                >Copy</button>
+                <button 
+                    id="download-btn" 
+                    onclick="downloadResults()" 
+                    disabled 
+                    class="flex-1 p-3 bg-gray-800 text-gray-200 rounded-md hover:bg-gray-700 transition border border-gray-700 disabled:opacity-50 disabled:hover:bg-gray-800 disabled:cursor-not-allowed"
+                    tabindex="0"
+                >Download CSV</button>
+            </div>
+
+            <!-- Preview Section -->
+            <div id="preview-section" class="w-full bg-gray-800/50 backdrop-blur rounded-2xl p-6 shadow-sm hidden">
+                <h2 class="text-xl font-medium mb-4 text-gray-300">Preview</h2>
+                <textarea id="preview-text" readonly class="w-full h-48 p-2 bg-gray-800 rounded-md text-gray-200 border border-gray-700"></textarea>
+            </div>
+        </div>
+
+        <!-- Right Column - Items Section -->
+        <div class="w-full bg-gray-800/50 backdrop-blur rounded-2xl p-6 shadow-sm">
+            <div class="mb-6">
+                <h2 class="text-xl font-medium text-gray-300">Items</h2>
+            </div>
+            <div class="space-y-4">
+                <div id="items-list" class="space-y-4"></div>
+                <button 
+                    onclick="addItem()" 
+                    class="w-full p-4 bg-gray-800 text-gray-200 rounded-md hover:bg-gray-700 transition border border-gray-700 flex items-center justify-center gap-2"
+                    tabindex="0"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg>
+                    Add Item
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Toast Notification -->
+<div id="toast" class="toast"></div>
+
+<!-- Confirmation Modal -->
+<div id="modal" class="modal-backdrop">
+    <div class="modal-content">
+        <button onclick="closeModal()" class="modal-close" aria-label="Close modal">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+        <h3 class="modal-title" id="modal-title"></h3>
+        <div class="text-gray-400" id="modal-message"></div>
+        <div class="flex justify-end gap-3 mt-6">
+            <button id="modal-cancel" class="px-4 py-2 bg-gray-800 text-gray-200 rounded-md hover:bg-gray-700 transition border border-gray-700 hidden">Cancel</button>
+            <button id="modal-confirm" class="px-4 py-2 bg-gray-800 text-red-400 rounded-md hover:bg-gray-700 transition border border-gray-700">Confirm</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let people = [];
+    let items = [];
+
+    // Toast notification system
+    function showToast(message, duration = 3000) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, duration);
+    }
+
+    // Modal system
+    function showModal(title, message, onConfirm, singleButton = false) {
+        const modal = document.getElementById('modal');
+        document.getElementById('modal-title').textContent = title;
+        
+        // Special handling for help modal - don't convert newlines to <br>
+        if (title === 'Help & Instructions') {
+            document.getElementById('modal-message').innerHTML = message;
+        } else {
+            document.getElementById('modal-message').innerHTML = message.replace(/\n/g, '<br>');
+        }
+        
+        // Remove any existing click handlers
+        const confirmButton = document.getElementById('modal-confirm');
+        const cancelButton = document.getElementById('modal-cancel');
+        const newConfirmButton = confirmButton.cloneNode(true);
+        const newCancelButton = cancelButton.cloneNode(true);
+        confirmButton.parentNode.replaceChild(newConfirmButton, confirmButton);
+        cancelButton.parentNode.replaceChild(newCancelButton, cancelButton);
+        
+        // Add new click handlers
+        newConfirmButton.onclick = () => {
+            closeModal();
+            // Small delay to ensure modal is fully closed before potentially opening another
+            setTimeout(() => {
+                if (onConfirm) onConfirm();
+            }, 100);
+        };
+        
+        newCancelButton.onclick = closeModal;
+
+        // Handle single button mode
+        if (singleButton) {
+            newCancelButton.classList.add('hidden');
+            newConfirmButton.classList.remove('text-red-400');
+            newConfirmButton.textContent = 'Okay';
+        } else {
+            newCancelButton.classList.remove('hidden');
+            newConfirmButton.classList.add('text-red-400');
+            newConfirmButton.textContent = 'Confirm';
+        }
+        
+        modal.classList.add('show');
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('modal');
+        modal.classList.remove('show');
+    }
+
+    // Click outside modal to close
+    document.getElementById('modal').addEventListener('click', (e) => {
+        if (e.target.classList.contains('modal-backdrop')) {
+            closeModal();
+        }
+    });
+
+    // Close modal on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && document.getElementById('modal').classList.contains('show')) {
+            closeModal();
+        }
+    });
+
+    function handleAddPerson(event) {
+        event.preventDefault(); // Prevent form submission
+        addPerson();
+    }
+
+    function clearCalculation() {
+        document.getElementById('results').innerHTML = '';
+        document.getElementById('preview-text').value = '';
+        document.getElementById('stats').innerHTML = '';
+        document.getElementById('results-section').classList.add('hidden');
+        document.getElementById('preview-section').classList.add('hidden');
+        document.getElementById('download-btn').disabled = true;
+        document.getElementById('copy-btn').disabled = true;
+    }
+
+    function addPerson() {
+        const nameInput = document.getElementById('person-name');
+        const name = nameInput.value.trim();
+        if (!name) {
+            showToast('Please enter a person\'s name');
+            return;
+        }
+        if (people.includes(name)) {
+            showToast('This person has already been added');
+            return;
+        }
+        people.push(name);
+        nameInput.value = '';
+        clearCalculation();
+        renderPeople();
+        renderItems();
+    }
+
+    function renderPeople() {
+        const container = document.getElementById('people-list');
+        container.innerHTML = '';
+        people.forEach((person, index) => {
+            container.innerHTML += `<div class='flex justify-between items-center bg-gray-800 p-2 rounded-md fade-enter fade-enter-active border border-gray-700'>
+      <span>${person}</span>
+      <button onclick='confirmRemovePerson(${index})' class='text-gray-400 hover:text-red-400 transition'>Remove</button>
+    </div>`;
+        });
+    }
+
+    function confirmRemovePerson(index) {
+        const person = people[index];
+        showModal(
+            'Remove Person',
+            `Are you sure you want to remove ${person}? This will also remove their shares from all items.`,
+            () => {
+                people.splice(index, 1);
+                items.forEach(item => {
+                    delete item.shares[person];
+                });
+                clearCalculation();
+                renderPeople();
+                renderItems();
+            }
+        );
+    }
+
+    function addItem() {
+        const defaultShares = {};
+        people.forEach(person => {
+            defaultShares[person] = 0;
+        });
+        const newItemIndex = items.length;
+        items.push({ name: '', price: 0, shares: defaultShares });
+        clearCalculation();
+        renderItems();
+        // Focus on the name input of the newly added item
+        setTimeout(() => {
+            const newItemNameInput = document.getElementById(`item-name-${newItemIndex}`);
+            if (newItemNameInput) {
+                newItemNameInput.focus();
+            }
+        }, 0);
+    }
+
+    function splitEqually(itemIndex) {
+        people.forEach(person => {
+            items[itemIndex].shares[person] = 1;
+        });
+        clearCalculation();
+        renderItems();
+    }
+
+    function renderItems() {
+        const container = document.getElementById('items-list');
+        container.innerHTML = '';
+        items.forEach((item, itemIndex) => {
+            let peopleShares = people.map((person, personIndex) => {
+                const shareValue = item.shares[person] || 0;
+                return `
+                <div class='flex items-center space-x-2 bg-gray-800 p-2 rounded-md border border-gray-700'>
+                    <label class='flex-1 text-gray-300' for="share-${itemIndex}-${personIndex}">${person}</label>
+                    <input 
+                        id="share-${itemIndex}-${personIndex}"
+                        type='number' 
+                        step='0.1' 
+                        min='0'
+                        value='${shareValue}' 
+                        onfocus='handleNumberFocus(this)'
+                        onchange='updateShare(${itemIndex}, "${person}", this.value)'
+                        onblur='handleShareBlur(this, ${itemIndex}, "${person}")'
+                        class='w-20 p-1 bg-gray-800 rounded text-right border border-gray-700 focus:outline-none focus:border-gray-600'
+                    >
+                </div>`;
+            }).join('');
+            
+            container.innerHTML += `
+            <div class='bg-gray-800 p-4 rounded-md space-y-4 fade-enter fade-enter-active border border-gray-700'>
+                <div class='flex flex-wrap gap-4 items-center'>
+                    <input 
+                        id="item-name-${itemIndex}"
+                        onchange='updateItemName(${itemIndex}, this.value)' 
+                        value='${item.name}' 
+                        placeholder='Item Name' 
+                        class='flex-1 min-w-[200px] p-2 bg-gray-800 rounded-md border border-gray-700 focus:outline-none focus:border-gray-600'
+                    >
+                    <div class="relative w-32">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <span class="text-gray-400">₹</span>
+                        </div>
+                        <input 
+                            id="item-price-${itemIndex}"
+                            onchange='updateItemPrice(${itemIndex}, this.value)' 
+                            onfocus='handleNumberFocus(this)'
+                            value='${item.price || ""}' 
+                            type='number' 
+                            min='0.01'
+                            step='0.01'
+                            placeholder='Price' 
+                            class='w-full p-2 pl-7 bg-gray-800 rounded-md text-right border border-gray-700 focus:outline-none focus:border-gray-600'
+                        >
+                    </div>
+                    <div class="flex gap-2">
+                        <button 
+                            onclick='splitEqually(${itemIndex})'
+                            class='p-2 text-gray-400 hover:text-gray-200 rounded-md transition tooltip'
+                            aria-label="Split equally among all people"
+                        >
+                            <span class="tooltip-text">Split equally among all people</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.97zm-16.5.52a49.5 49.5 0 013-.52m0 0l-2.62 10.726c-.122.499.106 1.028.589 1.202a5.989 5.989 0 002.031.352 5.989 5.989 0 002.031-.352c.483-.174.711-.703.59-1.202L5.25 4.97z" />
+                            </svg>
+                        </button>
+                        <button 
+                            id="remove-item-${itemIndex}"
+                            onclick='removeItem(${itemIndex})' 
+                            class='p-2 text-gray-400 hover:text-red-400 rounded-md transition text-2xl'
+                            aria-label="Remove item"
+                        >×</button>
+                    </div>
+                </div>
+                <div class='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 2xl:grid-cols-3 gap-2'>
+                    ${peopleShares}
+                </div>
+                <div class='flex justify-between text-sm text-gray-400'>
+                    <span>Total Shares: ${calculateTotalShares(item)}</span>
+                    <span>Share Price: ₹${calculateSharePrice(item)}</span>
+                </div>
+            </div>`;
+        });
+    }
+
+    function handleNumberFocus(input) {
+        if (parseFloat(input.value) === 0) {
+            input.value = '';
+        }
+    }
+
+    function removeItem(index) {
+        showModal(
+            'Remove Item',
+            'Are you sure you want to remove this item?',
+            () => {
+                items.splice(index, 1);
+                clearCalculation();
+                renderItems();
+            }
+        );
+    }
+
+    function calculateTotalShares(item) {
+        return Object.values(item.shares).reduce((sum, share) => sum + (parseFloat(share) || 0), 0);
+    }
+
+    function calculateSharePrice(item) {
+        const totalShares = calculateTotalShares(item);
+        return totalShares > 0 ? (item.price / totalShares).toFixed(2) : '0.00';
+    }
+
+    function updateItemName(index, value) {
+        const trimmedName = value.trim();
+        items[index].name = trimmedName;
+        
+        // Check for duplicates after name update
+        checkForDuplicates(index);
+        
+        clearCalculation();
+        // Don't re-render, just update the totals
+        updateItemTotals(index);
+    }
+
+    function updateItemPrice(index, value) {
+        const price = parseFloat(value) || 0;
+        if (price <= 0) {
+            showToast('Item price must be greater than 0');
+            items[index].price = 0;  // Reset to 0
+            document.getElementById(`item-price-${index}`).value = '';
+            return;
+        }
+        items[index].price = price;
+        
+        // Check for duplicates after price update
+        checkForDuplicates(index);
+        
+        clearCalculation();
+        // Don't re-render, just update the totals
+        updateItemTotals(index);
+    }
+
+    function checkForDuplicates(currentIndex) {
+        const currentItem = items[currentIndex];
+        if (!currentItem.name || currentItem.price <= 0) return; // Don't check incomplete items
+
+        const duplicates = items.reduce((acc, item, index) => {
+            if (index !== currentIndex && 
+                item.name && 
+                item.price > 0 && 
+                item.name.toLowerCase() === currentItem.name.toLowerCase() && 
+                item.price === currentItem.price) {
+                acc.push(index + 1); // Adding 1 for human-readable position
+            }
+            return acc;
+        }, []);
+
+        if (duplicates.length > 0) {
+            showToast(`Warning: Item "${currentItem.name}" (₹${currentItem.price}) appears to be a duplicate of item${duplicates.length > 1 ? 's' : ''} #${duplicates.join(', #')}`);
+        }
+    }
+
+    function updateShare(itemIndex, person, value) {
+        const shareValue = parseFloat(value) || 0;
+        if (shareValue === 0) {
+            delete items[itemIndex].shares[person];
+        } else {
+            items[itemIndex].shares[person] = shareValue;
+        }
+        clearCalculation();
+        // Don't re-render, just update the totals
+        updateItemTotals(itemIndex);
+    }
+
+    function updateItemTotals(itemIndex) {
+        const item = items[itemIndex];
+        const totalShares = calculateTotalShares(item);
+        const sharePrice = calculateSharePrice(item);
+        const totalsDiv = document.querySelector(`#items-list > div:nth-child(${itemIndex + 1}) > div:last-child`);
+        if (totalsDiv) {
+            totalsDiv.innerHTML = `
+                <span>Total Shares: ${totalShares}</span>
+                <span>Share Price: ₹${sharePrice}</span>
+            `;
+        }
+    }
+
+    function calculateShares() {
+        if (people.length === 0) {
+            showToast('Please add at least one person');
+            return;
+        }
+
+        if (items.length === 0) {
+            showToast('Please add at least one item');
+            return;
+        }
+
+        const finalPaid = parseFloat(document.getElementById('final-paid').value);
+        if (!finalPaid || finalPaid <= 0) {
+            showToast('Total paid amount must be greater than 0');
+            return;
+        }
+
+        let hasShares = false;
+        let preTaxTotal = 0;
+        let hasZeroPrice = false;
+        let zeroItemName = '';
+        let unassignedItems = [];
+
+        for (const item of items) {
+            if (item.price <= 0) {
+                hasZeroPrice = true;
+                zeroItemName = item.name || 'Unnamed item';
+                break;
+            }
+            
+            const itemShares = calculateTotalShares(item);
+            if (itemShares === 0) {
+                unassignedItems.push(item.name || 'Unnamed item');
+            }
+            
+            if (Object.keys(item.shares).length > 0) {
+                hasShares = true;
+            }
+            preTaxTotal += item.price;
+        }
+
+        if (hasZeroPrice) {
+            showToast(`Please set a valid price for ${zeroItemName}`);
+            return;
+        }
+        
+        if (unassignedItems.length > 0) {
+            showToast(`The following items have no shares assigned: ${unassignedItems.join(', ')}`);
+            return;
+        }
+        
+        if (!hasShares) {
+            showToast('Please add at least one share to an item');
+            return;
+        }
+
+        if (preTaxTotal === 0) {
+            showToast('Total of all items cannot be zero');
+            return;
+        }
+
+        const duplicates = findAllDuplicates();
+        const discrepancyPercent = Math.abs((finalPaid - preTaxTotal) / preTaxTotal * 100);
+        
+        const showPriceDiscrepancy = () => {
+            showModal(
+                'Large Price Difference',
+                `The total amount paid (₹${finalPaid.toFixed(2)}) is ${discrepancyPercent.toFixed(1)}% ${finalPaid > preTaxTotal ? 'more' : 'less'} than the sum of items (₹${preTaxTotal.toFixed(2)}). Do you want to proceed?`,
+                () => performCalculation(finalPaid, preTaxTotal)
+            );
+        };
+
+        if (duplicates.length > 0) {
+            const duplicatesList = duplicates
+                .map(d => `• ${d.name} (₹${d.price}) appears ${d.count} times`)
+                .join('\n\n');
+            
+            showModal(
+                'Duplicate Items Found',
+                `The following items appear to be duplicates:\n\n${duplicatesList}\n\nDo you want to proceed with the calculation?`,
+                () => {
+                    if (discrepancyPercent > 55) {
+                        showPriceDiscrepancy();
+                    } else {
+                        performCalculation(finalPaid, preTaxTotal);
+                    }
+                }
+            );
+        } else if (discrepancyPercent > 55) {
+            showPriceDiscrepancy();
+        } else {
+            performCalculation(finalPaid, preTaxTotal);
+        }
+    }
+
+    function findAllDuplicates() {
+        const duplicates = [];
+        const itemMap = new Map();
+
+        // Only consider items with both name and valid price
+        items.filter(item => item.name && item.price > 0).forEach(item => {
+            const key = `${item.name.toLowerCase()}-${item.price}`;
+            if (!itemMap.has(key)) {
+                itemMap.set(key, { name: item.name, price: item.price, count: 1 });
+            } else {
+                const existing = itemMap.get(key);
+                existing.count++;
+            }
+        });
+
+        // Return only items that appear more than once
+        return Array.from(itemMap.values()).filter(item => item.count > 1);
+    }
+
+    function generateDetailedReport(totals, finalPaid, preTaxTotal, adjustmentFactor) {
+        const title = document.getElementById('sheet-title').value.trim() || 'Untitled Sheet';
+        const date = new Date().toLocaleString();
+        const adjustmentPercent = (((finalPaid - preTaxTotal) / preTaxTotal) * 100).toFixed(2);
+        
+        // Calculate statistics
+        const amounts = people.map(p => totals[p] * adjustmentFactor);
+        const mean = (amounts.reduce((a, b) => a + b, 0) / amounts.length).toFixed(2);
+        const stdDev = Math.sqrt(amounts.map(x => Math.pow(x - mean, 2)).reduce((a, b) => a + b, 0) / amounts.length).toFixed(2);
+        const maxAmount = Math.max(...amounts).toFixed(2);
+        const minAmount = Math.min(...amounts).toFixed(2);
+
+        // Generate report sections
+        let report = [];
+
+        // 1. Title and Summary
+        report.push(
+            `${title}`,
+            `Generated on: ${date}`,
+            ``,
+            `Summary`,
+            `-------`,
+            `Total Items: ${items.length}`,
+            `Pre-tax Total: ₹${preTaxTotal.toFixed(2)}`,
+            `Final Amount: ₹${finalPaid.toFixed(2)}`,
+            `Adjustment: ${adjustmentPercent}%`,
+            ``
+        );
+
+        // 2. Items Section
+        report.push(
+            `Items`,
+            `-----`
+        );
+        items.forEach((item, index) => {
+            const totalShares = calculateTotalShares(item);
+            const sharePrice = totalShares > 0 ? item.price / totalShares : 0;
+            const shares = Object.entries(item.shares)
+                .filter(([_, share]) => share > 0) // Only show non-zero shares
+                .map(([person, share]) => `${person} (${share})`)
+                .join(', ');
+            
+            report.push(
+                `${index + 1}. ${item.name}`,
+                `   Price: ₹${item.price.toFixed(2)}`,
+                `   Per Share: ₹${sharePrice.toFixed(2)}`,
+                `   Shares: ${shares}`,
+                ``
+            );
+        });
+
+        // 3. Per-Person Summary
+        report.push(
+            `Per Person Summary`,
+            `----------------`
+        );
+        people.forEach(person => {
+            const amount = (totals[person] * adjustmentFactor).toFixed(2);
+            const percentage = ((totals[person] * adjustmentFactor / finalPaid) * 100).toFixed(1);
+            const personItems = items
+                .filter(item => item.shares[person] && item.shares[person] > 0)
+                .map(item => `${item.name} (${item.shares[person]} shares)`)
+                .join(', ');
+            
+            report.push(
+                `${person}:`,
+                `   Amount: ₹${amount}`,
+                `   Percentage: ${percentage}%`,
+                `   Items: ${personItems}`,
+                ``
+            );
+        });
+
+        // 4. Statistics
+        report.push(
+            `Statistics`,
+            `---------`,
+            `Mean: ₹${mean}`,
+            `Standard Deviation: ₹${stdDev}`,
+            `Highest: ₹${maxAmount}`,
+            `Lowest: ₹${minAmount}`
+        );
+
+        return report.join('\n');
+    }
+
+    function generateCSV(totals, finalPaid, preTaxTotal, adjustmentFactor) {
+        const title = document.getElementById('sheet-title').value.trim() || 'Untitled Sheet';
+        const date = new Date().toLocaleString();
+        const adjustmentPercent = (((finalPaid - preTaxTotal) / preTaxTotal) * 100).toFixed(2);
+        let csvRows = [];
+        
+        // Header information
+        csvRows.push(['Sheet Name', title]);
+        csvRows.push(['Generated on', date]);
+        csvRows.push([]);
+        
+        // Summary section
+        csvRows.push(['Summary']);
+        csvRows.push(['Total Items', items.length]);
+        csvRows.push(['Pre-tax Total', `₹${preTaxTotal.toFixed(2)}`]);
+        csvRows.push(['Final Amount', `₹${finalPaid.toFixed(2)}`]);
+        csvRows.push(['Adjustment', `${adjustmentPercent}%`]);
+        csvRows.push([]);
+
+        // Add amounts owed in summary
+        csvRows.push(['Amounts Owed']);
+        people.forEach(person => {
+            const amount = (totals[person] * adjustmentFactor).toFixed(2);
+            csvRows.push([person, `₹${amount}`]);
+        });
+        
+        // Add spacing
+        csvRows.push([]);
+        csvRows.push([]);
+        
+        // Main content starts here
+        // Headers - Item and Price columns, followed by per-person columns
+        csvRows.push(['Item', 'Price', 'Per Share Price', ...people]);
+        
+        // Items with their prices and shares
+        items.forEach(item => {
+            const totalShares = calculateTotalShares(item);
+            const sharePrice = totalShares > 0 ? item.price / totalShares : item.price;
+            
+            const row = [
+                item.name,
+                item.price,
+                sharePrice.toFixed(2)
+            ];
+            
+            // Add share values for each person
+            people.forEach(person => {
+                row.push(item.shares[person] || '');
+            });
+            
+            csvRows.push(row);
+        });
+        
+        // Add empty row
+        csvRows.push([]);
+        
+        // Total Exclusive
+        const totalRow = ['Total Exclusive', preTaxTotal.toFixed(2), ''];
+        const personTotals = people.map(person => totals[person].toFixed(2));
+        csvRows.push([...totalRow, ...personTotals]);
+        
+        // After Taxes, Service, and Discount
+        const afterTaxRow = ['Total amount paid (including taxes/discount/service charge)', finalPaid.toFixed(2), ''];
+        const adjustedTotals = people.map(person => (totals[person] * adjustmentFactor).toFixed(2));
+        csvRows.push([...afterTaxRow, ...adjustedTotals]);
+        
+        // Adjustment Percentage
+        csvRows.push(['Adjustment Percentage', adjustmentPercent, '', ...Array(people.length).fill('')]);
+        
+        // Empty rows
+        csvRows.push([]);
+        csvRows.push([]);
+        
+        // Amounts Owed
+        csvRows.push(['Amounts Owed', '', '', ...adjustedTotals]);
+        
+        // Statistics
+        const amounts = people.map(p => totals[p] * adjustmentFactor);
+        const mean = (amounts.reduce((a, b) => a + b, 0) / amounts.length).toFixed(2);
+        const stdDev = Math.sqrt(amounts.map(x => Math.pow(x - mean, 2)).reduce((a, b) => a + b, 0) / amounts.length).toFixed(2);
+        
+        csvRows.push([]);
+        csvRows.push(['Standard Deviation', '', '', stdDev, ...Array(people.length - 1).fill('')]);
+        csvRows.push(['Mean', '', '', mean, ...Array(people.length - 1).fill('')]);
+
+        return csvRows.map(row => row.join(',')).join('\n');
+    }
+
+    function performCalculation(finalPaid, preTaxTotal) {
+        let totals = {};
+        people.forEach(p => totals[p] = 0);
+
+        items.forEach(item => {
+            const totalShares = calculateTotalShares(item);
+            if (totalShares > 0) {
+                const sharePrice = item.price / totalShares;
+                Object.entries(item.shares).forEach(([person, share]) => {
+                    totals[person] += sharePrice * share;
+                });
+            }
+        });
+
+        const adjustmentFactor = finalPaid / preTaxTotal;
+
+        // Generate the detailed report for preview
+        const detailedReport = generateDetailedReport(totals, finalPaid, preTaxTotal, adjustmentFactor);
+
+        // Show results and enable buttons
+        document.getElementById('results-section').classList.remove('hidden');
+        document.getElementById('preview-section').classList.remove('hidden');
+        document.getElementById('download-btn').disabled = false;
+        document.getElementById('copy-btn').disabled = false;
+
+        // Update UI
+        let resultHTML = '';
+        people.forEach(p => {
+            const adjustedAmount = (totals[p] * adjustmentFactor).toFixed(2);
+            resultHTML += `<div class='flex justify-between'><span>${p}</span><span>₹${adjustedAmount}</span></div>`;
+        });
+        document.getElementById('results').innerHTML = resultHTML;
+        document.getElementById('preview-text').value = detailedReport;
+
+        // Calculate and display statistics
+        const amounts = people.map(p => totals[p] * adjustmentFactor);
+        const mean = (amounts.reduce((a, b) => a + b, 0) / amounts.length).toFixed(2);
+        const stdDev = Math.sqrt(amounts.map(x => Math.pow(x - mean, 2)).reduce((a, b) => a + b, 0) / amounts.length).toFixed(2);
+        const adjustmentPercent = (((finalPaid - preTaxTotal) / preTaxTotal) * 100).toFixed(2);
+
+        document.getElementById('stats').innerHTML = `
+            <div class='mt-4 space-y-2'>
+                <div class='flex justify-between'>
+                    <span>Pre-tax Total:</span>
+                    <span>₹${preTaxTotal.toFixed(2)}</span>
+                </div>
+                <div class='flex justify-between'>
+                    <span>Final Amount:</span>
+                    <span>₹${finalPaid.toFixed(2)}</span>
+                </div>
+                <div class='flex justify-between'>
+                    <span>Adjustment:</span>
+                    <span>${adjustmentPercent}%</span>
+                </div>
+                <div class='flex justify-between'>
+                    <span>Mean:</span>
+                    <span>₹${mean}</span>
+                </div>
+                <div class='flex justify-between'>
+                    <span>Standard Deviation:</span>
+                    <span>₹${stdDev}</span>
+                </div>
+            </div>
+        `;
+
+        // Store the CSV data for download
+        window.lastCalculatedCSV = generateCSV(totals, finalPaid, preTaxTotal, adjustmentFactor);
+    }
+
+    function downloadResults() {
+        const title = document.getElementById('sheet-title').value.trim() || 'hisaab';
+        const encodedUri = encodeURI("data:text/csv;charset=utf-8," + window.lastCalculatedCSV);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", `${title}_results.csv`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    function copyResults() {
+        const previewText = document.getElementById('preview-text').value;
+        navigator.clipboard.writeText(previewText).then(() => {
+            showModal(
+                'Success',
+                'Results copied to clipboard!',
+                () => {}, // Empty function since we don't need any action on confirm
+                true // Single button mode
+            );
+        }).catch(err => {
+            showModal(
+                'Error',
+                'Failed to copy: ' + err,
+                () => {}, // Empty function since we don't need any action on confirm
+                true // Single button mode
+            );
+        });
+    }
+
+    function resetAll() {
+        showModal(
+            'Reset Everything',
+            'Are you sure you want to reset everything? This action cannot be undone.',
+            () => {
+                people = [];
+                items = [];
+                document.getElementById('person-name').value = '';
+                document.getElementById('final-paid').value = '';
+                document.getElementById('sheet-title').value = 'My Outing';
+                document.getElementById('people-list').innerHTML = '';
+                document.getElementById('items-list').innerHTML = '';
+                document.getElementById('results').innerHTML = '';
+                document.getElementById('preview-text').value = '';
+                document.getElementById('stats').innerHTML = '';
+                document.getElementById('results-section').classList.add('hidden');
+                document.getElementById('preview-section').classList.add('hidden');
+                document.getElementById('download-btn').disabled = true;
+                document.getElementById('copy-btn').disabled = true;
+            }
+        );
+    }
+
+    function showHelpModal() {
+        const helpContent = `
+<div class="help-content">
+    <div>
+        <h3>About Hisaab</h3>
+        <p>Hisaab is a simple yet powerful bill-splitting calculator that helps you fairly divide expenses among friends, roommates, or any group. It handles complex scenarios like unequal shares, taxes, and service charges with ease.</p>
+    </div>
+
+    <div>
+        <h3>How to Use</h3>
+        <ol class="list-decimal list-inside">
+            <li><strong>Add People:</strong> Enter names of all participants in the "People" section</li>
+            <li><strong>Add Items:</strong> Click "Add Item" to add each expense
+                <ul class="list-disc list-inside ml-4 mt-1">
+                    <li>Enter item name and price</li>
+                    <li>Use the split equally button (<svg class="w-4 h-4 inline align-text-bottom" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.97zm-16.5.52a49.5 49.5 0 013-.52m0 0l-2.62 10.726c-.122.499.106 1.028.589 1.202a5.989 5.989 0 002.031.352 5.989 5.989 0 002.031-.352c.483-.174.711-.703.59-1.202L5.25 4.97z" /></svg>) to quickly divide an item among all people</li>
+                    <li>Or manually assign shares to people (1 share = equal split, 0.5 = half share)</li>
+                </ul>
+            </li>
+            <li><strong>Enter Final Amount:</strong> Input the actual amount paid (including taxes/discounts)</li>
+            <li><strong>Calculate:</strong> Click "Calculate" to see how much each person owes</li>
+        </ol>
+    </div>
+
+    <div>
+        <h3>Features</h3>
+        <ul class="list-disc list-inside">
+            <li>Quick split button to divide items equally</li>
+            <li>Supports decimal shares (0.5, 1.5, etc.)</li>
+            <li>Automatically adjusts for taxes and discounts</li>
+            <li>Warns about duplicate items</li>
+            <li>Provides detailed statistics</li>
+            <li>Export results as CSV</li>
+            <li>Copy-paste friendly output</li>
+        </ul>
+    </div>
+
+    <div>
+        <h3>Tips</h3>
+        <ul class="list-disc list-inside">
+            <li>Use the split equally button for items shared by everyone</li>
+            <li>Use decimal shares for unequal splits (e.g., 0.5 for half portion)</li>
+            <li>The final amount can be higher or lower than item total to account for taxes/discounts</li>
+            <li>Check the statistics section to see mean and standard deviation of expenses</li>
+            <li>Use the copy feature to quickly share results via chat</li>
+        </ul>
+    </div>
+</div>`;
+
+        showModal(
+            'Help & Instructions',
+            helpContent,
+            null,
+            true
+        );
+    }
+
+    function handleShareBlur(input, itemIndex, person) {
+        if (input.value.trim() === '') {
+            input.value = '0';
+            updateShare(itemIndex, person, 0);
+        }
+    }
+</script>
+
+</body>
+</html>

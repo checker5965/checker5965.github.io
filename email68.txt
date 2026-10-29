@@ -1,0 +1,58 @@
+Original Email body: 
+Message-ID: <1191072.1075855688663.JavaMail.evans@thyme>
+Date: Tue, 5 Sep 2000 06:30:00 -0700 (PDT)
+From: phillip.allen@enron.com
+To: dexter@intelligencepress.com
+Subject: 
+Mime-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+X-From: Phillip K Allen
+X-To: dexter@intelligencepress.com
+X-cc: 
+X-bcc: 
+X-Folder: \Phillip_Allen_Dec2000\Notes Folders\'sent mail
+X-Origin: Allen-P
+X-FileName: pallen.nsf
+
+---------------------- Forwarded by Phillip K Allen/HOU/ECT on 09/05/2000 
+01:29 PM ---------------------------
+   
+	
+	
+	From:  Phillip K Allen                           08/29/2000 02:20 PM
+	
+
+To: mark@intelligencepress.com
+cc:  
+Subject: 
+
+Mark,
+
+ Here is a spreadsheet detailing our September Socal trades. (I did not 
+distinguish between buys vs. sells.)
+
+
+
+Phillip
+
+
+Cleaned Email body: 
+['forward', 'intelligencepress', 'subject', 'spreadsheet', 'detail', 'september', 'socal', 'distinguish', 'buy']
+
+Topic distribution: 
+[(1, 0.53257173), (2, 0.40558153), (0, 0.020907976), (4, 0.020514496), (3, 0.020424273)]
+
+Assigned topic: [('schedule', 0.0042754766), ('variance', 0.003877806), ('final', 0.0037400688), ('company', 0.0036147607), ('detect', 0.003316158), ('iso', 0.003102232), ('say', 0.0030879476), ('hour', 0.0030182765), ('award', 0.0029992354), ('hourahead', 0.0029054591), ('westdesk', 0.002902551), ('log', 0.002896836), ('ancillary', 0.002888875), ('parse', 0.0028700007), ('date', 0.002605762), ('file', 0.0021679974), ('million', 0.0019844447), ('trans', 0.0019735624), ('type', 0.0019066514), ('utility', 0.0016800148), ('one', 0.0016129521), ('would', 0.0016071075), ('plant', 0.001526073), ('continue', 0.0015144416), ('get', 0.0014618698), ('data', 0.0013452994), ('industry', 0.0013348147), ('take', 0.0013213772), ('also', 0.0012946249), ('make', 0.0012875202), ('well', 0.0012560688), ('plan', 0.001228533), ('last', 0.0012199078), ('find', 0.001214944), ('include', 0.0012119211), ('unit', 0.0012035043), ('high', 0.0011968606), ('year', 0.001195431), ('join', 0.0011844785), ('billion', 0.001171666)]
+
+
+
+Other topics in decreasing order of similarity:
+[('get', 0.0038298054), ('image', 0.003415238), ('would', 0.0032377911), ('go', 0.0030991707), ('think', 0.003043731), ('recipient', 0.0030200724), ('know', 0.0030032073), ('intend', 0.0029943422), ('ferc', 0.0027351303), ('subject', 0.0025358112), ('send', 0.0024983585), ('want', 0.0024940863), ('use', 0.002483071), ('see', 0.0024460107), ('need', 0.0023712446), ('let', 0.0023681954), ('like', 0.0023659398), ('original', 0.0023257162), ('one', 0.0021825419), ('take', 0.0021422245), ('issue', 0.001970343), ('week', 0.0019636517), ('look', 0.001929701), ('back', 0.0019208532), ('say', 0.001899074), ('give', 0.0018670255), ('thru', 0.0018606116), ('well', 0.0018460026), ('could', 0.0018348603), ('deal', 0.0017996313), ('come', 0.001737568), ('also', 0.0017205016), ('try', 0.0016743), ('still', 0.0016370817), ('receive', 0.0016055098), ('schedule', 0.0016002913), ('last', 0.0015866698), ('thing', 0.0015847725), ('regard', 0.0015527301), ('much', 0.0015331547)]
+
+[('agreement', 0.006039858), ('request', 0.005176747), ('attach', 0.0041758735), ('name', 0.00376007), ('need', 0.0037431947), ('deal', 0.003593487), ('review', 0.0035693476), ('know', 0.0034014226), ('subject', 0.00339583), ('isda', 0.0033730809), ('counterparty', 0.0033135214), ('let', 0.003233132), ('draft', 0.0030112683), ('would', 0.0029205754), ('change', 0.002795483), ('send', 0.0027101848), ('forward', 0.002677151), ('date', 0.0026722616), ('letter', 0.0026485377), ('follow', 0.002640721), ('form', 0.002625872), ('regard', 0.0025831638), ('revise', 0.0025444194), ('get', 0.0023869118), ('original', 0.002330483), ('company', 0.0023119897), ('receive', 0.0022957006), ('sent', 0.0022840824), ('approve', 0.002232179), ('trade', 0.002166954), ('issue', 0.002129474), ('phone', 0.0020883207), ('process', 0.0020498543), ('status', 0.0020386048), ('complete', 0.0019933884), ('access', 0.001968715), ('add', 0.0019533143), ('note', 0.0019018373), ('swap', 0.0018963641), ('also', 0.0018848178)]
+
+[('attach', 0.0059477617), ('deal', 0.0053315945), ('subject', 0.0052635577), ('let', 0.004331067), ('forward', 0.004172212), ('know', 0.004145635), ('original', 0.004102448), ('xl', 0.004039693), ('agreement', 0.0035735318), ('send', 0.0034214458), ('sent', 0.0033943506), ('would', 0.003272866), ('file', 0.0032109322), ('pdx', 0.0030940643), ('presentation', 0.0030030962), ('broker', 0.0029865832), ('need', 0.0029575275), ('regard', 0.0029137675), ('draft', 0.0028882665), ('see', 0.002851899), ('review', 0.0026068534), ('curve', 0.0024935007), ('october', 0.002475819), ('get', 0.0024553947), ('prebon', 0.0024525241), ('give', 0.0023374956), ('change', 0.002284415), ('use', 0.002228309), ('meeting', 0.0022120555), ('like', 0.0021980603), ('look', 0.0021310828), ('request', 0.0021106196), ('discuss', 0.0020957468), ('week', 0.0020866399), ('model', 0.002037712), ('version', 0.0020022558), ('attached', 0.0019888652), ('follow', 0.0019716069), ('show', 0.0019486919), ('want', 0.0019380667)]
+
+[('meeting', 0.008261635), ('phone', 0.0064673256), ('subject', 0.0052056876), ('original', 0.0051963767), ('description', 0.004885155), ('meet', 0.004586978), ('send', 0.0045441384), ('attend', 0.0043358547), ('calendar', 0.0043083006), ('thursday', 0.004266601), ('tuesday', 0.00409123), ('sent', 0.0040669055), ('street', 0.0040072366), ('lunch', 0.003920028), ('wednesday', 0.0039008365), ('know', 0.003850956), ('let', 0.0037870603), ('get', 0.0036059935), ('room', 0.0034796926), ('november', 0.003383494), ('date', 0.0033314659), ('number', 0.0032646742), ('tomorrow', 0.0032388465), ('see', 0.0032306912), ('cell', 0.0031007293), ('forward', 0.0029732233), ('chairperson', 0.0029484783), ('would', 0.0028619487), ('vacation', 0.0028339424), ('look', 0.002799483), ('week', 0.002728817), ('assistant', 0.002715237), ('dinner', 0.0026436753), ('october', 0.0026278), ('leave', 0.002474978), ('attached', 0.0024628807), ('location', 0.0024427276), ('detailed', 0.0024375494), ('entry', 0.0024243947), ('regard', 0.0024232897)]
+
